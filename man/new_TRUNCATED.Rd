@@ -7,6 +7,8 @@
 new_TRUNCATED(p_distribution, p_min = -Inf, p_max = Inf)
 }
 \arguments{
+\item{p_distribution}{An object of class DISTRIBUTION to truncate}
+
 \item{p_min}{A numeric that set the lower limit of the distribution}
 
 \item{p_max}{A numeric that set the upper limit of the distribution}

@@ -18,7 +18,7 @@ An object of class \code{DISTRIBUTION}, \code{BETA}
 }
 \description{
 Returns an BETA distribution object that produce random numbers
-from a  beta distribution using the \code{\link{rbeta()}} funtion
+from a  beta distribution using the \code{\link{rbeta}} funtion
 but the shape parameters are estimated from the mean and 95% confidence
 intervals of a proportion to estimate the variance
 }

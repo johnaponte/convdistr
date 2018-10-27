@@ -7,11 +7,13 @@
 #'
 #' DISTRIBUTION is an abstract class (or interphase)
 #' that the specific constructors should implement.
+#'
+#'
 #' It contains 4 fields
 #' \describe{
 #'  \item{distribution}{A character with the name of the distribution implemented}
-#'  \item{seed}{A numerical that is used for \code{\link{details}}} to produce
-#'  reproducible details of the distribution
+#'  \item{seed}{A numerical that is used for \code{details} to produce
+#'  reproducible details of the distribution}
 #'  \item{oval}{Observerd value. Is the value expected. It is used as a
 #'  number for the mathematical operations of the distributions
 #'  as if they were a simple scalar}
@@ -28,7 +30,7 @@
 #'It is expected that the \code{rfunc} is included in the creation of new
 #'distributions by convolution so the enviromnent should be carefully controlled
 #'to avoid reference leaking that is possible within the R language. For that
-#'reason, \code{rfunc} should be created within a \code{\link{restrict_envirnoment}}
+#'reason, \code{rfunc} should be created within a \code{\link{restrict_environment}}
 #'function
 #'
 #' @name DISTRIBUTION
@@ -37,11 +39,12 @@ NULL
 #' Factory for a NORMAL distribution object
 #'
 #' Returns a NORMAL distribution object that produce random numbers
-#' from a normal distribution using the \code{\link{rnorm()}} funtion
+#' from a normal distribution using the \code{\link{rnorm}} funtion
 #' @author John Aponte
 #' @param p_mean A numeric that represents the mean value
 #' @param p_sd A numeric that represents the standard deviation
 #' @return An object of class \code{DISTRIBUTION}, \code{NORMAL}
+#' @importFrom stats rnorm
 #' @export
 #' @examples
 #' myDistr <- new_NORMAL(0,1)
@@ -66,11 +69,12 @@ new_NORMAL <- function(p_mean, p_sd) {
 #' Factory for a UNIFORM distribution object
 #'
 #' Returns an UNIFORM distribution object that produce random numbers
-#' from a  uniform distribution using the \code{\link{runif()}} funtion
+#' from a  uniform distribution using the \code{\link{runif}} funtion
 #' @author John Aponte
 #' @param p_min A numeric that represents the lower limit
 #' @param p_max A numeric that represents the upper limit
 #' @return An object of class \code{DISTRIBUTION}, \code{UNIFORM}
+#' @importFrom stats runif
 #' @export
 #' @examples
 #' myDistr <- new_UNIFORM(0,1)
@@ -97,11 +101,12 @@ new_UNIFORM <- function(p_min, p_max) {
 #' Factory for a BETA distribution object
 #'
 #' Returns an BETA distribution object that produce random numbers
-#' from a  beta distribution using the \code{\link{rbeta()}} funtion
+#' from a  beta distribution using the \code{\link{rbeta}} funtion
 #' @author John Aponte
 #' @param p_shape1 A numeric that represents the lower limit
 #' @param p_shape2 A numeric that represents the upper limit
 #' @return An object of class \code{DISTRIBUTION}, \code{BETA}
+#' @importFrom stats rbeta
 #' @export
 #' @examples
 #' myDistr <- new_BETA(1,1)
@@ -126,7 +131,7 @@ new_BETA <- function(p_shape1, p_shape2) {
 #' Factory for a BETA distribution using confidence intervals
 #'
 #' Returns an BETA distribution object that produce random numbers
-#' from a  beta distribution using the \code{\link{rbeta()}} funtion
+#' from a  beta distribution using the \code{\link{rbeta}} funtion
 #' but the shape parameters are estimated from the mean and 95% confidence
 #' intervals of a proportion to estimate the variance
 #'
@@ -143,6 +148,7 @@ new_BETA <- function(p_shape1, p_shape2) {
 #' @param p_lci A numeric for the lower 95\% confidence interval
 #' @param p_uci A numeric for the upper 95\% confidence interval
 #' @return An object of class \code{DISTRIBUTION}, \code{BETA}
+#' @importFrom stats rbeta
 #' @export
 #' @examples
 #' myDistr <- new_BETA_lci(0.30,0.25,0.35)
@@ -214,10 +220,11 @@ new_TRIANGULAR <- function(p_min, p_max, p_mode) {
 #' Factory for a POISSON distribution using confidence intervals
 #'
 #' Returns an POISSON distribution object that produce random numbers
-#' from a Poisson distribution using the \code{\link{rpoison}} function
+#' from a Poisson distribution using the \code{\link{rpois}} function
 #' @author John Aponte
 #' @param p_lambda A numeric that represents the expected number of events
 #' @return An object of class \code{DISTRIBUTION}, \code{POISSON}
+#' @importFrom stats rpois
 #' @export
 #' @examples
 #' myDistr <- new_POISSON(5)
@@ -248,6 +255,7 @@ new_POISSON <- function(p_lambda) {
 #' @author John Aponte
 #' @param p_rate A numeric that represents the rate of events
 #' @return An object of class \code{DISTRIBUTION}, \code{EXPONENTIAL}
+#' @importFrom stats rexp
 #' @export
 #' @examples
 #' myDistr <- new_EXPONENTIAL(5)
@@ -258,7 +266,7 @@ new_EXPONENTIAL <- function(p_rate) {
     list(
       distribution = "EXPONENTIAL",
       seed = sample(1:2 ^ 15, 1),
-      oval = 1/p_rate,
+      oval = 1 / p_rate,
       rfunc = restrict_environment(function(n) {
         matrix(rexp(n, p_rate),
                ncol = 1,
@@ -285,7 +293,7 @@ new_EXPONENTIAL <- function(p_rate) {
 #' @return An object of class \code{DISTRIBUTION}, \code{DISCRETE}
 #' @export
 #' @examples
-#' myDistr <- new_DISCRETE(p_supp=c(1,2,3,4), p_prob=(0.40,0.30,0.20,0.10)
+#' myDistr <- new_DISCRETE(p_supp=c(1,2,3,4), p_prob=c(0.40,0.30,0.20,0.10))
 #' myDistr$rfunc(10)
 new_DISCRETE <- function(p_supp, p_prob = NA) {
   stopifnot(missing(p_prob) ||
@@ -312,13 +320,16 @@ new_DISCRETE <- function(p_supp, p_prob = NA) {
   )
 }
 
+
+
+
 #' Factory for a NA distribution object
 #'
 #' Returns an NA distribution object that always return \code{NA_real_}
 #' By default only one dimension \code{rvar} is produced, but if several
 #' names are provided more columns will be added to the return matrix
 #' @author John Aponte
-#' @param p_dinmanmes A character that represents the the names of the
+#' @param p_dimnames A character that represents the the names of the
 #'  dimensions. By default only one dimension with name \code{rvar}
 #' @return An object of class \code{DISTRIBUTION}, \code{NA}
 #' @export
@@ -387,6 +398,7 @@ new_DIRAC <- function(p_value) {
 #'
 #' If the distribution is multidimensional, the limits will apply to all dimensions.
 #' @author John Aponte
+#' @param p_distribution An object of class DISTRIBUTION to truncate
 #' @param p_min A numeric that set the lower limit of the distribution
 #' @param p_max A numeric that set the upper limit of the distribution
 #' @return An object of class \code{DISTRIBUTION},
@@ -420,3 +432,46 @@ new_TRUNCATED <-
       class = c("TRUNCATED", class(p_distribution))
     )
   }
+
+
+#' Factory for a DIRICHLET distribution object
+#'
+#' Returns an DIRCHLET distribution object that limits the values that are
+#' generated by the function \code{\link[extraDistr]{rdirichlet}}
+#'
+#'A name can be provided for the dimensions. Otherwise \code{rvar1},
+#'\code{rvar2}, ..., \code{rvark} will be assigned
+#'
+#' @author John Aponte
+#' @param p_alpha k-value vector for concentration parameter. Must be positive
+#' @param p_dimnames A vector of characters for the names of the k-dimensions
+#' @return An object of class \code{DISTRIBUTION},
+#'  \code{p_distribution$distribution}, \code{TRUNCATED}
+#'@importFrom extraDistr rdirichlet
+#' @export
+#' @examples
+#' myDistr <- new_DIRICHLET(c(0.3,0.2,0.5), c("a","b","c"))
+#' myDistr$rfunc(10)
+new_DIRICHLET <- function(p_alpha, p_dimnames) {
+  .sum_alpha = sum(p_alpha)
+  .oval = p_alpha / .sum_alpha
+  if (missing(p_dimnames)) {
+    p_dimnames = paste("rvar", seq(1:length(p_alpha)), sep = "")
+  }
+  names(.oval) <- p_dimnames
+  structure(
+    list(
+      distribution = "DIRICHLET",
+      seed = sample(1:2 ^ 15, 1),
+      oval = .oval,
+      rfunc = restrict_environment(function(n) {
+        res <- rdirichlet(n, p_alpha)
+        colnames(res) <- p_dimnames
+        res
+      },
+      p_alpha = p_alpha,
+      p_dimnames = p_dimnames)
+    ),
+    class = c("DIRICHLET", "DISTRIBUTION")
+  )
+}

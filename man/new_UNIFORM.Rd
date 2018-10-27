@@ -16,7 +16,7 @@ An object of class \code{DISTRIBUTION}, \code{UNIFORM}
 }
 \description{
 Returns an UNIFORM distribution object that produce random numbers
-from a  uniform distribution using the \code{\link{runif()}} funtion
+from a  uniform distribution using the \code{\link{runif}} funtion
 }
 \examples{
 myDistr <- new_UNIFORM(0,1)

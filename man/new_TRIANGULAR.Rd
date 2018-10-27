@@ -14,7 +14,7 @@ new_TRIANGULAR(p_min, p_max, p_mode)
 \item{p_mode}{A numeric that represents the mode}
 }
 \value{
-An object of class \code{DISTRIBUTION}, \code{BETA}
+An object of class \code{DISTRIBUTION}, \code{TRIANGULAR}
 }
 \description{
 Returns an TRIANGULAR distribution object that produce random numbers

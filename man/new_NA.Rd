@@ -7,7 +7,7 @@
 new_NA(p_dimnames = "rvar")
 }
 \arguments{
-\item{p_dinmanmes}{A character that represents the the names of the
+\item{p_dimnames}{A character that represents the the names of the
 dimensions. By default only one dimension with name \code{rvar}}
 }
 \value{

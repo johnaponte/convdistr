@@ -108,3 +108,24 @@ test_that("new_POISSON works fine",{
   expect_error(new_POISSON(-1))
 })
 
+
+test_that("new_EXPONENTIAL works fine",{
+  myDistr <- new_EXPONENTIAL(1/40)
+  expect_s3_class(myDistr, "EXPONENTIAL")
+  expect_s3_class(myDistr, "DISTRIBUTION")
+  expect_equal(myDistr$oval, 40)
+  expect_silent(myDistr$rfunc(1))
+  expect_error(new_EXPONENTIAL(-1))
+})
+
+
+test_that("new_DIRCHLET works fine",{
+  myDistr <- new_DIRICHLET(c(0.2,0.3,0.5))
+  expect_s3_class(myDistr, "DIRICHLET")
+  expect_s3_class(myDistr, "DISTRIBUTION")
+  expect_equivalent(myDistr$oval, c(0.2,0.3,0.5))
+  expect_silent(myDistr$rfunc(1))
+  myDistr <- new_DIRICHLET(c(0.2,0.3,0.5),c("A","B","C"))
+  expect_equal(myDistr$oval, c(A=0.2, B=0.3, C=0.5))
+})
+

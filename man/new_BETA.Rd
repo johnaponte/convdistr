@@ -16,7 +16,7 @@ An object of class \code{DISTRIBUTION}, \code{BETA}
 }
 \description{
 Returns an BETA distribution object that produce random numbers
-from a  beta distribution using the \code{\link{rbeta()}} funtion
+from a  beta distribution using the \code{\link{rbeta}} funtion
 }
 \examples{
 myDistr <- new_BETA(1,1)

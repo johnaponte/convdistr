@@ -16,7 +16,7 @@ An object of class \code{DISTRIBUTION}, \code{NORMAL}
 }
 \description{
 Returns a NORMAL distribution object that produce random numbers
-from a normal distribution using the \code{\link{rnorm()}} funtion
+from a normal distribution using the \code{\link{rnorm}} funtion
 }
 \examples{
 myDistr <- new_NORMAL(0,1)

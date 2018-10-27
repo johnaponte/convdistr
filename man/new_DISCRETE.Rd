@@ -24,7 +24,7 @@ If the second argument is missing, all options will be sample with
  be the same length that the first argument
 }
 \examples{
-myDistr <- new_DISCRETE(p_supp=c(1,2,3,4), p_prob=(0.40,0.30,0.20,0.10)
+myDistr <- new_DISCRETE(p_supp=c(1,2,3,4), p_prob=c(0.40,0.30,0.20,0.10))
 myDistr$rfunc(10)
 }
 \author{

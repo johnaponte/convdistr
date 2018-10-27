@@ -14,7 +14,7 @@ An object of class \code{DISTRIBUTION}, \code{POISSON}
 }
 \description{
 Returns an POISSON distribution object that produce random numbers
-from a Poisson distribution using the \code{\link{rpoison}} function
+from a Poisson distribution using the \code{\link{rpois}} function
 }
 \examples{
 myDistr <- new_POISSON(5)
