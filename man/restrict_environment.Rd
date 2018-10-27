@@ -25,16 +25,16 @@ restricted enviroment where only the variables that the function requires
 to work are included
 }
 \examples{
-a = 0, b= 1
-myfunc <-
- restrict_environment(
+a = 0
+b = 1
+myfunc <- restrict_environment(
  function(n) {
    rnorm(meanvalue, sdvalue)
-},
-meanvalue = a, sdvalue = b)
+ },
+ meanvalue = a, sdvalue = b)
 
 myfunc(10)
-ls(*, envir=environment(myfunc))
+ls(envir=environment(myfunc))
 
 }
 \author{

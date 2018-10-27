@@ -15,17 +15,18 @@
 #' @param ... define the set of  variables to be included as variable = value.
 #' @return new function with a restricted environment
 #' @importFrom pryr named_dots
+#' @export
 #' @examples
-#' a = 0, b= 1
-#' myfunc <-
-#'  restrict_environment(
+#' a = 0
+#' b = 1
+#' myfunc <- restrict_environment(
 #'  function(n) {
 #'    rnorm(meanvalue, sdvalue)
-#' },
-#' meanvalue = a, sdvalue = b)
+#'  },
+#'  meanvalue = a, sdvalue = b)
 #'
 #' myfunc(10)
-#' ls(*, envir=environment(myfunc))
+#' ls(envir=environment(myfunc))
 #'
 restrict_environment <- function(f, ...) {
   dots <- named_dots(...)

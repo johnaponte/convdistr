@@ -30,7 +30,7 @@ anymore the expected value of the distribution.
 If the distribution is multidimensional, the limits will apply to all dimensions.
 }
 \examples{
-myDistr <- new_TRUNCATED(p_distribution = new_NORMAL(0,1), p_min = -1, pmax = 1)
+myDistr <- new_TRUNCATED(p_distribution = new_NORMAL(0,1), p_min = -1, p_max = 1)
 myDistr$rfunc(10)
 }
 \author{
