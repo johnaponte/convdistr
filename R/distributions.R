@@ -3,6 +3,7 @@
 # 2018-10-26 by JJAV
 # # # # # # # # # # # # # # # # # # #
 
+##### DISTRIBUTION
 #' DISTRIBUTION class
 #'
 #' DISTRIBUTION is an abstract class (or interphase)
@@ -23,7 +24,7 @@
 #'  dimensions of the distributions}
 #' }
 #'The DISTRIBUTION objects could support multidimensional distributions
-#'for example  \code{\link{new_DIRICHLET}}. The names of the dimensions
+#'for example  \code{\link{DIRICHLET}}. The names of the dimensions
 #'should coincides with the names of the \code{oval} vector.
 #'If only one dimension, the default name is \code{rvar}.
 #'
@@ -36,6 +37,21 @@
 #'Once the object is instanciated, the fields are immutable and should not be
 #'changed.
 #'
+#' Objects are defined for the following distributions
+#' \itemize{
+#'  \item \code{\link{UNIFORM}}
+#'  \item \code{\link{NORMAL}}
+#'  \item \code{\link{BETA}}
+#'  \item \code{\link{TRIANGULAR}}
+#'  \item \code{\link{POISSON}}
+#'  \item \code{\link{EXPONENTIAL}}
+#'  \item \code{\link{DISCRETE}}
+#'  \item \code{\link{DIRAC}}
+#'  \item \code{\link{DIRICHLET}}
+#'  \item \code{\link{TRUNCATED}}
+#'  \item \code{\link{NA_DISTRIBUTION}}
+#' }
+#' 
 #' @name DISTRIBUTION
 NULL
 
@@ -193,6 +209,7 @@ new_BETA_lci <- function(p_mean, p_lci, p_uci) {
 #' @examples
 #' myDistr <- new_TRIANGULAR(-1,1,0)
 #' myDistr$rfunc(10)
+#' @name TRIANGULAR
 new_TRIANGULAR <- function(p_min, p_max, p_mode) {
   stopifnot(p_min < p_max)
   stopifnot(p_min <= p_mode & p_mode <= p_max)
@@ -229,6 +246,7 @@ new_TRIANGULAR <- function(p_min, p_max, p_mode) {
 #' @examples
 #' myDistr <- new_POISSON(5)
 #' myDistr$rfunc(10)
+#' @name POISSON
 new_POISSON <- function(p_lambda) {
   stopifnot(p_lambda > 0)
   structure(
@@ -260,6 +278,7 @@ new_POISSON <- function(p_lambda) {
 #' @examples
 #' myDistr <- new_EXPONENTIAL(5)
 #' myDistr$rfunc(10)
+#' @name EXPONENTIAL
 new_EXPONENTIAL <- function(p_rate) {
   stopifnot(p_rate >= 0)
   structure(
@@ -295,6 +314,7 @@ new_EXPONENTIAL <- function(p_rate) {
 #' @examples
 #' myDistr <- new_DISCRETE(p_supp=c(1,2,3,4), p_prob=c(0.40,0.30,0.20,0.10))
 #' myDistr$rfunc(10)
+#' @name DISCRETE
 new_DISCRETE <- function(p_supp, p_prob = NA) {
   stopifnot(missing(p_prob) ||
               is.na(p_prob) || length(p_supp) == length(p_prob))
@@ -320,12 +340,10 @@ new_DISCRETE <- function(p_supp, p_prob = NA) {
   )
 }
 
-
-
-
 #' Factory for a NA distribution object
 #'
 #' Returns an NA distribution object that always return \code{NA_real_}
+#' This is usefull to handle \code{NA}.
 #' By default only one dimension \code{rvar} is produced, but if several
 #' names are provided more columns will be added to the return matrix
 #' @author John Aponte
@@ -336,6 +354,7 @@ new_DISCRETE <- function(p_supp, p_prob = NA) {
 #' @examples
 #' myDistr <- new_NA(p_dimnames = "rvar")
 #' myDistr$rfunc(10)
+#' @name NA_DISTRIBUTION
 new_NA <- function(p_dimnames = "rvar") {
   .oval = rep(NA_real_, length(p_dimnames))
   names(.oval) <- p_dimnames
@@ -368,6 +387,7 @@ new_NA <- function(p_dimnames = "rvar") {
 #' @examples
 #' myDistr <- new_DIRAC(p_value = 1)
 #' myDistr$rfunc(10)
+#' @name DIRAC
 new_DIRAC <- function(p_value) {
   structure(
     list(
@@ -407,6 +427,7 @@ new_DIRAC <- function(p_value) {
 #' @examples
 #' myDistr <- new_TRUNCATED(p_distribution = new_NORMAL(0,1), p_min = -1, p_max = 1)
 #' myDistr$rfunc(10)
+#' @name TRUNCATED
 new_TRUNCATED <-
   function(p_distribution,
            p_min = -Inf,
@@ -452,6 +473,7 @@ new_TRUNCATED <-
 #' @examples
 #' myDistr <- new_DIRICHLET(c(0.3,0.2,0.5), c("a","b","c"))
 #' myDistr$rfunc(10)
+#' @name DIRICHLET
 new_DIRICHLET <- function(p_alpha, p_dimnames) {
   .sum_alpha = sum(p_alpha)
   .oval = p_alpha / .sum_alpha

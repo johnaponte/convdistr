@@ -22,7 +22,7 @@ It contains 4 fields
  dimensions of the distributions}
 }
 The DISTRIBUTION objects could support multidimensional distributions
-for example  \code{\link{new_DIRICHLET}}. The names of the dimensions
+for example  \code{\link{DIRICHLET}}. The names of the dimensions
 should coincides with the names of the \code{oval} vector.
 If only one dimension, the default name is \code{rvar}.
 
@@ -34,4 +34,19 @@ function
 
 Once the object is instanciated, the fields are immutable and should not be
 changed.
+
+Objects are defined for the following distributions
+\itemize{
+ \item \code{\link{UNIFORM}}
+ \item \code{\link{NORMAL}}
+ \item \code{\link{BETA}}
+ \item \code{\link{TRIANGULAR}}
+ \item \code{\link{POISSON}}
+ \item \code{\link{EXPONENTIAL}}
+ \item \code{\link{DISCRETE}}
+ \item \code{\link{DIRAC}}
+ \item \code{\link{DIRICHLET}}
+ \item \code{\link{TRUNCATED}}
+ \item \code{\link{NA_DISTRIBUTION}}
+}
 }
