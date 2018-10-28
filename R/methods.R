@@ -1,6 +1,6 @@
 # Methods for DISTRIBUTION class
 # 20181028 by JJAV
-##################################
+# # # # # # # # # # # # # # # # # 
 
 # Fields in the DISTRIBUION object are immutable and should not be changed
 
@@ -114,8 +114,9 @@ cinqnum.DISTRIBUTION <- function(x,n) {
 #' And optimized version for NA distribution
 #'
 #' @param x an object of  class \code{\link{DISTRIBUTION}}
+#' @param n number of dranws
 #' @return a list of NA
-cinqnum.NA <- function(x) {
+cinqnum.NA <- function(x,n) {
   list(
     mean_ = x$oval,
     sd_ = x$oval,
@@ -129,8 +130,9 @@ cinqnum.NA <- function(x) {
 #' And optimized version for DIRAC distributions
 #'
 #' @param x an object of  class \code{\link{DISTRIBUTION}}
+#' @param n number of dranws
 #' @return a list of NA
-cinqnum.DIRAC <- function(x) {
+cinqnum.DIRAC <- function(x,n) {
   list(
     mean_ = x$oval,
     sd_ = 0,

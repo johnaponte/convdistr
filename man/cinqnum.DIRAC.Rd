@@ -4,10 +4,12 @@
 \alias{cinqnum.DIRAC}
 \title{And optimized version for DIRAC distributions}
 \usage{
-\method{cinqnum}{DIRAC}(x)
+\method{cinqnum}{DIRAC}(x, n)
 }
 \arguments{
 \item{x}{an object of  class \code{\link{DISTRIBUTION}}}
+
+\item{n}{number of dranws}
 }
 \value{
 a list of NA

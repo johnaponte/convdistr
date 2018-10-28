@@ -23,3 +23,30 @@ test_that("The print.DISTRIBUTION function works well" , {
   myDistr <- new_NORMAL(0,1)
   expect_output_file(print(myDistr), "print_myDistr.txt")
 })
+
+test_that(
+  "The summary function works" ,
+  {
+    myDistr <- new_NORMAL(0, 1)
+    mySummary <- summary(myDistr)
+    expect_is(mySummary, "data.frame")
+    expect_equal(
+      names(mySummary),
+      c(
+        "distribution",
+        "varname",
+        "oval",
+        "nsample",
+        "mean_",
+        "sd_",
+        "lci_",
+        "median_",
+        "uci_"
+      )
+    )
+    expect_equal(nrow(mySummary),1)
+    expect_is(summary(new_NA()), "data.frame")
+    expect_is(summary(new_DIRAC(1)), "data.frame")
+    expect_is(summary(new_DIRICHLET(c(0.1,0.9))), "data.frame")
+    expect_equal(nrow(summary(new_DIRICHLET(c(0.1,0.9)))), 2)
+  })
