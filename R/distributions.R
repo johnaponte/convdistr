@@ -46,12 +46,13 @@ NULL
 #' @author John Aponte
 #' @param p_mean A numeric that represents the mean value
 #' @param p_sd A numeric that represents the standard deviation
-#' @return An object of class \code{DISTRIBUTION}, \code{NORMAL}
+#' @return An object of class \code{\link{DISTRIBUTION}}, \code{NORMAL}
 #' @importFrom stats rnorm
 #' @export
 #' @examples
 #' myDistr <- new_NORMAL(0,1)
 #' myDistr$rfunc(10)
+#' @name NORMAL
 new_NORMAL <- function(p_mean, p_sd) {
   structure(
     list(
@@ -82,6 +83,7 @@ new_NORMAL <- function(p_mean, p_sd) {
 #' @examples
 #' myDistr <- new_UNIFORM(0,1)
 #' myDistr$rfunc(10)
+#' @name UNIFORM
 new_UNIFORM <- function(p_min, p_max) {
   stopifnot(p_min <= p_max)
   structure(
@@ -104,16 +106,17 @@ new_UNIFORM <- function(p_min, p_max) {
 #' Factory for a BETA distribution object
 #'
 #' Returns an BETA distribution object that produce random numbers
-#' from a  beta distribution using the \code{\link{rbeta}} funtion
+#' from a  beta distribution using the \code{\link{rbeta}} function
 #' @author John Aponte
-#' @param p_shape1 A numeric that represents the lower limit
-#' @param p_shape2 A numeric that represents the upper limit
+#' @param p_shape1 parameters of the beta distribution
+#' @param p_shape2 parameters of the beta distribution
 #' @return An object of class \code{DISTRIBUTION}, \code{BETA}
 #' @importFrom stats rbeta
 #' @export
 #' @examples
 #' myDistr <- new_BETA(1,1)
 #' myDistr$rfunc(10)
+#' @name BETA
 new_BETA <- function(p_shape1, p_shape2) {
   structure(
     list(
@@ -131,14 +134,9 @@ new_BETA <- function(p_shape1, p_shape2) {
   )
 }
 
-#' Factory for a BETA distribution using confidence intervals
-#'
-#' Returns an BETA distribution object that produce random numbers
-#' from a  beta distribution using the \code{\link{rbeta}} funtion
-#' but the shape parameters are estimated from the mean and 95% confidence
-#' intervals of a proportion to estimate the variance
-#'
-#' Shape parameters are obtained using the following formula:
+#' @note
+#' When using confidence intervals, the shape parameters are obtained
+#' using the following formula:
 #'
 #' \eqn{varp = (p_uci-p_lci)/4^2}
 #'
@@ -146,16 +144,15 @@ new_BETA <- function(p_shape1, p_shape2) {
 #'
 #' \eqn{shape2 =(1 - p_mean) * (p_mean * (1 - p_mean) / varp - 1) }
 #'
-#' @author John Aponte
 #' @param p_mean A numeric that represents the expected value of the proportion
 #' @param p_lci A numeric for the lower 95\% confidence interval
 #' @param p_uci A numeric for the upper 95\% confidence interval
-#' @return An object of class \code{DISTRIBUTION}, \code{BETA}
 #' @importFrom stats rbeta
 #' @export
 #' @examples
 #' myDistr <- new_BETA_lci(0.30,0.25,0.35)
 #' myDistr$rfunc(10)
+#' @describeIn BETA Constructor based on confidence intervals
 new_BETA_lci <- function(p_mean, p_lci, p_uci) {
   stopifnot(p_lci < p_uci)
   stopifnot(p_lci < p_mean & p_mean < p_uci)
