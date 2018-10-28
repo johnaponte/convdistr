@@ -31,4 +31,7 @@ distributions by convolution so the enviromnent should be carefully controlled
 to avoid reference leaking that is possible within the R language. For that
 reason, \code{rfunc} should be created within a \code{\link{restrict_environment}}
 function
+
+Once the object is instanciated, the fields are immutable and should not be
+changed.
 }

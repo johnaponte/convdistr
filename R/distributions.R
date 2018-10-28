@@ -33,6 +33,9 @@
 #'reason, \code{rfunc} should be created within a \code{\link{restrict_environment}}
 #'function
 #'
+#'Once the object is instanciated, the fields are immutable and should not be
+#'changed.
+#'
 #' @name DISTRIBUTION
 NULL
 

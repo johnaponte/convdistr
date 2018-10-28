@@ -1,3 +1,7 @@
+# Test for distributions
+# 20181027 by JJAV
+# # # # # # # # # # # # # #
+
 context("Test Distributions")
 
 test_that("new_UNIFORM works fine", {
