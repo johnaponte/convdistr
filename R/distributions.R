@@ -138,7 +138,7 @@ new_BETA <- function(p_shape1, p_shape2) {
     list(
       distribution = "BETA",
       seed = sample(1:2 ^ 15, 1),
-      oval = p_shape1 / (p_shape1 + p_shape2),
+      oval = c("rvar" = p_shape1 / (p_shape1 + p_shape2)),
       rfunc = restrict_environment(function(n) {
         matrix(rbeta(n, p_shape1, p_shape2),
                ncol = 1,
@@ -178,20 +178,7 @@ new_BETA_lci <- function(p_mean, p_lci, p_uci) {
   varp <- abs(((p_uci - p_lci)) / 4) ^ 2
   p_shape1 <- p_mean * (p_mean * (1 - p_mean) / varp - 1)
   p_shape2 <- (1 - p_mean) * (p_mean * (1 - p_mean) / varp - 1)
-  structure(
-    list(
-      distribution = "BETA",
-      seed = sample(1:2 ^ 15, 1),
-      oval = p_shape1 / (p_shape1 + p_shape2),
-      rfunc = restrict_environment(function(n) {
-        matrix(rbeta(n, p_shape1, p_shape2),
-               ncol = 1,
-               dimnames = list(1:n, "rvar"))
-      },
-      p_shape1 = p_shape1, p_shape2 = p_shape2)
-    ),
-    class = c("BETA", "DISTRIBUTION")
-  )
+  new_BETA(p_shape1,p_shape2)
 }
 
 #' Factory for a TRIANGULAR distribution object
@@ -217,7 +204,7 @@ new_TRIANGULAR <- function(p_min, p_max, p_mode) {
     list(
       distribution = "TRIANGULAR",
       seed = sample(1:2 ^ 15, 1),
-      oval = (p_min + p_max + p_mode) / 3,
+      oval = c("rvar" = (p_min + p_max + p_mode) / 3),
       rfunc = restrict_environment(
         function(n) {
           matrix(rtriang(n, a, b, c),
@@ -285,7 +272,7 @@ new_EXPONENTIAL <- function(p_rate) {
     list(
       distribution = "EXPONENTIAL",
       seed = sample(1:2 ^ 15, 1),
-      oval = 1 / p_rate,
+      oval = c("rvar" = 1 / p_rate),
       rfunc = restrict_environment(function(n) {
         matrix(rexp(n, p_rate),
                ncol = 1,
@@ -495,5 +482,37 @@ new_DIRICHLET <- function(p_alpha, p_dimnames) {
       p_dimnames = p_dimnames)
     ),
     class = c("DIRICHLET", "DISTRIBUTION")
+  )
+}
+
+
+#' Factory for a LOGNORMAL distribution object
+#'
+#' Returns a LOGNORMAL distribution object that produce random numbers
+#' from a log normal distribution using the \code{\link{rlnorm}} funtion
+#' @author John Aponte
+#' @param p_meanlog mean of the distribution on th elog scale
+#' @param p_sdlog A numeric that represents the standard deviation on the log scale
+#' @return An object of class \code{\link{DISTRIBUTION}}, \code{LOGNORMAL}
+#' @importFrom stats rnorm
+#' @export
+#' @examples
+#' myDistr <- new_LOGNORMAL(0,1)
+#' myDistr$rfunc(10)
+#' @name LOGNORMAL
+new_LOGNORMAL <- function(p_meanlog, p_sdlog) {
+  structure(
+    list(
+      distribution = "LOGNORMAL",
+      seed = sample(1:2 ^ 15, 1),
+      oval = c("rvar" = p_meanlog),
+      rfunc = restrict_environment(function(n) {
+        matrix(rlnorm(n, p_meanlog, p_sdlog),
+               ncol = 1,
+               dimnames = list(1:n, "rvar"))
+      },
+      p_meanlog = p_meanlog, p_sdlog = p_sdlog)
+    ),
+    class = c("LOGNORMAL", "DISTRIBUTION")
   )
 }

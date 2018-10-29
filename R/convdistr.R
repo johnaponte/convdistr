@@ -9,4 +9,4 @@
 #' @name convdistr
 NULL
 
-utils::globalVariables(c("a","b","p_function"))
+utils::globalVariables(c("a","b","p_function","rfuncs"))

@@ -1,4 +1,4 @@
-Package: convdist
+Package: convdistr
 Type: Package
 Title: Convolute probabilistic distributions
 Version: 0.1.0

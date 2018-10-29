@@ -1,0 +1,36 @@
+library(convdistr)
+
+f.X <- function(x) dnorm(x,0,0.5)     
+f.Y <- function(y) dlnorm(y,1.5,0.75)
+# convolution integral
+f.Z <- function(z) integrate(function(x,z) f.Y(z-x)*f.X(x),-Inf,Inf,z)$value
+f.Z <- Vectorize(f.Z)                    # need to vectorize the resulting fn.
+
+
+b1 <- new_NORM(1,0.5)
+b2 <- new_LOGNORMAL(1.5,0.75)
+b3 <- new_SUM(list(b1,b2))
+Z <- rfunc(b3,10000)
+# compare the methods
+hist(Z,freq=F,breaks=50, xlim=c(0,30))
+z <- seq(0,50,0.01)
+lines(z,f.Z(z),lty=2,col="red")
+
+
+# example with beta
+f.X <- function(x) dbeta(x,4,10)     
+f.Y <- function(y) dbeta(y,10,4)
+# convolution integral
+f.Z <- function(z) integrate(function(x,z) f.Y(z-x)*f.X(x),-Inf,Inf,z)$value
+f.Z <- Vectorize(f.Z)                    # need to vectorize the resulting fn.
+
+
+b1 <- new_BETA(4,10)
+b2 <- new_BETA(10,4)
+b3 <- new_SUM(list(b1,b2))
+Z <- rfunc(b3,10000)
+# compare the methods
+hist(Z,freq=F,breaks=50, xlim=c(0,2))
+z <- seq(0,2,0.01)
+lines(z,f.Z(z),lty=2,col="red")
+

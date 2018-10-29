@@ -1,4 +1,4 @@
 library(testthat)
-library(convdist)
+library(convdistr)
 
-test_check("convdist")
+test_check("convdistr")
