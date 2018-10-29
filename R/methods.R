@@ -180,3 +180,35 @@ summary.DISTRIBUTION <- function(object, n = 10000, ...) {
 
 }
 
+
+#' Generate random drawns from a \code{\link{DISTRIBUTION}} object
+#'
+#' This is a generic method that calls the \code{rfunc} slot of the object
+#'
+#' @param x an object
+#' @param n the number of random samples
+#' @return a matrix with as many rows as \code{n} and as many columns as
+#' dimensions have \code{distribution}
+#' @export
+rfunc <- function(x, n) {
+  UseMethod("rfunc",x)
+}
+
+#' Generic function for a \code{\link{DISTRIBUTION}} object
+#'
+#' @param x an object of class \code{\link{DISTRIBUTION}}
+#' @param n the number of random samples
+#' @export
+rfunc.DISTRIBUTION <- function(x,n) {
+  x$rfunc(n)
+}
+
+
+#' Default function
+#' @param x an object of class different from \code{\link{DISTRIBUTION}}
+#' @param n the number of random samples
+#' @export
+rfunc.default <- function(x,n) {
+  stop("Don't know how to obtain random drawns from an object of class ", class(x))
+}
+

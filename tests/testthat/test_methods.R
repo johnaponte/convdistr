@@ -50,3 +50,13 @@ test_that(
     expect_is(summary(new_DIRICHLET(c(0.1,0.9))), "data.frame")
     expect_equal(nrow(summary(new_DIRICHLET(c(0.1,0.9)))), 2)
   })
+
+
+test_that("The rfunc works well", {
+  myDistr <- new_NORMAL(0,1)
+  expect_is(rfunc(myDistr,10),"matrix")
+  expect_equal(nrow(rfunc(myDistr,10)),10)
+  expect_equal(ncol(rfunc(myDistr,10)),1)
+  expect_equal(ncol(rfunc(new_DIRICHLET(c(0.2,0.3,0.4)),10)),3)
+  expect_equal(nrow(rfunc(new_DIRICHLET(c(0.2,0.3,0.4)),10)),10)
+})
