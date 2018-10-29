@@ -139,7 +139,9 @@ new_MIXTURE <- function(listdistr, mixture) {
   if (is.na(mixture[1])) {
     mixture = rep(1 / length(listdistr), length(listdistr))
   }
+  stopifnot(!any(is.na(mixture)))
   stopifnot(abs(sum(mixture) - 1) < 0.01)
+  stopifnot(length(listdistr) == length(mixture))
   .oval <- listdistr[[1]]$oval * mixture[1]
   i = 2
   while (i <= length(listdistr)) {
