@@ -72,3 +72,109 @@ new_SUM <- function(listdistr, omit_NA = FALSE) {
 `+.DISTRIBUTION` <- function(e1,e2) new_SUM(list(e1,e2))
 
 
+#' @describeIn CONVOLUTION Substration for distributions
+#' @export
+#' @examples 
+#' new_SUBSTRATION(list(x1,x2))
+new_SUBSTRATION <- function(listdistr, omit_NA = FALSE) {
+  new_CONVOLUTION(listdistr, `-`, omit_NA = omit_NA)
+}
+
+#' @name CONVOLUTION
+#' @export
+#' @examples 
+#' x1 - x2
+`-.DISTRIBUTION` <- function(e1,e2) new_SUBSTRATION(list(e1,e2))
+
+#' @describeIn CONVOLUTION Multiplication for distributions
+#' @export
+#' @examples 
+#' new_MULTIPLICATION(list(x1,x2))
+new_MULTIPLICATION <- function(listdistr, omit_NA = FALSE) {
+  new_CONVOLUTION(listdistr, `*`, omit_NA = omit_NA)
+}
+
+#' @name CONVOLUTION
+#' @export
+#' @examples 
+#' x1 * x2
+`*.DISTRIBUTION` <- function(e1,e2) new_MULTIPLICATION(list(e1,e2))
+
+#' @describeIn CONVOLUTION  DIVISION for distributions
+#' @export
+#' @examples 
+#' new_DIVISION(list(x1,x2))
+new_DIVISION <- function(listdistr, omit_NA = FALSE) {
+  new_CONVOLUTION(listdistr, `/`, omit_NA = omit_NA)
+}
+
+#' @name CONVOLUTION
+#' @export
+#' @examples 
+#' x1 / x2
+`/.DISTRIBUTION` <- function(e1,e2) new_DIVISION(list(e1,e2))
+
+
+#' Mixture of \code{\link{DISTRIBUTION}} objects
+#' 
+#' Produce a new distribution that obtain random drawns of the mixture
+#' of the \code{\link{DISTRIBUTION}} objects
+#' 
+#' @param listdistr a list of \code{\link{DISTRIBUTION}} objects
+#' @param mixture a vector of probabilities to mixture the distributions. Must add 1
+#' If missing the drawns are obtained from the distributions with the same probability
+#' @return an object of class \code{MIXTURE}, \code{\link{DISTRIBUTION}}
+#' @export
+#' @examples 
+#' x1 <- new_NORMAL(0,1)
+#' x2 <- new_NORMAL(4,1)
+#' x3 <- new_NORMAL(6,1)
+#' new_MIXTURE(list(x1,x2,x3))
+new_MIXTURE <- function(listdistr, mixture) {
+  if (missing(mixture))
+    mixture = NA
+  stopifnot(length(listdistr) > 0)
+  stopifnot(all(sapply(listdistr, inherits, "DISTRIBUTION")))
+  stopifnot(same_dimensions(listdistr))
+  if (is.na(mixture[1])) {
+    mixture = rep(1 / length(listdistr), length(listdistr))
+  }
+  stopifnot(abs(sum(mixture) - 1) < 0.01)
+  .oval <- listdistr[[1]]$oval * mixture[1]
+  i = 2
+  while (i <= length(listdistr)) {
+    .oval = .oval + listdistr[[i]]$oval * mixture[i]
+    i = i + 1
+  }
+  .rfuncs = lapply(listdistr, function(x) {
+    x$rfunc
+  })
+  structure(
+    list(
+      distribution = "MIXTURE",
+      seed = sample(1:2 ^ 15, 1),
+      oval = .oval,
+      rfunc = restrict_environment(function(n) {
+        # We get initial samples where at list 1 drawn is get
+        # from the all distributions and a minimun of n*2 drawns are made
+        obj_n = ceiling(max(10 ^ (-log10(min(
+          mixture
+        ))), n * 2))
+        subx <- ceiling(mixture * obj_n)
+        res <- rfunc[[1]](subx[1])
+        i = 2
+        while (i <= length(rfunc)) {
+          res = rbind(res, rfunc[[i]](subx[i]))
+          i = i + 1
+        }
+        matrix(res[sample(1:nrow(res), n, replace = TRUE),],
+               ncol = ncol(res) ,
+               dimnames = list(1:n, colnames(res)))
+      },
+      rfunc = .rfuncs, mixture = mixture)
+    ),
+    class = c("MIXTURE", "DISTRIBUTION")
+  )
+}
+
+ 

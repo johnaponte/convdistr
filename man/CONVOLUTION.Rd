@@ -5,6 +5,12 @@
 \alias{new_CONVOLUTION}
 \alias{new_SUM}
 \alias{+.DISTRIBUTION}
+\alias{new_SUBSTRATION}
+\alias{-.DISTRIBUTION}
+\alias{new_MULTIPLICATION}
+\alias{*.DISTRIBUTION}
+\alias{new_DIVISION}
+\alias{/.DISTRIBUTION}
 \title{Make the convolution of two or more \code{\link{DISTRIBUTION}} objects}
 \usage{
 new_CONVOLUTION(listdistr, op, omit_NA = FALSE)
@@ -12,6 +18,18 @@ new_CONVOLUTION(listdistr, op, omit_NA = FALSE)
 new_SUM(listdistr, omit_NA = FALSE)
 
 \method{+}{DISTRIBUTION}(e1, e2)
+
+new_SUBSTRATION(listdistr, omit_NA = FALSE)
+
+\method{-}{DISTRIBUTION}(e1, e2)
+
+new_MULTIPLICATION(listdistr, omit_NA = FALSE)
+
+\method{*}{DISTRIBUTION}(e1, e2)
+
+new_DIVISION(listdistr, omit_NA = FALSE)
+
+\method{/}{DISTRIBUTION}(e1, e2)
 }
 \arguments{
 \item{listdistr}{a list of \code{\link{DISTRIBUTION}} objects}
@@ -35,11 +53,17 @@ same dimensions.
 \details{
 If any of the distributions is of class \code{NA} (\code{\link{NA_DISTRIBUTION}})
 the result will be a new distribution of class \code{NA} unless the
- \code{NA.omit} option is set to \code{TRUE}
+ \code{omit_NA} option is set to \code{TRUE}
 }
 \section{Functions}{
 \itemize{
 \item \code{new_SUM}: Sum of distributions
+
+\item \code{new_SUBSTRATION}: Substration for distributions
+
+\item \code{new_MULTIPLICATION}: Multiplication for distributions
+
+\item \code{new_DIVISION}: DIVISION for distributions
 }}
 
 \examples{
@@ -48,5 +72,10 @@ x2 <- new_UNIFORM(1,2)
 new_CONVOLUTION(list(x1,x2), `+`)
 new_SUM(list(x1,x2))
 x1 + x2
-x1 + x2
+new_SUBSTRATION(list(x1,x2))
+x1 - x2
+new_MULTIPLICATION(list(x1,x2))
+x1 * x2
+new_DIVISION(list(x1,x2))
+x1 / x2
 }
