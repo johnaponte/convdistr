@@ -42,7 +42,7 @@ ggDISTRIBUTION <- function(distribution, n = 10000) {
 #' 
 #' Plot an histogram of the density of the distribution using random
 #' drawns from the distribution
-#' @param distribution an object of class \code{\link{DISTRIBUTION}}
+#' @param x an object of class \code{\link{DISTRIBUTION}}
 #' @param n number of drawns
 #' @param ... other parameters to the \code{\link{hist}} function
 #' @importFrom RColorBrewer brewer.pal

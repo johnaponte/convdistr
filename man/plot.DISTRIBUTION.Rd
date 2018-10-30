@@ -7,11 +7,11 @@
 \method{plot}{DISTRIBUTION}(x, n = 10000, ...)
 }
 \arguments{
+\item{x}{an object of class \code{\link{DISTRIBUTION}}}
+
 \item{n}{number of drawns}
 
 \item{...}{other parameters to the \code{\link{hist}} function}
-
-\item{distribution}{an object of class \code{\link{DISTRIBUTION}}}
 }
 \description{
 Plot an histogram of the density of the distribution using random
