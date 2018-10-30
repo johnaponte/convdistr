@@ -4,10 +4,10 @@
 \alias{ggDISTRIBUTION}
 \title{Plot of \code{\link{DISTRIBUTION}} objects using \code{\link[ggplot2]{ggplot2}}}
 \usage{
-ggDISTRIBUTION(distribution, n = 10000)
+ggDISTRIBUTION(x, n = 10000)
 }
 \arguments{
-\item{distribution}{an object of class \code{\link{DISTRIBUTION}}}
+\item{x}{an object of class \code{\link{DISTRIBUTION}}}
 
 \item{n}{number of drawns}
 }

@@ -5,7 +5,7 @@
 
 #' Plot of \code{\link{DISTRIBUTION}} objects using \code{\link[ggplot2]{ggplot2}}
 #' 
-#' @param distribution an object of class \code{\link{DISTRIBUTION}}
+#' @param x an object of class \code{\link{DISTRIBUTION}}
 #' @param n number of drawns
 #' @return a \code{\link[ggplot2]{ggplot}} object with the density of the distribution
 #' @importFrom tidyr gather
@@ -16,26 +16,26 @@
 #' ggDISTRIBUTION(x)
 #' y <- new_DIRICHLET(c(10,20,70))
 #' ggDISTRIBUTION(x)
-ggDISTRIBUTION <- function(distribution, n = 10000) {
-  stopifnot(inherits(distribution, "DISTRIBUTION"))
-  xx <- rfunc(distribution, n)
+ggDISTRIBUTION <- function(x, n = 10000) {
+  stopifnot(inherits(x, "DISTRIBUTION"))
+  xx <- rfunc(x, n)
   xxdf <- tidyr::gather(data.frame(xx), dimension, value)
   if (ncol(xx) > 1) {
     g <-
       ggplot(xxdf, aes(x = value, stat(density), color = dimension)) +
       geom_histogram(aes(fill = dimension),
                      alpha = 0.4,
-                     bins = log10(n) * 7 * ncol(xx)) +
-      geom_freqpoly(bins = log10(n) * 7 * ncol(xx))
+                     bins = log10(n) * 7 * ncol(xx)) 
+      #geom_freqpoly(bins = log10(n) * 7 * ncol(xx))
   }
   else {
     g <-
       ggplot(xxdf,
              aes(x = value, stat(density))) +
-      geom_histogram(alpha = 0.4, bins = log10(n) * 7) +
-      geom_freqpoly(bins = log10(n) * 7)
+      geom_histogram(alpha = 0.4, bins = log10(n) * 7) 
+      #geom_freqpoly(bins = log10(n) * 7)
   }
-  g + ggtitle(distribution$distribution)
+  g + ggtitle(x$distribution)
 }
 
 #' plot of  \code{\link{DISTRIBUTION}} objects

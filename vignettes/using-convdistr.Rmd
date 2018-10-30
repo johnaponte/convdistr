@@ -1,0 +1,190 @@
+---
+title: "Using the convdistr package"
+author: "John J. Aponte"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `convdistr` provide tools to define distribution objects and make 
+mathematical operations with them. It keep track of the results as if they
+where scalar numbers but mantain the ability to obtain randoms samples of
+the convoluted distributions.
+
+## Practical example
+What would be the resulting distribution of 
+$a+b*c$ if $a$ is a __normal__ distribution with mean 1 and standard deviation 0.5,
+$b$ is a __poisson__ distribution with lambda 5 and $c$ is a __beta__ distribution with
+shape parameters 10 and 20?
+
+```{r, fig.width=7}
+library(convdistr)
+library(ggplot2)
+
+a <- new_NORMAL(1,0.5)
+b <- new_POISSON(5)
+c <- new_BETA(10,20)
+res <- a + b * c
+
+metadata(res)
+t(summary(res))
+ggDISTRIBUTION(res) + ggtitle("a + b * c")
+```
+
+```{r echo=FALSE, results='hide'}
+sum_res <- summary(res)
+r_oval <- format(sum_res$oval,  digits = 3)
+r_mean <- format(sum_res$mean_, digits = 3)
+r_median <- format(sum_res$median_, digits = 3)
+r_lci <- format(sum_res$lci_, digits = 2)
+r_uci <- format(sum_res$uci_, digits = 3)
+```
+
+The result is a distribution with expected value `r r_oval`. A sample from 10000
+drawns of the distribution shows a mean value of `r r_mean`, a median of `r r_median`
+and 95% centiles of `r r_lci`, `r r_uci`
+
+The following sections describe the DISTRIBUTION object, how to create 
+new DISTRIBUTION objects and how to make operations and mixtures with them.
+
+## The `DISTRIBUTION` object
+
+The `DISTRIBUTION` is an abstract class (or interphase)
+that specific constructors should implement.
+
+
+It contains 4 fields:
+
+**distribution**
+      : A character with the name of the distribution implemented
+
+**seed**
+      : A numerical seed that is use when obtaing random drawns for the `summary` function
+
+**oval**
+      : The observed value. It is the value expected. It is used as a
+        number for the mathematical operations of the distributions
+        as if they were a simple scalar
+        
+**rfunc(n)**
+    : A function that generate random numbers from the distribution.
+      Its only parameter `n` is the number of drawns of the distribution.
+      It returns a matrix with as many rows as `n`, and as many columns as the 
+      dimensions of the distributions
+  
+The DISTRIBUTION object can support multidimensional distributions
+for example a dirchlet distribution. The names of the dimensions
+should coincides with the names of the `oval` vector.
+If it has only one dimension, the default name is `rvar`.
+
+It is expected that the `rfunc` could be included in the creation of new
+distributions by convolution or mixture, so the environment should be carefully controlled
+to avoid reference leaking that is possible within the R language. For that
+reason, the `rfunc` should be created within a `restrict_environment` 
+function that controls that only the variables that are required within the 
+`function` are saved in the environment of the function.
+
+Once the new objects are instanciated, the fields are immutable and should not be
+changed.
+
+## Factory of `DISTRIBUTION` objects
+
+The following functions create new objects of class `DISTRIBUTION`
+
+| Distribution | factory         | parameters                   | function   |
+|--------------|-----------------|------------------------------|------------|
+| uniform      | new_UNIFORM     | p_min, p_max                 | runif      |
+| normal       | new_NORMAL      | p_mean, p_sd                 | rnorm      |
+| beta         | new_BETA        | p_shape1, p_shape2           | rbeta      |
+| beta         | new_BETA_lci    | p_mean, p_lci, p_uci         | rbeta      |
+| triangular   | new_TRIANGULAR  | p_min, p_max, p_mode         | rtriangular|
+| poisson      | new_POISSON     | p_lambda                     | rpoisson   |
+| exponential  | new_EXPONENTIAL | p_rate                       | rexp       |
+| discrete     | new_DISCRETE    | p_supp, p_prob               | sample     |
+| dirchlet     | new_DIRCHLET    | p_alpha, p_dimnames          | rdirichlet |
+| truncated    | new_TRUNCATED   | p_distribution, p_min, p_max |            |
+| dirac        | new_DIRAC       | p_value                      |            |
+| NA           | new_NA          | p_dimnames                   |            |
+
+## Methods
+
+The following are methods for all objects of class `DISTRIBUTION`
+
+* `metadata(x)` Print the metadata for the distribution
+* `summary(object, n=10000)` Produce a summary of the distribution
+* `rfunc(x, n)` Generate `n` random drawns of the distribution
+* `plot(x, n= 10000)` Produce a density plot of the distribution
+* `ggDISTRIBUTION(x, n= 10000)` produce a density plot of the distribution using ggplot2
+
+```{r}
+myDistr <- new_NORMAL(0,1)
+
+metadata(myDistr)
+
+t(summary(myDistr))
+
+rfunc(myDistr, 10)
+
+```
+
+```{r, fig.width=5, fig.cap = "Figure with R plot"}
+plot(myDistr)
+```
+
+
+```{r, fig.width=5, fig.cap = "Figure with ggplot2"}
+ggDISTRIBUTION(myDistr)
+```
+
+## Convolution
+
+Mathematical operations between `DISTRIBUTION` like `+`, `-`, `*`, `/` can be perform
+with the `new_CONVOLUTION(listdistr, op, omit_NA = FALSE)` function. The `listdistr` 
+paramater is a list of `DISTRIBUTION` objects on which the operation is made.
+A shorter version exists for each one of the operations as follow
+
+* `new_SUM(listdistr, omit_NA = FALSE)`
+* `new_SUBSTRACTION(listdistr, omit_NA = FALSE)`
+* `new_MULTIPLICATION(listdistr, omit_NA = FALSE)`
+* `new_DIVISION(listdistr, omit_NA = FALSE)`
+
+but Mathematical operator can also be used.
+
+
+```{r, fig.width = 5}
+d1 <- new_NORMAL(1,1)
+d2 <- new_UNIFORM(2,8)
+d3 <- new_POISSON(5)
+dsum <- new_SUM(list(d1,d2,d3))
+t(summary(dsum))
+t(summary(d1 + d2 + d3))
+ggDISTRIBUTION(dsum)
+
+```
+
+## Mixture
+
+A `DISTRIBUTION`, consisting on the mixture of several distribution can be obtained
+with the `new_MIXTURE(listdistr, mixture)` function where `listdistr` is a list of
+`DISTRIBUTION` objects and `mixture` the vector of probabilities for each distribution.
+If missing the mixture, the probability will be the same for each distribution.
+
+
+```{r, fig.width = 7}
+d1 <- new_NORMAL(1,0.5)
+d2 <- new_NORMAL(5,0.5)
+d3 <- new_NORMAL(10,0.5)
+dmix <- new_MIXTURE(list(d1,d2,d3))
+t(summary(dmix))
+ggDISTRIBUTION(dmix)
+```

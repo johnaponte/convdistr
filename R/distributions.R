@@ -240,7 +240,7 @@ new_POISSON <- function(p_lambda) {
     list(
       distribution = "POISSON",
       seed = sample(1:2 ^ 15, 1),
-      oval = p_lambda,
+      oval = c("rvar" = p_lambda),
       rfunc = restrict_environment(function(n) {
         matrix(rpois(n, p_lambda),
                ncol = 1,
