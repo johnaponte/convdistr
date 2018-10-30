@@ -34,3 +34,27 @@ hist(Z,freq=F,breaks=50, xlim=c(0,2))
 z <- seq(0,2,0.01)
 lines(z,f.Z(z),lty=2,col="red")
 
+
+
+# Thest for graphs
+library(convdistr)
+library(tidyr)
+library(ggplot2)
+
+x <- new_DIRICHLET(c(100,400,500))
+y <- new_DIRICHLET(c(10,30,60))
+z <- new_SUM(list(x,y))
+w <- new_MIXTURE(list(x,y))
+
+
+
+ggDISTRIBUTION(x)
+ggDISTRIBUTION(y)
+ggDISTRIBUTION(z)
+ggDISTRIBUTION(w)
+ggDISTRIBUTION(new_NORMAL(0,1))
+plot(x)
+plot(y)
+plot(x)
+plot(w)
+plot(new_NORMAL(0,1))
