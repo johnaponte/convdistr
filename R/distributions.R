@@ -55,6 +55,77 @@
 #' @name DISTRIBUTION
 NULL
 
+
+
+#' A factory of \code{\link{DISTRIBUTION}} classes
+#'
+#' Generate a function that creates \code{\link{DISTRIBUTION}} objects
+#'
+#' @return  A function that is able to create \code{\link{DISTRIBUTION}} objects.
+#' @param distname name of the distribution. By convention they are upper case
+#' @param rfunction a function to generate random numbers from the distribution
+#' @param ovalfunc a function that calculate the oval value, should used only
+#' the same arguments that the \code{rfunction}
+#' @examples
+#' new_MYDISTR <- DISTRIBUTION_factory("MYDISTR", rnorm, function(){mean})
+#' d1 <- new_MYDISTR
+#' summary(d1)
+#'
+#' new_MyDIRICHLET <- DISTRIBUTION_factory('rdirichlet',
+#'                        rdirichlet,
+#'                        function() {
+#'                          salpha = sum(alpha)
+#'                          alpha / salpha
+#'                        })
+#' d2 <- new_MyDIRICHLET(c(10, 20, 70), dimnames = c("A", "B", "C"))
+#' summary(d2)
+#' @note The function return a new function, that have as arguments the formals
+#' of the \code{rfunction} plus a new argument \code{dimnames} for the dimmension
+#' names. If The distribution is unidimensional, the default value 
+#' \code{ dimnames = "rvar"} will  works well, but if not, the \code{dimnames} 
+#' argument should be specified when the genertared function is used as in 
+#' the example for the \code{new_MyDIRICHLET}
+#' @export
+#' @keywords DISTRIBUTION
+DISTRIBUTION_factory <-
+  function(distname, rfunction, ovalfunc) {
+    fx <- function() {
+      foval <- function() {
+        
+      }
+      body(foval) <- body(ovalfunc)
+      .oval <- foval()
+      stopifnot(length(.oval) == length(dimnames))
+      names(.oval) <- dimnames
+      redenv <- as.list(environment())
+      topass <-
+        redenv[names(redenv[!names(redenv) %in% c(".oval", "ovalfunc", "foval")])]
+      .rfunc <- restrict_environment(function(n) {
+        drawns <-
+          do.call(rfunction, c(n, topass[names(topass) %in% names(formals(rfunction))]))
+        matrix(drawns,
+               ncol = cols,
+               dimnames = list(1:n, topass$dimnames))
+      },
+      cols = length(.oval),
+      topass)
+      structure(
+        list(
+          distribution = toupper(distname),
+          seed = sample(1:2 ^ 15, 1),
+          oval = .oval,
+          rfunc = .rfunc
+        ),
+        class = c(toupper(distname), "DISTRIBUTION")
+      )
+    }
+    formals(fx) <-
+      c(formals(rfunction)[-1],
+        "ovalfunc" = ovalfunc,
+        "dimnames" = "rvar")
+    fx
+  }
+
 #' Factory for a NORMAL distribution object
 #'
 #' Returns a NORMAL distribution object that produce random numbers
@@ -516,3 +587,40 @@ new_LOGNORMAL <- function(p_meanlog, p_sdlog) {
     class = c("LOGNORMAL", "DISTRIBUTION")
   )
 }
+
+
+#' Factory for a BINOMIAL distribution object
+#'
+#' Returns a BINOMIAL distribution object that produce random numbers
+#' from a binomial distribution using the \code{\link{rbinom}} funtion
+#' @author John Aponte
+#' @param p_size integer that represent the number of trials
+#' @param p_prob probabilty of success of each trial
+#' @return An object of class \code{\link{DISTRIBUTION}}, \code{BINOMIAL}
+#' @importFrom stats rnorm
+#' @export
+#' @examples
+#' myDistr <- new_BINOMIAL(1000,0.3)
+#' myDistr$rfunc(10)
+#' @name BINOMIAL
+#' 
+new_BINOMIAL <- function(p_size, p_prob) {
+  stopifnot(p_size >= 0)
+  stopifnot(trunc(p_size) == p_size)
+  stopifnot(0 <= p_prob & p_prob <= 1 )
+  structure(
+    list(
+      distribution = "BINOMIAL",
+      seed = sample(1:2 ^ 15, 1),
+      oval = c("rvar" = p_size*p_prob),
+      rfunc = restrict_environment(function(n) {
+        matrix(rbinom(n, p_size, p_prob),
+               ncol = 1,
+               dimnames = list(1:n, "rvar"))
+      },
+      p_size = p_size, p_prob = p_prob)
+    ),
+    class = c("BINOMIAL", "DISTRIBUTION")
+  )
+}
+# new_BINOMIAL = DISTRIBUTION_factory("BINOMIAL", rbinom, function(){prob*size})

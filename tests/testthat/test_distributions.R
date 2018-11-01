@@ -123,13 +123,20 @@ test_that("new_EXPONENTIAL works fine",{
 })
 
 
-test_that("new_DIRCHLET works fine",{
-  myDistr <- new_DIRICHLET(c(0.2,0.3,0.5))
+test_that("new_DIRCHLET works fine", {
+  myDistr <- new_DIRICHLET(c(0.2, 0.3, 0.5))
   expect_s3_class(myDistr, "DIRICHLET")
   expect_s3_class(myDistr, "DISTRIBUTION")
-  expect_equivalent(myDistr$oval, c(0.2,0.3,0.5))
+  expect_equivalent(myDistr$oval, c(0.2, 0.3, 0.5))
   expect_silent(myDistr$rfunc(1))
-  myDistr <- new_DIRICHLET(c(0.2,0.3,0.5),c("A","B","C"))
-  expect_equal(myDistr$oval, c(A=0.2, B=0.3, C=0.5))
+  myDistr <- new_DIRICHLET(c(0.2, 0.3, 0.5), c("A", "B", "C"))
+  expect_equal(myDistr$oval, c(A = 0.2, B = 0.3, C = 0.5))
 })
 
+test_that("new_BINOMIAL works fine",{
+  myDistr <- new_BINOMIAL(1000, 0.3)
+  expect_s3_class(myDistr, "BINOMIAL")
+  expect_s3_class(myDistr, "DISTRIBUTION")
+  expect_equivalent(myDistr$oval, 300)
+  expect_silent(myDistr$rfunc(1))
+})
