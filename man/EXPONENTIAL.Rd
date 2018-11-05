@@ -5,10 +5,12 @@
 \alias{new_EXPONENTIAL}
 \title{Factory for a EXPONENTIAL distribution using confidence intervals}
 \usage{
-new_EXPONENTIAL(p_rate)
+new_EXPONENTIAL(p_rate, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_rate}{A numeric that represents the rate of events}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{DISTRIBUTION}, \code{EXPONENTIAL}

@@ -5,12 +5,14 @@
 \alias{new_DISCRETE}
 \title{Factory for a DISCRETE distribution object}
 \usage{
-new_DISCRETE(p_supp, p_prob = NA)
+new_DISCRETE(p_supp, p_prob = NA, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_supp}{A numeric vector of options}
 
 \item{p_prob}{A numeric vector of probabilities.}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{DISTRIBUTION}, \code{DISCRETE}

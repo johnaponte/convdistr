@@ -5,12 +5,14 @@
 \alias{new_UNIFORM}
 \title{Factory for a UNIFORM distribution object}
 \usage{
-new_UNIFORM(p_min, p_max)
+new_UNIFORM(p_min, p_max, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_min}{A numeric that represents the lower limit}
 
 \item{p_max}{A numeric that represents the upper limit}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{DISTRIBUTION}, \code{UNIFORM}

@@ -60,3 +60,8 @@ test_that("The rfunc works well", {
   expect_equal(ncol(rfunc(new_DIRICHLET(c(0.2,0.3,0.4)),10)),3)
   expect_equal(nrow(rfunc(new_DIRICHLET(c(0.2,0.3,0.4)),10)),10)
 })
+
+test_that("The dimnames works well" , {
+  myDistr <- new_NORMAL(0,1)
+  expect_equal(dimnames(myDistr), "rvar")
+})

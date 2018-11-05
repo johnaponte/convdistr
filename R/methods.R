@@ -212,3 +212,7 @@ rfunc.default <- function(x,n) {
   stop("Don't know how to obtain random drawns from an object of class ", class(x))
 }
 
+#' @export
+dimnames.DISTRIBUTION <- function(x) {
+  return(names(x$oval))
+}

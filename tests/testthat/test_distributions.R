@@ -140,3 +140,12 @@ test_that("new_BINOMIAL works fine",{
   expect_equivalent(myDistr$oval, 300)
   expect_silent(myDistr$rfunc(1))
 })
+
+test_that("new_MULTINORMAL works fine", {
+  Sigma = matrix(c(1,0.5,0,0.5,1,0,0,0,1), ncol = 3)
+  myDistr <- new_MULTINORMAL(c(0,0,10), Sigma, c("A","B","C"))
+  expect_equivalent(myDistr$oval , c(0,0,10))
+  mycov <- cov(rfunc(myDistr,10000))
+  dif <- abs(Sigma - mycov)
+  expect_true(all(dif < 0.05))
+})

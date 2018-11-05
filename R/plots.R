@@ -25,7 +25,8 @@ ggDISTRIBUTION <- function(x, n = 10000) {
       ggplot(xxdf, aes(x = value, stat(density), color = dimension)) +
       geom_histogram(aes(fill = dimension),
                      alpha = 0.4,
-                     bins = log10(n) * 7 * ncol(xx)) 
+                     bins = log10(n) * 7 * ncol(xx),
+                     position = "identity") 
       #geom_freqpoly(bins = log10(n) * 7 * ncol(xx))
   }
   else {
@@ -58,7 +59,7 @@ plot.DISTRIBUTION <- function(x, n = 10000, ...) {
   stopifnot(inherits(distribution, "DISTRIBUTION"))
   xx <- rfunc(distribution, n)
   if (ncol(xx) > 1) {
-    cols <- brewer.pal(n = ncol(xx), name = "Set2")
+    cols <- brewer.pal(n = max(ncol(xx),3), name = "Set2")
     hist(xx[, 1],
          freq = F,
          breaks = log10(n) * 7,

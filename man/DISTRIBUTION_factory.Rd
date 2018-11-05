@@ -30,9 +30,9 @@ the example for the \code{new_MyDIRICHLET}
 }
 \examples{
 new_MYDISTR <- DISTRIBUTION_factory("MYDISTR", rnorm, function(){mean})
-d1 <- new_MYDISTR
+d1 <- new_MYDISTR(0,1)
 summary(d1)
-
+require(extraDistr)
 new_MyDIRICHLET <- DISTRIBUTION_factory('rdirichlet',
                        rdirichlet,
                        function() {

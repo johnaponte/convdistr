@@ -23,10 +23,10 @@
 #' @name CONVOLUTION
 new_CONVOLUTION <- function(listdistr, op, omit_NA = FALSE){
   stopifnot(all(sapply(listdistr,inherits,"DISTRIBUTION")))
-  stopifnot(same_dimensions(listdistr))
   if (omit_NA) {
     listdistr <- omit_NA(listdistr)
   }
+  stopifnot(same_dimensions(listdistr))
   if (any(sapply(listdistr,inherits,"NA"))) {
     return(new_NA(p_dimnames = names(listdistr[[1]]$oval)))
   }

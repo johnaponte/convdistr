@@ -68,9 +68,9 @@ NULL
 #' the same arguments that the \code{rfunction}
 #' @examples
 #' new_MYDISTR <- DISTRIBUTION_factory("MYDISTR", rnorm, function(){mean})
-#' d1 <- new_MYDISTR
+#' d1 <- new_MYDISTR(0,1)
 #' summary(d1)
-#'
+#' require(extraDistr)
 #' new_MyDIRICHLET <- DISTRIBUTION_factory('rdirichlet',
 #'                        rdirichlet,
 #'                        function() {
@@ -133,6 +133,7 @@ DISTRIBUTION_factory <-
 #' @author John Aponte
 #' @param p_mean A numeric that represents the mean value
 #' @param p_sd A numeric that represents the standard deviation
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{\link{DISTRIBUTION}}, \code{NORMAL}
 #' @importFrom stats rnorm
 #' @export
@@ -140,18 +141,24 @@ DISTRIBUTION_factory <-
 #' myDistr <- new_NORMAL(0,1)
 #' myDistr$rfunc(10)
 #' @name NORMAL
-new_NORMAL <- function(p_mean, p_sd) {
+new_NORMAL <- function(p_mean, p_sd, p_dimnames = "rvar") {
+  stopifnot(length(p_mean) == 1)
+  stopifnot(length(p_sd) == 1)
+  stopifnot(length(p_dimnames) == 1)
+  stopifnot(p_sd >= 0)
+  .oval = p_mean
+  names(.oval) <- p_dimnames
   structure(
     list(
       distribution = "NORMAL",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = p_mean),
+      oval = .oval,
       rfunc = restrict_environment(function(n) {
         matrix(rnorm(n, p_mean, p_sd),
                ncol = 1,
-               dimnames = list(1:n, "rvar"))
+               dimnames = list(1:n, p_dimnames))
       },
-      p_mean = p_mean, p_sd = p_sd)
+      p_mean = p_mean, p_sd = p_sd, p_dimnames = p_dimnames)
     ),
     class = c("NORMAL", "DISTRIBUTION")
   )
@@ -164,6 +171,7 @@ new_NORMAL <- function(p_mean, p_sd) {
 #' @author John Aponte
 #' @param p_min A numeric that represents the lower limit
 #' @param p_max A numeric that represents the upper limit
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{UNIFORM}
 #' @importFrom stats runif
 #' @export
@@ -171,19 +179,21 @@ new_NORMAL <- function(p_mean, p_sd) {
 #' myDistr <- new_UNIFORM(0,1)
 #' myDistr$rfunc(10)
 #' @name UNIFORM
-new_UNIFORM <- function(p_min, p_max) {
+new_UNIFORM <- function(p_min, p_max, p_dimnames = "rvar") {
   stopifnot(p_min <= p_max)
+  .oval = (p_max + p_min)/2
+  names(.oval) <- p_dimnames
   structure(
     list(
       distribution = "UNIFORM",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = (p_max - p_min) / 2 + p_min),
+      oval = .oval,
       rfunc = restrict_environment(function(n) {
         matrix(runif(n, p_min, p_max),
                ncol = 1,
-               dimnames = list(1:n, "rvar"))
+               dimnames = list(1:n, p_dimnames))
       },
-      p_min = p_min, p_max = p_max)
+      p_min = p_min, p_max = p_max, p_dimnames = p_dimnames)
     ),
     class = c("UNIFORM", "DISTRIBUTION")
   )
@@ -197,6 +207,7 @@ new_UNIFORM <- function(p_min, p_max) {
 #' @author John Aponte
 #' @param p_shape1 parameters of the beta distribution
 #' @param p_shape2 parameters of the beta distribution
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{BETA}
 #' @importFrom stats rbeta
 #' @export
@@ -204,18 +215,20 @@ new_UNIFORM <- function(p_min, p_max) {
 #' myDistr <- new_BETA(1,1)
 #' myDistr$rfunc(10)
 #' @name BETA
-new_BETA <- function(p_shape1, p_shape2) {
+new_BETA <- function(p_shape1, p_shape2, p_dimnames = "rvar") {
+  .oval = p_shape1 / (p_shape1 + p_shape2)
+  names(.oval) <- p_dimnames
   structure(
     list(
       distribution = "BETA",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = p_shape1 / (p_shape1 + p_shape2)),
+      oval = .oval,
       rfunc = restrict_environment(function(n) {
         matrix(rbeta(n, p_shape1, p_shape2),
                ncol = 1,
-               dimnames = list(1:n, "rvar"))
+               dimnames = list(1:n,p_dimnames))
       },
-      p_shape1 = p_shape1, p_shape2 = p_shape2)
+      p_shape1 = p_shape1, p_shape2 = p_shape2, p_dimnames = p_dimnames)
     ),
     class = c("BETA", "DISTRIBUTION", "list")
   )
@@ -240,7 +253,7 @@ new_BETA <- function(p_shape1, p_shape2) {
 #' myDistr <- new_BETA_lci(0.30,0.25,0.35)
 #' myDistr$rfunc(10)
 #' @describeIn BETA Constructor based on confidence intervals
-new_BETA_lci <- function(p_mean, p_lci, p_uci) {
+new_BETA_lci <- function(p_mean, p_lci, p_uci, p_dimnames = "rvar") {
   stopifnot(p_lci < p_uci)
   stopifnot(p_lci < p_mean & p_mean < p_uci)
   stopifnot(0 < p_mean & p_mean < 1)
@@ -249,7 +262,7 @@ new_BETA_lci <- function(p_mean, p_lci, p_uci) {
   varp <- abs(((p_uci - p_lci)) / 4) ^ 2
   p_shape1 <- p_mean * (p_mean * (1 - p_mean) / varp - 1)
   p_shape2 <- (1 - p_mean) * (p_mean * (1 - p_mean) / varp - 1)
-  new_BETA(p_shape1,p_shape2)
+  new_BETA(p_shape1,p_shape2, p_dimnames = p_dimnames)
 }
 
 #' Factory for a TRIANGULAR distribution object
@@ -261,6 +274,7 @@ new_BETA_lci <- function(p_mean, p_lci, p_uci) {
 #' @param p_min A numeric that represents the lower limit
 #' @param p_max A numeric that represents the upper limit
 #' @param p_mode A numeric that represents the mode
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{TRIANGULAR}
 #' @importFrom extraDistr rtriang
 #' @export
@@ -268,23 +282,26 @@ new_BETA_lci <- function(p_mean, p_lci, p_uci) {
 #' myDistr <- new_TRIANGULAR(-1,1,0)
 #' myDistr$rfunc(10)
 #' @name TRIANGULAR
-new_TRIANGULAR <- function(p_min, p_max, p_mode) {
+new_TRIANGULAR <- function(p_min, p_max, p_mode, p_dimnames = "rvar") {
   stopifnot(p_min < p_max)
   stopifnot(p_min <= p_mode & p_mode <= p_max)
+  .oval = (p_min + p_max + p_mode) / 3
+  names(.oval) <- p_dimnames
   structure(
     list(
       distribution = "TRIANGULAR",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = (p_min + p_max + p_mode) / 3),
+      oval = .oval,
       rfunc = restrict_environment(
         function(n) {
           matrix(rtriang(n, a, b, c),
                  ncol = 1,
-                 dimnames = list(1:n, "rvar"))
+                 dimnames = list(1:n, p_dimnames))
         },
         a = p_min,
         b = p_max,
-        c = p_mode
+        c = p_mode,
+        p_dimnames = p_dimnames
       )
     ),
     class = c("TRIANGULAR", "DISTRIBUTION")
@@ -298,6 +315,7 @@ new_TRIANGULAR <- function(p_min, p_max, p_mode) {
 #' from a Poisson distribution using the \code{\link{rpois}} function
 #' @author John Aponte
 #' @param p_lambda A numeric that represents the expected number of events
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{POISSON}
 #' @importFrom stats rpois
 #' @export
@@ -305,19 +323,21 @@ new_TRIANGULAR <- function(p_min, p_max, p_mode) {
 #' myDistr <- new_POISSON(5)
 #' myDistr$rfunc(10)
 #' @name POISSON
-new_POISSON <- function(p_lambda) {
+new_POISSON <- function(p_lambda, p_dimnames = "rvar") {
   stopifnot(p_lambda > 0)
+  .oval = p_lambda
+  names(.oval) = "rvar"
   structure(
     list(
       distribution = "POISSON",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = p_lambda),
+      oval = .oval,
       rfunc = restrict_environment(function(n) {
         matrix(rpois(n, p_lambda),
                ncol = 1,
-               dimnames = list(1:n, "rvar"))
+               dimnames = list(1:n, p_dimnames))
       },
-      p_lambda = p_lambda)
+      p_lambda = p_lambda, p_dimnames = p_dimnames)
     ),
     class = c("POISSON", "DISTRIBUTION")
   )
@@ -330,6 +350,7 @@ new_POISSON <- function(p_lambda) {
 #' from an exponential distribution using the \code{\link{rexp}} function
 #' @author John Aponte
 #' @param p_rate A numeric that represents the rate of events
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{EXPONENTIAL}
 #' @importFrom stats rexp
 #' @export
@@ -337,19 +358,21 @@ new_POISSON <- function(p_lambda) {
 #' myDistr <- new_EXPONENTIAL(5)
 #' myDistr$rfunc(10)
 #' @name EXPONENTIAL
-new_EXPONENTIAL <- function(p_rate) {
+new_EXPONENTIAL <- function(p_rate, p_dimnames = "rvar") {
   stopifnot(p_rate >= 0)
+  .oval = 1/p_rate
+  names(.oval) <- p_dimnames
   structure(
     list(
       distribution = "EXPONENTIAL",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = 1 / p_rate),
+      oval = .oval,
       rfunc = restrict_environment(function(n) {
         matrix(rexp(n, p_rate),
                ncol = 1,
-               dimnames = list(1:n, "rvar"))
+               dimnames = list(1:n, p_dimnames))
       },
-      p_rate = p_rate)
+      p_rate = p_rate, p_dimnames = p_dimnames)
     ),
     class = c("EXPONENTIAL", "DISTRIBUTION")
   )
@@ -367,32 +390,35 @@ new_EXPONENTIAL <- function(p_rate) {
 #' @author John Aponte
 #' @param p_supp A numeric vector of options
 #' @param p_prob A numeric vector of probabilities.
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{DISCRETE}
 #' @export
 #' @examples
 #' myDistr <- new_DISCRETE(p_supp=c(1,2,3,4), p_prob=c(0.40,0.30,0.20,0.10))
 #' myDistr$rfunc(10)
 #' @name DISCRETE
-new_DISCRETE <- function(p_supp, p_prob = NA) {
+new_DISCRETE <- function(p_supp, p_prob = NA, p_dimnames = "rvar") {
   stopifnot(missing(p_prob) ||
               is.na(p_prob) || length(p_supp) == length(p_prob))
   if (missing(p_prob) || is.na(p_prob)) {
     p_prob = rep(1 / length(p_supp), length(p_supp))
   }
   stopifnot(abs(1 - sum(p_prob)) < 1 ^ 0.4)
+  .oval = sum(p_supp * p_prob)
+  names(.oval) <- p_dimnames
   structure(
     list(
       distribution = "DISCRETE",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = sum(p_supp * p_prob)),
+      oval = .oval,
       rfunc = restrict_environment(function(n) {
         matrix(
           sample(p_supp, n, replace = TRUE, prob = p_prob),
           ncol = 1,
-          dimnames = list(1:n, "rvar")
+          dimnames = list(1:n, p_dimnames)
         )
       },
-      p_supp = p_supp, p_prob = p_prob)
+      p_supp = p_supp, p_prob = p_prob, p_dimnames = p_dimnames)
     ),
     class = c("DISCRETE", "DISTRIBUTION")
   )
@@ -439,25 +465,29 @@ new_NA <- function(p_dimnames = "rvar") {
 #' Returns an DIRAC distribution object that always return the same number.
 #'
 #' @author John Aponte
-#' @param p_value A numeric that set the value for the distribution
+#' @param p_scalar A numeric that set the value for the distribution
 #' @return An object of class \code{DISTRIBUTION}, \code{DIRAC}
+#' @param p_dimnames A character that represents the name of the dimension
 #' @export
 #' @examples
-#' myDistr <- new_DIRAC(p_value = 1)
+#' myDistr <- new_DIRAC(1)
 #' myDistr$rfunc(10)
 #' @name DIRAC
-new_DIRAC <- function(p_value) {
+new_DIRAC <- function(p_scalar, p_dimnames = "rvar") {
+  stopifnot(length(p_scalar) == 1)
+  .oval = p_scalar
+  names(.oval) <- p_dimnames
   structure(
     list(
       distribution = "DIRAC",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = p_value),
+      oval = .oval,
       rfunc = restrict_environment(function(n) {
-        matrix(rep(p_value, n),
+        matrix(rep(p_scalar, n),
                ncol = 1,
-               dimnames = list(1:n, "rvar"))
+               dimnames = list(1:n, p_dimnames))
       },
-      p_value = p_value)
+      p_scalar = p_scalar, p_dimnames = p_dimnames)
     ),
     class =  c("DIRAC", "DISTRIBUTION")
   )
@@ -564,6 +594,7 @@ new_DIRICHLET <- function(p_alpha, p_dimnames) {
 #' @author John Aponte
 #' @param p_meanlog mean of the distribution on th elog scale
 #' @param p_sdlog A numeric that represents the standard deviation on the log scale
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{\link{DISTRIBUTION}}, \code{LOGNORMAL}
 #' @importFrom stats rnorm
 #' @export
@@ -571,18 +602,20 @@ new_DIRICHLET <- function(p_alpha, p_dimnames) {
 #' myDistr <- new_LOGNORMAL(0,1)
 #' myDistr$rfunc(10)
 #' @name LOGNORMAL
-new_LOGNORMAL <- function(p_meanlog, p_sdlog) {
+new_LOGNORMAL <- function(p_meanlog, p_sdlog, p_dimnames = "rvar") {
+  .oval =  p_meanlog + (p_sdlog^2)/2
+  names(.oval) <- "rvar"
   structure(
     list(
       distribution = "LOGNORMAL",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = p_meanlog),
+      oval = .oval, 
       rfunc = restrict_environment(function(n) {
         matrix(rlnorm(n, p_meanlog, p_sdlog),
                ncol = 1,
-               dimnames = list(1:n, "rvar"))
+               dimnames = list(1:n, p_dimnames))
       },
-      p_meanlog = p_meanlog, p_sdlog = p_sdlog)
+      p_meanlog = p_meanlog, p_sdlog = p_sdlog, p_dimnames = p_dimnames)
     ),
     class = c("LOGNORMAL", "DISTRIBUTION")
   )
@@ -596,6 +629,7 @@ new_LOGNORMAL <- function(p_meanlog, p_sdlog) {
 #' @author John Aponte
 #' @param p_size integer that represent the number of trials
 #' @param p_prob probabilty of success of each trial
+#' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{\link{DISTRIBUTION}}, \code{BINOMIAL}
 #' @importFrom stats rnorm
 #' @export
@@ -604,23 +638,79 @@ new_LOGNORMAL <- function(p_meanlog, p_sdlog) {
 #' myDistr$rfunc(10)
 #' @name BINOMIAL
 #' 
-new_BINOMIAL <- function(p_size, p_prob) {
+new_BINOMIAL <- function(p_size, p_prob, p_dimnames = "rvar") {
   stopifnot(p_size >= 0)
   stopifnot(trunc(p_size) == p_size)
   stopifnot(0 <= p_prob & p_prob <= 1 )
+  .oval =  p_size*p_prob
+  names(.oval) <- p_dimnames
   structure(
     list(
       distribution = "BINOMIAL",
       seed = sample(1:2 ^ 15, 1),
-      oval = c("rvar" = p_size*p_prob),
+      oval = .oval,
       rfunc = restrict_environment(function(n) {
         matrix(rbinom(n, p_size, p_prob),
                ncol = 1,
-               dimnames = list(1:n, "rvar"))
+               dimnames = list(1:n, p_dimnames))
       },
-      p_size = p_size, p_prob = p_prob)
+      p_size = p_size, p_prob = p_prob, p_dimnames = p_dimnames)
     ),
     class = c("BINOMIAL", "DISTRIBUTION")
   )
 }
+
 # new_BINOMIAL = DISTRIBUTION_factory("BINOMIAL", rbinom, function(){prob*size})
+
+#' Multivariate Normal Distribution
+#' 
+#' Return a \code{\link{DISTRIBUTION}} object that obtain random drawns from a 
+#' multivariate normal distribution using the \code{\link[MASS]{mvrnorm}} function.
+#' 
+#' @param p_mu a vector of means
+#' @param p_sigma a positive-definite symmetric matrix specifiying the covariance matrix
+#' @param p_dimnames A character that represents the name of the dimension 
+#' @param tol tolerance (relative to largest variance) for numerical lack of positive-definiteness in p_sigma.
+#' @param empirical logical. If true, mu and Sigma specify the empirical not population mean and covariance matrix.
+#' @importFrom MASS mvrnorm
+#' @export
+#' @seealso \code{\link[MASS]{mvrnorm}}
+#' @examples 
+#' msigma <- matrix(c(1,0,0,1), ncol=2)
+#' d1 <- new_MULTINORMAL(c(0,1), msigma)
+#' rfunc(d1, 10)
+new_MULTINORMAL <-
+  function(p_mu,
+           p_sigma,
+           p_dimnames,
+           tol = 1e-6,
+           empirical = FALSE) {
+    if (missing(p_dimnames)) {
+      p_dimnames = paste("rvar", 1:length(p_mu), sep = "")
+    }
+    
+    stopifnot(ncol(p_sigma) == length(p_mu))
+    stopifnot(isSymmetric.matrix(p_sigma))
+    .oval = p_mu
+    names(.oval) <- p_dimnames
+    structure(
+      list(
+        distribution = "MULTINORMAL",
+        seed = sample(1:2 ^ 15, 1),
+        oval = .oval,
+        rfunc = restrict_environment(
+          function(n) {
+            res <- mvrnorm(n, p_mu, p_sigma, tol, empirical)
+            dimnames(res) <- list(1:n, p_dimnames)
+            res
+          },
+          p_mu = p_mu,
+          p_sigma = p_sigma,
+          tol = tol,
+          empirical = empirical,
+          p_dimnames = p_dimnames
+        )
+      ),
+      class = c("MULTINORMAL", "DISTRIBUTION")
+    )
+  }

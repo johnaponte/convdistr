@@ -5,10 +5,12 @@
 \alias{new_DIRAC}
 \title{Factory for a DIRAC distribution object}
 \usage{
-new_DIRAC(p_value)
+new_DIRAC(p_scalar, p_dimnames = "rvar")
 }
 \arguments{
-\item{p_value}{A numeric that set the value for the distribution}
+\item{p_scalar}{A numeric that set the value for the distribution}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{DISTRIBUTION}, \code{DIRAC}
@@ -17,7 +19,7 @@ An object of class \code{DISTRIBUTION}, \code{DIRAC}
 Returns an DIRAC distribution object that always return the same number.
 }
 \examples{
-myDistr <- new_DIRAC(p_value = 1)
+myDistr <- new_DIRAC(1)
 myDistr$rfunc(10)
 }
 \author{

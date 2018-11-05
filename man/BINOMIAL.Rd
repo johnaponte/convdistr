@@ -5,12 +5,14 @@
 \alias{new_BINOMIAL}
 \title{Factory for a BINOMIAL distribution object}
 \usage{
-new_BINOMIAL(p_size, p_prob)
+new_BINOMIAL(p_size, p_prob, p_dimnames = "rvar")
 }
 \arguments{
-\item{p_size}{number of trials}
+\item{p_size}{integer that represent the number of trials}
 
 \item{p_prob}{probabilty of success of each trial}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{\link{DISTRIBUTION}}, \code{BINOMIAL}
@@ -20,7 +22,7 @@ Returns a BINOMIAL distribution object that produce random numbers
 from a binomial distribution using the \code{\link{rbinom}} funtion
 }
 \examples{
-myDistr <- new_BINOMIAL(0,1)
+myDistr <- new_BINOMIAL(1000,0.3)
 myDistr$rfunc(10)
 }
 \author{

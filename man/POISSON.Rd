@@ -5,10 +5,12 @@
 \alias{new_POISSON}
 \title{Factory for a POISSON distribution using confidence intervals}
 \usage{
-new_POISSON(p_lambda)
+new_POISSON(p_lambda, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_lambda}{A numeric that represents the expected number of events}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{DISTRIBUTION}, \code{POISSON}

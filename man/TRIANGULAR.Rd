@@ -5,7 +5,7 @@
 \alias{new_TRIANGULAR}
 \title{Factory for a TRIANGULAR distribution object}
 \usage{
-new_TRIANGULAR(p_min, p_max, p_mode)
+new_TRIANGULAR(p_min, p_max, p_mode, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_min}{A numeric that represents the lower limit}
@@ -13,6 +13,8 @@ new_TRIANGULAR(p_min, p_max, p_mode)
 \item{p_max}{A numeric that represents the upper limit}
 
 \item{p_mode}{A numeric that represents the mode}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{DISTRIBUTION}, \code{TRIANGULAR}

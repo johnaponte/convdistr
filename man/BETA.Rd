@@ -6,14 +6,16 @@
 \alias{new_BETA_lci}
 \title{Factory for a BETA distribution object}
 \usage{
-new_BETA(p_shape1, p_shape2)
+new_BETA(p_shape1, p_shape2, p_dimnames = "rvar")
 
-new_BETA_lci(p_mean, p_lci, p_uci)
+new_BETA_lci(p_mean, p_lci, p_uci, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_shape1}{parameters of the beta distribution}
 
 \item{p_shape2}{parameters of the beta distribution}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 
 \item{p_mean}{A numeric that represents the expected value of the proportion}
 

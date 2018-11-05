@@ -5,12 +5,14 @@
 \alias{new_LOGNORMAL}
 \title{Factory for a LOGNORMAL distribution object}
 \usage{
-new_LOGNORMAL(p_meanlog, p_sdlog)
+new_LOGNORMAL(p_meanlog, p_sdlog, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_meanlog}{mean of the distribution on th elog scale}
 
 \item{p_sdlog}{A numeric that represents the standard deviation on the log scale}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{\link{DISTRIBUTION}}, \code{LOGNORMAL}

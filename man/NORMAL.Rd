@@ -5,12 +5,14 @@
 \alias{new_NORMAL}
 \title{Factory for a NORMAL distribution object}
 \usage{
-new_NORMAL(p_mean, p_sd)
+new_NORMAL(p_mean, p_sd, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_mean}{A numeric that represents the mean value}
 
 \item{p_sd}{A numeric that represents the standard deviation}
+
+\item{p_dimnames}{A character that represents the name of the dimension}
 }
 \value{
 An object of class \code{\link{DISTRIBUTION}}, \code{NORMAL}
