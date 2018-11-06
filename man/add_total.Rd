@@ -21,3 +21,7 @@ created by the sum of each row of the drawns of the distribution.
 \details{
 Only works with multidimensional distributions.
 }
+\examples{
+d1 <- new_DIRICHLET(c(0.2,0.5,0.3))
+d2 <- add_total(d1)
+}

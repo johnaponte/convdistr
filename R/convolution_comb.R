@@ -22,6 +22,11 @@
 #'
 #' @return an object of class \code{\link{DISTRIBUTION}}
 #' @export
+#' @examples 
+#' x1 <- new_MULTINORMAL(c(0,1), matrix(c(1,0.5,0.5,1),ncol=2), p_dimnames = c("A","B"))
+#' x2 <- new_MULTINORMAL(c(10,1), matrix(c(1,0.4,0.4,1),ncol=2), p_dimnames = c("B","C"))
+#' new_CONVOLUTION_comb(x1,x2, `+`)
+#' @name CONVOLUTION_comb
 new_CONVOLUTION_comb <-
   function(dist1,
            dist2,
@@ -88,6 +93,9 @@ new_CONVOLUTION_comb <-
 #' @param p_totalname the name of the new dimension
 #' @return a \code{\link{DISTRIBUTION}}
 #' @export
+#' @examples
+#' d1 <- new_DIRICHLET(c(0.2,0.5,0.3))
+#' d2 <- add_total(d1)
 add_total <- function(p_distribution, p_totalname = "TOTAL") {
   stopifnot(inherits(p_distribution, "DISTRIBUTION"))
   stopifnot(length(p_distribution$oval) > 1)
@@ -111,4 +119,40 @@ add_total <- function(p_distribution, p_totalname = "TOTAL") {
     ),
     class = c("CONVOLUTION", "DISTRIBUTION")
   )
+}
+
+
+#' @describeIn CONVOLUTION_comb Sum of distributions
+#' @export
+#' @examples 
+#' new_SUM_comb(x1,x2)
+new_SUM_comb <- function(dist1,dist2) {
+  new_CONVOLUTION_comb(dist1,dist2, `+`)
+}
+
+
+#' @describeIn CONVOLUTION_comb Substraction of distributions
+#' @export
+#' @examples 
+#' new_SUBSTRACTION_comb(x1,x2)
+new_SUBSTRACTION_comb <- function(dist1,dist2) {
+  new_CONVOLUTION_comb(dist1,dist2, `-`)
+}
+
+
+#' @describeIn CONVOLUTION_comb Multiplication of distributions
+#' @export
+#' @examples 
+#' new_MULTIPLICATION_comb(x1,x2)
+new_MULTIPLICATION_comb <- function(dist1,dist2) {
+  new_CONVOLUTION_comb(dist1,dist2, `*`)
+}
+
+
+#' @describeIn CONVOLUTION_comb Division of distributions
+#' @export
+#' @examples 
+#' new_DIVISION_comb(x1,x2)
+new_DIVISION_comb <- function(dist1,dist2) {
+  new_CONVOLUTION_comb(dist1,dist2, `/`)
 }

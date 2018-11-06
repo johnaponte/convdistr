@@ -18,6 +18,11 @@
 #' 
 #' @return an object of class \code{\link{DISTRIBUTION}}
 #' @export
+#' @name CONVOLUTION_assoc
+#' @examples
+#' x1 <- new_MULTINORMAL(c(0,1), matrix(c(1,0.5,0.5,1),ncol=2), p_dimnames = c("A","B"))
+#' x2 <- new_MULTINORMAL(c(10,1), matrix(c(1,0.4,0.4,1),ncol=2), p_dimnames = c("B","C"))
+#' new_CONVOLUTION_assoc(x1,x2, `+`)
 new_CONVOLUTION_assoc <- function(dist1, dist2, op) {
   stopifnot(inherits(dist1, "DISTRIBUTION"))
   stopifnot(inherits(dist2, "DISTRIBUTION"))
@@ -53,4 +58,39 @@ new_CONVOLUTION_assoc <- function(dist1, dist2, op) {
       oval = .oval,
       rfunc = .rfunc),
     class = c("CONVOLUTION","DISTRIBUTION"))      
+}
+
+#' @describeIn CONVOLUTION_assoc Sum of distributions
+#' @export
+#' @examples 
+#' new_SUM_assoc(x1,x2)
+new_SUM_assoc <- function(dist1,dist2) {
+  new_CONVOLUTION_assoc(dist1,dist2, `+`)
+}
+
+
+#' @describeIn CONVOLUTION_assoc Substraction of distributions
+#' @export
+#' @examples 
+#' new_SUBSTRACTION_assoc(x1,x2)
+new_SUBSTRACTION_assoc <- function(dist1,dist2) {
+  new_CONVOLUTION_assoc(dist1,dist2, `-`)
+}
+
+
+#' @describeIn CONVOLUTION_assoc Multiplication of distributions
+#' @export
+#' @examples 
+#' new_MULTIPLICATION_assoc(x1,x2)
+new_MULTIPLICATION_assoc <- function(dist1,dist2) {
+  new_CONVOLUTION_assoc(dist1,dist2, `*`)
+}
+
+
+#' @describeIn CONVOLUTION_assoc Division of distributions
+#' @export
+#' @examples 
+#' new_DIVISION_assoc(x1,x2)
+new_DIVISION_assoc <- function(dist1,dist2) {
+  new_CONVOLUTION_assoc(dist1,dist2, `/`)
 }
