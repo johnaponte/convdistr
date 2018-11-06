@@ -2,7 +2,7 @@
 # 20181028
 # # # # # # # # # # # # # # # # # #
 
-context("Test Convolution")
+context("Test convolution")
 
 test_that("The new_CONVOLUTION function works", {
   x1 <- new_NORMAL(0, 1)

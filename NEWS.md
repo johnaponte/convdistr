@@ -9,7 +9,8 @@
 * Added the fitdiri and fitbeta functions
 * Added the dimmnames function
 * All distributions now accept a dimnames paramater
-* Adds  MULTINORMAL distribution
+* Added  MULTINORMAL distribution
+* Added new_CONVOLUTION_assoc
 
 
 

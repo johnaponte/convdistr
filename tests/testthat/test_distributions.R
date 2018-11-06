@@ -2,7 +2,7 @@
 # 20181027 by JJAV
 # # # # # # # # # # # # # #
 
-context("Test Distributions")
+context("Test distributions")
 
 test_that("new_UNIFORM works fine", {
   myDistr <- new_UNIFORM(0,1)

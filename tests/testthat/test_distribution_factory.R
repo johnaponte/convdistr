@@ -2,7 +2,7 @@
 # by JJAV 20191101
 # # # # # # # # # # # # # # # # # # # #
 
-context("Test DISTRIBUTION_factory")
+context("Test distribution_factory")
 
 test_that("The DISTRIBUTION_factory works well" , {
   new_myUNIF <-
