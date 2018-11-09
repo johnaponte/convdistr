@@ -33,7 +33,7 @@ ggDISTRIBUTION <- function(x, n = 10000) {
     g <-
       ggplot(xxdf,
              aes(x = value, stat(density))) +
-      geom_histogram(alpha = 0.4, bins = log10(n) * 7) 
+      geom_histogram(alpha = 0.4, bins = log10(n) * 7, color = "white") 
       #geom_freqpoly(bins = log10(n) * 7)
   }
   g + ggtitle(x$distribution)
