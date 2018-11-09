@@ -15,19 +15,19 @@
 \usage{
 new_CONVOLUTION(listdistr, op, omit_NA = FALSE)
 
-new_SUM(listdistr, omit_NA = FALSE)
+new_SUM(..., omit_NA = FALSE)
 
 \method{+}{DISTRIBUTION}(e1, e2)
 
-new_SUBSTRATION(listdistr, omit_NA = FALSE)
+new_SUBSTRATION(..., omit_NA = FALSE)
 
 \method{-}{DISTRIBUTION}(e1, e2)
 
-new_MULTIPLICATION(listdistr, omit_NA = FALSE)
+new_MULTIPLICATION(..., omit_NA = FALSE)
 
 \method{*}{DISTRIBUTION}(e1, e2)
 
-new_DIVISION(listdistr, omit_NA = FALSE)
+new_DIVISION(..., omit_NA = FALSE)
 
 \method{/}{DISTRIBUTION}(e1, e2)
 }
@@ -37,6 +37,8 @@ new_DIVISION(listdistr, omit_NA = FALSE)
 \item{op}{a function to convolute `+`, `-`, `*`, `\`}
 
 \item{omit_NA}{if TRUE, \code{NA} distributions will be omitted}
+
+\item{...}{\code{\link{DISTRIBUTION}} objects or a list of distribution objects}
 
 \item{e1}{object of class \code{\link{DISTRIBUTION}}}
 
@@ -70,9 +72,9 @@ the result will be a new distribution of class \code{NA} unless the
 x1 <- new_NORMAL(0,1)
 x2 <- new_UNIFORM(1,2)
 new_CONVOLUTION(list(x1,x2), `+`)
-new_SUM(list(x1,x2))
+new_SUM(x1,x2)
 x1 + x2
-new_SUBSTRATION(list(x1,x2))
+new_SUBSTRATION(x1,x2)
 x1 - x2
 new_MULTIPLICATION(list(x1,x2))
 x1 * x2

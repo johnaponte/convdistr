@@ -56,10 +56,14 @@ new_CONVOLUTION <- function(listdistr, op, omit_NA = FALSE){
 }
 
 #' @describeIn CONVOLUTION Sum of distributions
-#' @export
+#' @param ... \code{\link{DISTRIBUTION}} objects or a list of distribution objects
+#' @export 
 #' @examples 
-#' new_SUM(list(x1,x2))
-new_SUM <- function(listdistr, omit_NA = FALSE) {
+#' new_SUM(x1,x2)
+new_SUM <- function(..., omit_NA = FALSE) {
+  listdistr <- list(...)
+  if (length(listdistr) == 1 & !inherits(listdistr, "DISTRIBUTION"))
+    listdistr <- unlist(listdistr, recursive = FALSE)
   new_CONVOLUTION(listdistr, `+`, omit_NA = omit_NA)
 }
 
@@ -75,8 +79,11 @@ new_SUM <- function(listdistr, omit_NA = FALSE) {
 #' @describeIn CONVOLUTION Substration for distributions
 #' @export
 #' @examples 
-#' new_SUBSTRATION(list(x1,x2))
-new_SUBSTRATION <- function(listdistr, omit_NA = FALSE) {
+#' new_SUBSTRATION(x1,x2)
+new_SUBSTRATION <- function(..., omit_NA = FALSE) {
+  listdistr <- list(...)
+  if (length(listdistr) == 1 & !inherits(listdistr, "DISTRIBUTION"))
+    listdistr <- unlist(listdistr, recursive = FALSE)
   new_CONVOLUTION(listdistr, `-`, omit_NA = omit_NA)
 }
 
@@ -90,7 +97,10 @@ new_SUBSTRATION <- function(listdistr, omit_NA = FALSE) {
 #' @export
 #' @examples 
 #' new_MULTIPLICATION(list(x1,x2))
-new_MULTIPLICATION <- function(listdistr, omit_NA = FALSE) {
+new_MULTIPLICATION <- function(..., omit_NA = FALSE) {
+  listdistr <- list(...)
+  if (length(listdistr) == 1 & !inherits(listdistr, "DISTRIBUTION"))
+    listdistr <- unlist(listdistr, recursive = FALSE)
   new_CONVOLUTION(listdistr, `*`, omit_NA = omit_NA)
 }
 
@@ -104,7 +114,10 @@ new_MULTIPLICATION <- function(listdistr, omit_NA = FALSE) {
 #' @export
 #' @examples 
 #' new_DIVISION(list(x1,x2))
-new_DIVISION <- function(listdistr, omit_NA = FALSE) {
+new_DIVISION <- function(..., omit_NA = FALSE) {
+  listdistr <- list(...)
+  if (length(listdistr) == 1 & !inherits(listdistr, "DISTRIBUTION"))
+    listdistr <- unlist(listdistr, recursive = FALSE)
   new_CONVOLUTION(listdistr, `/`, omit_NA = omit_NA)
 }
 

@@ -1,0 +1,180 @@
+---
+title: "Sample size with Uncertainty"
+author: "John Aponte"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+This example show in details how to construct a new factory of `DISTRIBUTION`
+objects using a convolution of parameters to propagate the uncertainty on the 
+parameters to the final calculation.
+
+The estimation of sample size require the input of different parameters in a way
+that when the parameters are correct, the power to have a significant result is
+correct. However many times there are some uncertainty on the parameters and 
+this is not reflected in the power. 
+
+The `convdist` package could help on explicitly express uncertainty on those
+parameters and estimate the distribution of sample sizes that would satisfy
+the power requirements of the assay.
+
+We explore how to estimate the sample size for binomial outcome with uncertainty
+
+## Sample size for a proportion
+
+For an individualy randomized trial, the number of subjects per group could
+be defined as 
+$$n = (z_{\alpha/2} + z_\beta)^2 [\pi_0(1 – \pi_0) + \pi_1(1 – \pi1)]/(\pi_0 – \pi_1)^2$$
+
+In this formula, $z_{\alpha/2}$ and $z_\beta$ are standard normal distribution values 
+corresponding to upper tail probabilities of $z_{\alpha/2}$ and  $z_\beta$ respectively. 
+This choice of sample size provides a power of 100(1 – $\beta$)% of obtaining a significant 
+difference ($P < \alpha$ on a two-sided test), assuming that the true (population)
+proportion in presence or absence of the interventions are $\pi_1$ and  $\pi_0$ respectively
+
+$\pi_1$ can be express on terms of $\pi_0$ as $\pi_1 = \pi_0 RR$ where $RR$ is 
+the relative risk.
+
+In the real world, there could be uncertainty on the exact values of $\pi_0$ and $RR$
+as they may come from previous studies or surveys. What would be the distribution
+of $n$ if the uncertainty is taking into acount?
+
+## A new `DISTRIBUTION` factory
+
+We can construct a `DISTRIBUTION` object which would produce random
+numbers taking into acount the a probability distribution for $\pi_0$ and $RR$
+
+```{r}
+library(convdistr)
+library(ggplot2)
+
+#' Sample size for proportions, with uncertainty
+#' 
+#' Create an new DISTRIBUTION object that produce
+#' random drawns of the estimated sample size for
+#' two proportions
+#' @param p0 a DISTRIBUTION object that drawns for proportions in control group
+#' @param logrr a DISTRIBUTION object that drawns log(RR) of the intervention
+#' @param alpha significant value
+#' @param beta  1-power
+new_SAMPLE_SIZE <- function(p0,logrr, alpha= 0.05, beta=0.2){
+  #checkings
+  stopifnot(inherits(p0,"DISTRIBUTION"))
+  stopifnot(inherits(logrr,"DISTRIBUTION"))
+  stopifnot(0 < alpha & alpha < 1)
+  stopifnot(0 < beta & beta < 1)
+
+ # function of alpha and beta
+  f_alpha_beta <- (qnorm(alpha/2,lower.tail = F) + qnorm(beta, lower.tail = F)) ^ 2 
+  
+  # The expected value of the distribution with default name for the dimension
+  # based on the oval value of the individual distributions  
+  v0 <- p0$oval
+  v1 <- p0$oval*exp(logrr$oval)
+  
+  # expected value of the distribution
+  .oval <- f_alpha_beta * (v0 * (1 - v0) + v1 * (1 - v1)) / (v0 - v1) ^ 2
+  names(.oval) <- "rvar"
+    
+  #random function within a restricted environment where only
+  #the specified variables can be accesed within the function
+  .rfunc <- restrict_environment(
+     function(n) {
+       d_p0 = rfunc_p0(n)
+       d_p1 = d_p0 * exp(rfunc_logrr(n))
+       fab * (d_p0 * (1 - d_p0) + d_p1 * (1 - d_p1)) / (d_p0 - d_p1) ^ 2
+     },
+     rfunc_p0 = p0$rfunc,
+     rfunc_logrr = logrr$rfunc,
+     fab = f_alpha_beta
+  )
+  # Create the object with 4 slots
+  structure(
+    list(
+      distribution = "SAMPLE_SIZE",
+      seed = sample(1:2 ^ 15, 1),
+      oval = .oval,
+      rfunc = .rfunc
+    ), 
+    class = c("SAMPLE_SIZE","DISTRIBUTION")
+  )
+  
+}
+```
+
+## Using the Sample Size object
+
+As example, suppose that the incidence of anemia in children under 5 have
+been estimated from a survey as 35% with 95%CI (30%,40%), and a prevention
+treatment that in other settings have shown to decrease anaemia by 50% with 95%CI(8% to 73%).
+
+We can define a `BETA` distribution based on the CI as
+
+```{r}
+d_p0 = new_BETA_lci(0.35,0.30,0.40)
+```
+
+And a `NORMAL` distribution of the `log(RR)` as
+```{r}
+rr = log(1 - 50/100)
+sd = (log((1 - 8 / 100)) - log((1 - 73 / 100))) / 4
+d_logrr = new_NORMAL(rr,sd)
+```
+
+So the input distributions are
+```{r, results='asis', echo = F}
+knitr::kable(rbind(summary(d_p0),summary(d_logrr)), digits = 2)
+```
+
+And base on this we can calculate the distribution of samples with those conditions
+
+```{r}
+d_sample <- new_SAMPLE_SIZE(d_p0, d_logrr)
+```
+```{r echo=FALSE, results='asis'}
+knitr::kable(summary(d_sample), digits = 0)
+```
+
+```{r fig.width=7, fig.height=5, echo = F, warning=FALSE, message=FALSE}
+ggDISTRIBUTION(d_sample) + scale_x_log10(breaks = c(40,80,160,320,640,1280), limits = c(-Inf, 1500))
+```
+
+The oval value of the distribution give us the result we obtain from the formula. With the
+conditions specifed, a sample size of ```r round(d_sample$oval)``` is required. However,
+the distribution is quite skweed as you can see the mean and the median value are far, and the 
+standard deviation very big. This is because the sample size require for combinations 
+of low efficacy and low prevalence could be very large.
+
+```{r}
+rdrawn <- rfunc(d_sample, 10000)
+f_ecdf <- ecdf(rdrawn)
+n_80 = trunc(uniroot(function(x){f_ecdf(x) - 0.8}, interval = c(10,10000))$root)
+```
+The empirical cumulative distribution values of a random sample of the distribution
+show us that with ```r n_80``` subjects per arm, 80% of the possible scenarios 
+are covered
+
+
+```{r fig.width=7, fig.height=5, echo = F, warning=FALSE, message=FALSE}
+df <- data.frame(n = 20:1280, y = f_ecdf(20:1280))
+ggplot(df, aes(x = n , y = y)) +
+  geom_line() +
+  scale_x_log10("n", breaks = c(40,80,160,320,640,1280)) +
+  scale_y_continuous("Empirical cumulative distribution") +
+  geom_segment(aes(x = 0, y = 0.8, xend = n_80, yend = 0.80), linetype = 2, color = "red") +
+  geom_segment(aes(x = n_80, y = 0, xend = n_80, yend = 0.80), linetype = 2, color = "red")
+```
+

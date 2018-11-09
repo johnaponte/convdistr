@@ -9,8 +9,8 @@ test_that("The new_CONVOLUTION function works", {
   x2 <- new_UNIFORM(0, 1)
   x3 <- new_DIRAC(3)
   expect_is(new_SUM(list(x1, x2)), "DISTRIBUTION")
-  expect_equivalent(new_SUM(list(x1, x2))$oval, 0.5)
-  rsum <- new_SUM(list(x1, x2, x3))
+  expect_equivalent(new_SUM(x1, x2)$oval, 0.5)
+  rsum <- new_SUM(x1, x2, x3)
   expect_is(rsum, "DISTRIBUTION")
   expect_equivalent(rsum$oval, 3.5)
   expect_is(rfunc(rsum, 10), "matrix")
@@ -39,5 +39,4 @@ test_that("The new_MIXTURE function works", {
   expect_equivalent(xmix$oval, 8)
   expect_equivalent(nrow(rfunc(xmix, 10)), 10)
   expect_equivalent(ncol(rfunc(xmix, 10)), 1)
-  
   })
