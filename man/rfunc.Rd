@@ -2,7 +2,7 @@
 % Please edit documentation in R/methods.R
 \name{rfunc}
 \alias{rfunc}
-\title{Generate random drawns from a \code{\link{DISTRIBUTION}} object}
+\title{Generate random numbers from a \code{\link{DISTRIBUTION}} object}
 \usage{
 rfunc(x, n)
 }
@@ -17,4 +17,7 @@ dimensions have \code{distribution}
 }
 \description{
 This is a generic method that calls the \code{rfunc} slot of the object
+}
+\author{
+John J. Aponte
 }

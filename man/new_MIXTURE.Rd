@@ -25,3 +25,6 @@ x2 <- new_NORMAL(4,1)
 x3 <- new_NORMAL(6,1)
 new_MIXTURE(list(x1,x2,x3))
 }
+\author{
+John J. Aponte
+}

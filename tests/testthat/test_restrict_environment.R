@@ -2,7 +2,7 @@
 # 20181026 by JJAV
 # # # # # # # # # # # # # # # # #
 
-context("restrict_enviromnent")
+context("Test for restrict_enviromnent")
 
 test_that("restrict envirnoment works", {
    a = 0

@@ -8,7 +8,7 @@
 new_LOGNORMAL(p_meanlog, p_sdlog, p_dimnames = "rvar")
 }
 \arguments{
-\item{p_meanlog}{mean of the distribution on th elog scale}
+\item{p_meanlog}{mean of the distribution on the log scale}
 
 \item{p_sdlog}{A numeric that represents the standard deviation on the log scale}
 
@@ -19,12 +19,12 @@ An object of class \code{\link{DISTRIBUTION}}, \code{LOGNORMAL}
 }
 \description{
 Returns a LOGNORMAL distribution object that produce random numbers
-from a log normal distribution using the \code{\link{rlnorm}} funtion
+from a log normal distribution using the \code{\link{rlnorm}} function
 }
 \examples{
 myDistr <- new_LOGNORMAL(0,1)
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

@@ -22,10 +22,10 @@ Generate a function that creates \code{\link{DISTRIBUTION}} objects
 }
 \note{
 The function return a new function, that have as arguments the formals
-of the \code{rfunction} plus a new argument \code{dimnames} for the dimmension
+of the \code{rfunction} plus a new argument \code{dimnames} for the dimension
 names. If The distribution is unidimensional, the default value 
 \code{ dimnames = "rvar"} will  works well, but if not, the \code{dimnames} 
-argument should be specified when the genertared function is used as in 
+argument should be specified when the generated function is used as in 
 the example for the \code{new_MyDIRICHLET}
 }
 \examples{
@@ -41,5 +41,8 @@ new_MyDIRICHLET <- DISTRIBUTION_factory('rdirichlet',
                        })
 d2 <- new_MyDIRICHLET(c(10, 20, 70), dimnames = c("A", "B", "C"))
 summary(d2)
+}
+\author{
+John J. Aponte
 }
 \keyword{DISTRIBUTION}

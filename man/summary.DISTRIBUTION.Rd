@@ -9,9 +9,9 @@
 \arguments{
 \item{object}{object of class \code{\link{DISTRIBUTION}}}
 
-\item{n}{the number of random drawns from the distribution}
+\item{n}{the number of random samples from the distribution}
 
-\item{...}{other parameteres. Not used}
+\item{...}{other parameters. Not used}
 }
 \value{
 A \code{\link{data.frame}} with as many rows as dimensions had the
@@ -20,7 +20,7 @@ distribution and  with the following columns
   \item distribution name
   \item varname name of the dimension
   \item oval value
-  \item nsample number of random drawns
+  \item nsample number of random samples
   \item mean_ mean value of the sample
   \item sd_ standard deviation of the sample
   \item lci_ lower 95% centile of the sample
@@ -34,4 +34,7 @@ Summary of Distributions
 \note{
 The sample uses the seed saved in the object those it will
 provide the same values fir an \code{n} value
+}
+\author{
+John J. Aponte
 }

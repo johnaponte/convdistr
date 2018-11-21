@@ -6,7 +6,7 @@
 #' Plot of \code{\link{DISTRIBUTION}} objects using \code{\link[ggplot2]{ggplot2}}
 #' 
 #' @param x an object of class \code{\link{DISTRIBUTION}}
-#' @param n number of drawns
+#' @param n number of observation
 #' @return a \code{\link[ggplot2]{ggplot}} object with the density of the distribution
 #' @importFrom tidyr gather
 #' @import ggplot2
@@ -42,9 +42,9 @@ ggDISTRIBUTION <- function(x, n = 10000) {
 #' plot of  \code{\link{DISTRIBUTION}} objects
 #' 
 #' Plot an histogram of the density of the distribution using random
-#' drawns from the distribution
+#' numbers from the distribution
 #' @param x an object of class \code{\link{DISTRIBUTION}}
-#' @param n number of drawns
+#' @param n number of observations
 #' @param ... other parameters to the \code{\link{hist}} function
 #' @importFrom RColorBrewer brewer.pal
 #' @import graphics 

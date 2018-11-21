@@ -4,7 +4,7 @@
 \alias{CONVOLUTION_comb}
 \alias{new_CONVOLUTION_comb}
 \alias{new_SUM_comb}
-\alias{new_SUBSTRACTION_comb}
+\alias{new_SUBTRACTION_comb}
 \alias{new_MULTIPLICATION_comb}
 \alias{new_DIVISION_comb}
 \title{Convolution with combination of dimensions}
@@ -13,7 +13,7 @@ new_CONVOLUTION_comb(dist1, dist2, op, p_dimnames)
 
 new_SUM_comb(dist1, dist2)
 
-new_SUBSTRACTION_comb(dist1, dist2)
+new_SUBTRACTION_comb(dist1, dist2)
 
 new_MULTIPLICATION_comb(dist1, dist2)
 
@@ -33,7 +33,7 @@ If missing the combination of the individual dimensions will be used}
 an object of class \code{\link{DISTRIBUTION}}
 }
 \description{
-In case of different dimnesions of the distribution
+In case of different dimensions of the distribution
 this function perform the operation on the combination of the distributions
 of both distribution.
 }
@@ -46,7 +46,7 @@ a_b,a_c,b_b, b_c
 \itemize{
 \item \code{new_SUM_comb}: Sum of distributions
 
-\item \code{new_SUBSTRACTION_comb}: Substraction of distributions
+\item \code{new_SUBTRACTION_comb}: Subtraction of distributions
 
 \item \code{new_MULTIPLICATION_comb}: Multiplication of distributions
 
@@ -61,7 +61,10 @@ x1 <- new_MULTINORMAL(c(0,1), matrix(c(1,0.5,0.5,1),ncol=2), p_dimnames = c("A",
 x2 <- new_MULTINORMAL(c(10,1), matrix(c(1,0.4,0.4,1),ncol=2), p_dimnames = c("B","C"))
 new_CONVOLUTION_comb(x1,x2, `+`)
 new_SUM_comb(x1,x2)
-new_SUBSTRACTION_comb(x1,x2)
+new_SUBTRACTION_comb(x1,x2)
 new_MULTIPLICATION_comb(x1,x2)
 new_DIVISION_comb(x1,x2)
+}
+\author{
+John J. Aponte
 }

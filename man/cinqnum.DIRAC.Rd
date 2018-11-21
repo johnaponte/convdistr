@@ -9,11 +9,14 @@
 \arguments{
 \item{x}{an object of  class \code{\link{DISTRIBUTION}}}
 
-\item{n}{number of dranws}
+\item{n}{number of drawns}
 }
 \value{
 a list of NA
 }
 \description{
 And optimized version for DIRAC distributions
+}
+\author{
+John J. Aponte
 }

@@ -23,5 +23,5 @@ myDistr <- new_DIRAC(1)
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

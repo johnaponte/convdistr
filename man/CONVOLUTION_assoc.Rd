@@ -4,16 +4,16 @@
 \alias{CONVOLUTION_assoc}
 \alias{new_CONVOLUTION_assoc}
 \alias{new_SUM_assoc}
-\alias{new_SUBSTRACTION_assoc}
+\alias{new_SUBTRACTION_assoc}
 \alias{new_MULTIPLICATION_assoc}
 \alias{new_DIVISION_assoc}
-\title{Convolution with asociation of dimensions}
+\title{Convolution with association of dimensions}
 \usage{
 new_CONVOLUTION_assoc(dist1, dist2, op)
 
 new_SUM_assoc(dist1, dist2)
 
-new_SUBSTRACTION_assoc(dist1, dist2)
+new_SUBTRACTION_assoc(dist1, dist2)
 
 new_MULTIPLICATION_assoc(dist1, dist2)
 
@@ -30,7 +30,7 @@ new_DIVISION_assoc(dist1, dist2)
 an object of class \code{\link{DISTRIBUTION}}
 }
 \description{
-In case of different dimnesions of the distribution
+In case of different dimensions of the distribution
 this function perform the operation on the common distributions and
 add without modifications the other dimensions of the distribution.
 }
@@ -43,7 +43,7 @@ a, c,  b+b,
 \itemize{
 \item \code{new_SUM_assoc}: Sum of distributions
 
-\item \code{new_SUBSTRACTION_assoc}: Substraction of distributions
+\item \code{new_SUBTRACTION_assoc}: Subtraction of distributions
 
 \item \code{new_MULTIPLICATION_assoc}: Multiplication of distributions
 
@@ -55,7 +55,10 @@ x1 <- new_MULTINORMAL(c(0,1), matrix(c(1,0.5,0.5,1),ncol=2), p_dimnames = c("A",
 x2 <- new_MULTINORMAL(c(10,1), matrix(c(1,0.4,0.4,1),ncol=2), p_dimnames = c("B","C"))
 new_CONVOLUTION_assoc(x1,x2, `+`)
 new_SUM_assoc(x1,x2)
-new_SUBSTRACTION_assoc(x1,x2)
+new_SUBTRACTION_assoc(x1,x2)
 new_MULTIPLICATION_assoc(x1,x2)
 new_DIVISION_assoc(x1,x2)
+}
+\author{
+John J. Aponte
 }

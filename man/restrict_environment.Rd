@@ -2,7 +2,7 @@
 % Please edit documentation in R/restrict_environment.R
 \name{restrict_environment}
 \alias{restrict_environment}
-\title{Build a new funcion with a smaller environment}
+\title{Build a new function with a smaller environment}
 \usage{
 restrict_environment(f, ...)
 }
@@ -17,11 +17,11 @@ new function with a restricted environment
 \description{
 As standard feature, R include in the environment of a function
 all the variables that are available when the function is created.
-This, however is prompt to leak refenrencewhen you have a factory
+This, however is prompt to leak reference when you have a factory
 of function and they are created within a list.. it will include all
 the component of the list in the function environment.
 To prevent that, the random generator functions are encapsulated with a
-restricted enviroment where only the variables that the function requires
+restricted environment where only the variables that the function requires
 to work are included
 }
 \examples{
@@ -38,5 +38,5 @@ ls(envir=environment(myfunc))
 
 }
 \author{
-John Aponte
+John J. Aponte
 }

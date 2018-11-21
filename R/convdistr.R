@@ -1,8 +1,8 @@
-#' convdistr: A package usefull for convolution of distributions.
+#' convdistr: A package useful for convolution of distributions.
 #' 
-#' The convdistr provides tools to definde distribution objects and make 
-#' mathematical operations with them. It keep track of the results as if they
-#' where scalar numbers but mantain the ability to obtain randoms samples of
+#' The convdistr package provides tools to define \code{\link{DISTRIBUTION}} objects and make 
+#' mathematical operations with them. It keeps track of the results as if they
+#' were scalar numbers but maintaining the ability to obtain random samples of
 #' the convoluted distributions.
 #' 
 #' @docType package

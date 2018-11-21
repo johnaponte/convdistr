@@ -10,7 +10,7 @@ new_BINOMIAL(p_size, p_prob, p_dimnames = "rvar")
 \arguments{
 \item{p_size}{integer that represent the number of trials}
 
-\item{p_prob}{probabilty of success of each trial}
+\item{p_prob}{probability of success}
 
 \item{p_dimnames}{A character that represents the name of the dimension}
 }
@@ -19,12 +19,12 @@ An object of class \code{\link{DISTRIBUTION}}, \code{BINOMIAL}
 }
 \description{
 Returns a BINOMIAL distribution object that produce random numbers
-from a binomial distribution using the \code{\link{rbinom}} funtion
+from a binomial distribution using the \code{\link{rbinom}} function
 }
 \examples{
 myDistr <- new_BINOMIAL(1000,0.3)
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

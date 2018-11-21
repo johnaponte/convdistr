@@ -14,5 +14,12 @@
 * Added new_CONVOLUTION_comb
 * Added new add_total
 
-
+# convdistr 0.3.0
+* Fixed typos in documention of package
+* Change documentation of new_BETA parameters
+* Change the name new_SUBSTRATION to new_SUBTRACTION
+* New test for seed management on summary
+* New set_seed function
+* Check of spelling of documentation
+* Sample size has been extended
 

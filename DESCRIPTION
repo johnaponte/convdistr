@@ -1,18 +1,20 @@
 Package: convdistr
 Type: Package
 Title: Convolute probabilistic distributions
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: person("Aponte", "John", email = "apontej@who.int", role = c("aut","cre"))
 Description: convolute probabilistic distributions using the random generator 
- function of each distribution. A new random generator function is createdthat 
+ function of each distribution. A new random number generator function is created that 
  perform the mathematical operation on the individual random samples from the 
  random generator function of each distribution. See the documentation for examples.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat,
+Suggests:
+    spelling, testthat,
     knitr,
     rmarkdown
 Imports: stats, graphics, pryr, extraDistr, dplyr, tidyr, ggplot2, RColorBrewer, SHELF, MASS
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+Language: en-GB

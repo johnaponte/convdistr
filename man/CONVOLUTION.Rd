@@ -5,7 +5,7 @@
 \alias{new_CONVOLUTION}
 \alias{new_SUM}
 \alias{+.DISTRIBUTION}
-\alias{new_SUBSTRATION}
+\alias{new_SUBTRACTION}
 \alias{-.DISTRIBUTION}
 \alias{new_MULTIPLICATION}
 \alias{*.DISTRIBUTION}
@@ -19,7 +19,7 @@ new_SUM(..., omit_NA = FALSE)
 
 \method{+}{DISTRIBUTION}(e1, e2)
 
-new_SUBSTRATION(..., omit_NA = FALSE)
+new_SUBTRACTION(..., omit_NA = FALSE)
 
 \method{-}{DISTRIBUTION}(e1, e2)
 
@@ -61,7 +61,7 @@ the result will be a new distribution of class \code{NA} unless the
 \itemize{
 \item \code{new_SUM}: Sum of distributions
 
-\item \code{new_SUBSTRATION}: Substration for distributions
+\item \code{new_SUBTRACTION}: Subtraction for distributions
 
 \item \code{new_MULTIPLICATION}: Multiplication for distributions
 
@@ -74,10 +74,13 @@ x2 <- new_UNIFORM(1,2)
 new_CONVOLUTION(list(x1,x2), `+`)
 new_SUM(x1,x2)
 x1 + x2
-new_SUBSTRATION(x1,x2)
+new_SUBTRACTION(x1,x2)
 x1 - x2
 new_MULTIPLICATION(list(x1,x2))
 x1 * x2
 new_DIVISION(list(x1,x2))
 x1 / x2
+}
+\author{
+John J. Aponte
 }

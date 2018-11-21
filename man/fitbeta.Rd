@@ -7,11 +7,11 @@
 fitbeta(point, lci, uci)
 }
 \arguments{
-\item{point}{Point estimates correspoding to the median}
+\item{point}{Point estimates corresponding to the median}
 
-\item{lci}{Lower limit correspoding to the quantile 0.025}
+\item{lci}{Lower limit (quantile 0.025)}
 
-\item{uci}{Upper limit corresponding to the quantile 0.975}
+\item{uci}{Upper limit (quantile 0.975)}
 }
 \value{
 parameters shape1 and shape2 of a beta distribution
@@ -26,4 +26,7 @@ fitbeta(0.45,0.40,0.50)
 }
 \seealso{
 \code{\link[SHELF]{fitdist}}
+}
+\author{
+John J. Aponte
 }

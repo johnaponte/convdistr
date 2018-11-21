@@ -1,10 +1,10 @@
-# Convulutuion and asociation of dimensions
+# Convulutuion and association of dimensions
 # 20181106 by JJAV
 # # # # # # # # # # # # # # # # # # # # # # #
 
-#' Convolution with asociation of dimensions
+#' Convolution with association of dimensions
 #' 
-#' In case of different dimnesions of the distribution
+#' In case of different dimensions of the distribution
 #' this function perform the operation on the common distributions and
 #' add without modifications the other dimensions of the distribution.
 #' 
@@ -18,6 +18,7 @@
 #' 
 #' @return an object of class \code{\link{DISTRIBUTION}}
 #' @export
+#' @author John J. Aponte
 #' @name CONVOLUTION_assoc
 #' @examples
 #' x1 <- new_MULTINORMAL(c(0,1), matrix(c(1,0.5,0.5,1),ncol=2), p_dimnames = c("A","B"))
@@ -69,11 +70,11 @@ new_SUM_assoc <- function(dist1,dist2) {
 }
 
 
-#' @describeIn CONVOLUTION_assoc Substraction of distributions
+#' @describeIn CONVOLUTION_assoc Subtraction of distributions
 #' @export
 #' @examples 
-#' new_SUBSTRACTION_assoc(x1,x2)
-new_SUBSTRACTION_assoc <- function(dist1,dist2) {
+#' new_SUBTRACTION_assoc(x1,x2)
+new_SUBTRACTION_assoc <- function(dist1,dist2) {
   new_CONVOLUTION_assoc(dist1,dist2, `-`)
 }
 

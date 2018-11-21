@@ -20,6 +20,7 @@
 #' x1 <- new_NORMAL(0,1)
 #' x2 <- new_UNIFORM(1,2)
 #' new_CONVOLUTION(list(x1,x2), `+`)
+#' @author John J. Aponte
 #' @name CONVOLUTION
 new_CONVOLUTION <- function(listdistr, op, omit_NA = FALSE){
   stopifnot(all(sapply(listdistr,inherits,"DISTRIBUTION")))
@@ -76,11 +77,11 @@ new_SUM <- function(..., omit_NA = FALSE) {
 `+.DISTRIBUTION` <- function(e1,e2) new_SUM(list(e1,e2))
 
 
-#' @describeIn CONVOLUTION Substration for distributions
+#' @describeIn CONVOLUTION Subtraction for distributions
 #' @export
 #' @examples 
-#' new_SUBSTRATION(x1,x2)
-new_SUBSTRATION <- function(..., omit_NA = FALSE) {
+#' new_SUBTRACTION(x1,x2)
+new_SUBTRACTION <- function(..., omit_NA = FALSE) {
   listdistr <- list(...)
   if (length(listdistr) == 1 & !inherits(listdistr, "DISTRIBUTION"))
     listdistr <- unlist(listdistr, recursive = FALSE)
@@ -91,7 +92,7 @@ new_SUBSTRATION <- function(..., omit_NA = FALSE) {
 #' @export
 #' @examples 
 #' x1 - x2
-`-.DISTRIBUTION` <- function(e1,e2) new_SUBSTRATION(list(e1,e2))
+`-.DISTRIBUTION` <- function(e1,e2) new_SUBTRACTION(list(e1,e2))
 
 #' @describeIn CONVOLUTION Multiplication for distributions
 #' @export
@@ -133,6 +134,7 @@ new_DIVISION <- function(..., omit_NA = FALSE) {
 #' Produce a new distribution that obtain random drawns of the mixture
 #' of the \code{\link{DISTRIBUTION}} objects
 #' 
+#' @author John J. Aponte
 #' @param listdistr a list of \code{\link{DISTRIBUTION}} objects
 #' @param mixture a vector of probabilities to mixture the distributions. Must add 1
 #' If missing the drawns are obtained from the distributions with the same probability

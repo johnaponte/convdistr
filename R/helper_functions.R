@@ -5,6 +5,7 @@
 
 #' Omit \code{NA} distributions from a list of distributions
 #'
+#' @author John J. Aponte
 #' @param listdistr a list of \code{\link{DISTRIBUTION}} objects
 #' @return the list without the \code{\link{NA_DISTRIBUTION}}
 omit_NA <- function(listdistr) {
@@ -30,9 +31,10 @@ same_dimensions <- function(listdistr) {
 #' the best parameters for a beta distribution based
 #' on quantiles
 #'
-#' @param point Point estimates correspoding to the median
-#' @param lci Lower limit correspoding to the quantile 0.025
-#' @param uci Upper limit corresponding to the quantile 0.975
+#' @author John J. Aponte
+#' @param point Point estimates corresponding to the median
+#' @param lci Lower limit (quantile 0.025)
+#' @param uci Upper limit (quantile 0.975)
 #' @return parameters shape1 and shape2 of a beta distribution
 #' @importFrom SHELF fitdist
 #' @export
@@ -61,6 +63,7 @@ fitbeta <- function(point,lci,uci) {
 #' Values from \code{\link{fitbeta}} are suitable for this. 
 #' This is a wrap of \code{\link[SHELF]{fitDirichlet}}
 #'
+#' @author John J. Aponte
 #' @param ... named vectors with the distribution parameters shape1, shape2
 #' @param plotBeta if TRUE a ggplot of the densities are plotted
 #' @param n.fitted Method to fit the values

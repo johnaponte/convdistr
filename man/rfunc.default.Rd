@@ -14,3 +14,6 @@
 \description{
 Default function
 }
+\author{
+John J. Aponte
+}

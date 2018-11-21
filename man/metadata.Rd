@@ -24,7 +24,7 @@ object
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{DISTRIBUTION}: Metadata for DISTIBUTION objects
+\item \code{DISTRIBUTION}: Metadata for DISTRIBUTION objects
 
 \item \code{default}: Metadata for other objects
 }}
@@ -33,4 +33,7 @@ object
 The number of columns depends on the dimensions of the distribution.
 There will be one column \code{distribution} with the name of the distribution
 and one column for each dimension with the names from the \code{oval} field.
+}
+\author{
+John J. Aponte
 }

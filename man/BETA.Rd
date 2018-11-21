@@ -11,9 +11,9 @@ new_BETA(p_shape1, p_shape2, p_dimnames = "rvar")
 new_BETA_lci(p_mean, p_lci, p_uci, p_dimnames = "rvar")
 }
 \arguments{
-\item{p_shape1}{parameters of the beta distribution}
+\item{p_shape1}{non-negative parameters of the Beta distribution}
 
-\item{p_shape2}{parameters of the beta distribution}
+\item{p_shape2}{non-negative parameters of the Beta distribution}
 
 \item{p_dimnames}{A character that represents the name of the dimension}
 
@@ -52,5 +52,5 @@ myDistr <- new_BETA_lci(0.30,0.25,0.35)
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

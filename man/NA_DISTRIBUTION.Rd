@@ -16,7 +16,7 @@ An object of class \code{DISTRIBUTION}, \code{NA}
 }
 \description{
 Returns an NA distribution object that always return \code{NA_real_}
-This is usefull to handle \code{NA}.
+This is useful to handle \code{NA}.
 By default only one dimension \code{rvar} is produced, but if several
 names are provided more columns will be added to the return matrix
 }
@@ -25,5 +25,5 @@ myDistr <- new_NA(p_dimnames = "rvar")
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

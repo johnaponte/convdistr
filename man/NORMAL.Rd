@@ -19,12 +19,12 @@ An object of class \code{\link{DISTRIBUTION}}, \code{NORMAL}
 }
 \description{
 Returns a NORMAL distribution object that produce random numbers
-from a normal distribution using the \code{\link{rnorm}} funtion
+from a normal distribution using the \code{\link{rnorm}} function
 }
 \examples{
 myDistr <- new_NORMAL(0,1)
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

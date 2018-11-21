@@ -15,3 +15,6 @@ the list without the \code{\link{NA_DISTRIBUTION}}
 \description{
 Omit \code{NA} distributions from a list of distributions
 }
+\author{
+John J. Aponte
+}

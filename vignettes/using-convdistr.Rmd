@@ -21,7 +21,7 @@ summary.DISTRIBUTION <- function(object,...) {
 
 The `convdistr` provide tools to define distribution objects and make 
 mathematical operations with them. It keep track of the results as if they
-where scalar numbers but mantain the ability to obtain randoms samples of
+where scalar numbers but maintaining the ability to obtain randoms samples of
 the convoluted distributions.
 
 ## Practical example
@@ -55,14 +55,14 @@ r_uci <- format(sum_res$uci_, digits = 3)
 
 The result is a distribution with expected value `r r_oval`. A sample from 10000
 drawns of the distribution shows a mean value of `r r_mean`, a median of `r r_median`
-and 95% centiles of `r r_lci`, `r r_uci`
+and 95% quantiles of `r r_lci`, `r r_uci`
 
 The following sections describe the DISTRIBUTION object, how to create 
 new DISTRIBUTION objects and how to make operations and mixtures with them.
 
 ## The `DISTRIBUTION` object
 
-The `DISTRIBUTION` is an abstract class (or interphase)
+The `DISTRIBUTION` is kind of abstract class (or interface)
 that specific constructors should implement.
 
 
@@ -72,7 +72,7 @@ It contains 4 fields:
       : A character with the name of the distribution implemented
 
 **seed**
-      : A numerical seed that is use when obtaing random drawns for the `summary` function
+      : A numerical seed that is use to get a repeatable sample in the `summary` function
 
 **oval**
       : The observed value. It is the value expected. It is used as a
@@ -86,7 +86,7 @@ It contains 4 fields:
       dimensions of the distributions
   
 The DISTRIBUTION object can support multidimensional distributions
-for example a dirchlet distribution. The names of the dimensions
+for example a dirichlet distribution. The names of the dimensions
 should coincides with the names of the `oval` vector.
 If it has only one dimension, the default name is `rvar`.
 
@@ -97,7 +97,7 @@ reason, the `rfunc` should be created within a `restrict_environment`
 function that controls that only the variables that are required within the 
 `function` are saved in the environment of the function.
 
-Once the new objects are instanciated, the fields are immutable and should not be
+Once the new objects are instanced, the fields are immutable and should not be
 changed.
 
 ## Factory of `DISTRIBUTION` objects
@@ -114,7 +114,7 @@ The following functions create new objects of class `DISTRIBUTION`
 | poisson      | new_POISSON     | p_lambda                     | rpoisson   |
 | exponential  | new_EXPONENTIAL | p_rate                       | rexp       |
 | discrete     | new_DISCRETE    | p_supp, p_prob               | sample     |
-| dirchlet     | new_DIRCHLET    | p_alpha, p_dimnames          | rdirichlet |
+| dirichlet    | new_DIRICHLET   | p_alpha, p_dimnames          | rdirichlet |
 | truncated    | new_TRUNCATED   | p_distribution, p_min, p_max |            |
 | dirac        | new_DIRAC       | p_value                      |            |
 | NA           | new_NA          | p_dimnames                   |            |
@@ -150,11 +150,11 @@ ggDISTRIBUTION(myDistr)
 Mathematical operations like `+`, `-`, `*`, `/` between `DISTRIBUTION` with the 
 same dimensions can be perform
 with the `new_CONVOLUTION(listdistr, op, omit_NA = FALSE)` function. The `listdistr` 
-paramater is a list of `DISTRIBUTION` objects on which the operation is made.
+parameter is a list of `DISTRIBUTION` objects on which the operation is made.
 A shorter version exists for each one of the operations as follow
 
 * `new_SUM(listdistr, omit_NA = FALSE)`
-* `new_SUBSTRACTION(listdistr, omit_NA = FALSE)`
+* `new_SUBTRACTION(listdistr, omit_NA = FALSE)`
 * `new_MULTIPLICATION(listdistr, omit_NA = FALSE)`
 * `new_DIVISION(listdistr, omit_NA = FALSE)`
 
@@ -193,9 +193,9 @@ ggDISTRIBUTION(dmix)
 ## Convolution of distributions with different dimensions
 
 When convoluting distribution with different dimensions, there
-are two posibilities. The `new_CONVOLUTION_assoc` family of functions perform the operation
+are two possibilities. The `new_CONVOLUTION_assoc` family of functions perform the operation
 only on the common dimensions and left the others dimensions as they are, or 
-the `new_CONVOLUTION_comb` family of functions which peform the operation in the 
+the `new_CONVOLUTION_comb` family of functions which perform the operation in the 
 combination of all dimensions.
 
 ```{r, fig.with = 7}

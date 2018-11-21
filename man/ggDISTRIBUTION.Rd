@@ -9,7 +9,7 @@ ggDISTRIBUTION(x, n = 10000)
 \arguments{
 \item{x}{an object of class \code{\link{DISTRIBUTION}}}
 
-\item{n}{number of drawns}
+\item{n}{number of observation}
 }
 \value{
 a \code{\link[ggplot2]{ggplot}} object with the density of the distribution

@@ -14,3 +14,6 @@
 \description{
 Generic function for a \code{\link{DISTRIBUTION}} object
 }
+\author{
+John J. Aponte
+}

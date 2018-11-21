@@ -6,7 +6,7 @@
 ##### DISTRIBUTION
 #' DISTRIBUTION class
 #'
-#' DISTRIBUTION is an abstract class (or interphase)
+#' DISTRIBUTION is a kind of abstract class (or interface)
 #' that the specific constructors should implement.
 #'
 #'
@@ -15,11 +15,11 @@
 #'  \item{distribution}{A character with the name of the distribution implemented}
 #'  \item{seed}{A numerical that is used for \code{details} to produce
 #'  reproducible details of the distribution}
-#'  \item{oval}{Observerd value. Is the value expected. It is used as a
+#'  \item{oval}{Observed value. Is the value expected. It is used as a
 #'  number for the mathematical operations of the distributions
 #'  as if they were a simple scalar}
 #'  \item{rfunc}{A function that generate random numbers from the distribution.
-#'  Its only parameter \code{n} is the number of drawns of the distribution.
+#'  Its only parameter \code{n} is the number of draws of the distribution.
 #'  It returns a matrix with as many rows as n, and as many columns as the
 #'  dimensions of the distributions}
 #' }
@@ -29,13 +29,14 @@
 #'If only one dimension, the default name is \code{rvar}.
 #'
 #'It is expected that the \code{rfunc} is included in the creation of new
-#'distributions by convolution so the enviromnent should be carefully controlled
+#'distributions by convolution so the environment should be carefully controlled
 #'to avoid reference leaking that is possible within the R language. For that
 #'reason, \code{rfunc} should be created within a \code{\link{restrict_environment}}
 #'function
 #'
-#'Once the object is instanciated, the fields are immutable and should not be
-#'changed.
+#'Once the object is instanced, the fields are immutable and should not be
+#'changed. If the seed needs to be modified, a new object can be created using
+#'the \code{\link{set_seed}} function
 #'
 #' Objects are defined for the following distributions
 #' \itemize{
@@ -52,6 +53,7 @@
 #'  \item \code{\link{NA_DISTRIBUTION}}
 #' }
 #' 
+#' @author John J. Aponte
 #' @name DISTRIBUTION
 NULL
 
@@ -80,11 +82,12 @@ NULL
 #' d2 <- new_MyDIRICHLET(c(10, 20, 70), dimnames = c("A", "B", "C"))
 #' summary(d2)
 #' @note The function return a new function, that have as arguments the formals
-#' of the \code{rfunction} plus a new argument \code{dimnames} for the dimmension
+#' of the \code{rfunction} plus a new argument \code{dimnames} for the dimension
 #' names. If The distribution is unidimensional, the default value 
 #' \code{ dimnames = "rvar"} will  works well, but if not, the \code{dimnames} 
-#' argument should be specified when the genertared function is used as in 
+#' argument should be specified when the generated function is used as in 
 #' the example for the \code{new_MyDIRICHLET}
+#' @author John J. Aponte
 #' @export
 #' @keywords DISTRIBUTION
 DISTRIBUTION_factory <-
@@ -101,9 +104,9 @@ DISTRIBUTION_factory <-
       topass <-
         redenv[names(redenv[!names(redenv) %in% c(".oval", "ovalfunc", "foval")])]
       .rfunc <- restrict_environment(function(n) {
-        drawns <-
+        draws <-
           do.call(rfunction, c(n, topass[names(topass) %in% names(formals(rfunction))]))
-        matrix(drawns,
+        matrix(draws,
                ncol = cols,
                dimnames = list(1:n, topass$dimnames))
       },
@@ -129,8 +132,8 @@ DISTRIBUTION_factory <-
 #' Factory for a NORMAL distribution object
 #'
 #' Returns a NORMAL distribution object that produce random numbers
-#' from a normal distribution using the \code{\link{rnorm}} funtion
-#' @author John Aponte
+#' from a normal distribution using the \code{\link{rnorm}} function
+#' @author John J. Aponte
 #' @param p_mean A numeric that represents the mean value
 #' @param p_sd A numeric that represents the standard deviation
 #' @param p_dimnames A character that represents the name of the dimension
@@ -167,8 +170,8 @@ new_NORMAL <- function(p_mean, p_sd, p_dimnames = "rvar") {
 #' Factory for a UNIFORM distribution object
 #'
 #' Returns an UNIFORM distribution object that produce random numbers
-#' from a  uniform distribution using the \code{\link{runif}} funtion
-#' @author John Aponte
+#' from a  uniform distribution using the \code{\link{runif}} function
+#' @author John J. Aponte
 #' @param p_min A numeric that represents the lower limit
 #' @param p_max A numeric that represents the upper limit
 #' @param p_dimnames A character that represents the name of the dimension
@@ -204,9 +207,9 @@ new_UNIFORM <- function(p_min, p_max, p_dimnames = "rvar") {
 #'
 #' Returns an BETA distribution object that produce random numbers
 #' from a  beta distribution using the \code{\link{rbeta}} function
-#' @author John Aponte
-#' @param p_shape1 parameters of the beta distribution
-#' @param p_shape2 parameters of the beta distribution
+#' @author John J. Aponte
+#' @param p_shape1 non-negative parameters of the Beta distribution
+#' @param p_shape2 non-negative parameters of the Beta distribution
 #' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{BETA}
 #' @importFrom stats rbeta
@@ -270,7 +273,7 @@ new_BETA_lci <- function(p_mean, p_lci, p_uci, p_dimnames = "rvar") {
 #' Returns an TRIANGULAR distribution object that produce random numbers
 #' from a  triangular distribution using the \code{\link[extraDistr]{rtriang}}
 #' function
-#' @author John Aponte
+#' @author John J. Aponte
 #' @param p_min A numeric that represents the lower limit
 #' @param p_max A numeric that represents the upper limit
 #' @param p_mode A numeric that represents the mode
@@ -313,7 +316,7 @@ new_TRIANGULAR <- function(p_min, p_max, p_mode, p_dimnames = "rvar") {
 #'
 #' Returns an POISSON distribution object that produce random numbers
 #' from a Poisson distribution using the \code{\link{rpois}} function
-#' @author John Aponte
+#' @author John J. Aponte
 #' @param p_lambda A numeric that represents the expected number of events
 #' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{POISSON}
@@ -348,7 +351,7 @@ new_POISSON <- function(p_lambda, p_dimnames = "rvar") {
 #'
 #' Returns an EXPONENTIAL distribution object that produce random numbers
 #' from an exponential distribution using the \code{\link{rexp}} function
-#' @author John Aponte
+#' @author John J. Aponte
 #' @param p_rate A numeric that represents the rate of events
 #' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{DISTRIBUTION}, \code{EXPONENTIAL}
@@ -387,7 +390,7 @@ new_EXPONENTIAL <- function(p_rate, p_dimnames = "rvar") {
 #' @note If the second argument is missing, all options will be sample with
 #'  equal probability. If provided, the second argument would add to 1 and must
 #'  be the same length that the first argument
-#' @author John Aponte
+#' @author John J. Aponte
 #' @param p_supp A numeric vector of options
 #' @param p_prob A numeric vector of probabilities.
 #' @param p_dimnames A character that represents the name of the dimension
@@ -427,10 +430,10 @@ new_DISCRETE <- function(p_supp, p_prob = NA, p_dimnames = "rvar") {
 #' Factory for a NA distribution object
 #'
 #' Returns an NA distribution object that always return \code{NA_real_}
-#' This is usefull to handle \code{NA}.
+#' This is useful to handle \code{NA}.
 #' By default only one dimension \code{rvar} is produced, but if several
 #' names are provided more columns will be added to the return matrix
-#' @author John Aponte
+#' @author John J. Aponte
 #' @param p_dimnames A character that represents the the names of the
 #'  dimensions. By default only one dimension with name \code{rvar}
 #' @return An object of class \code{DISTRIBUTION}, \code{NA}
@@ -464,7 +467,7 @@ new_NA <- function(p_dimnames = "rvar") {
 #'
 #' Returns an DIRAC distribution object that always return the same number.
 #'
-#' @author John Aponte
+#' @author John J. Aponte
 #' @param p_scalar A numeric that set the value for the distribution
 #' @return An object of class \code{DISTRIBUTION}, \code{DIRAC}
 #' @param p_dimnames A character that represents the name of the dimension
@@ -501,11 +504,11 @@ new_DIRAC <- function(p_scalar, p_dimnames = "rvar") {
 #'
 #' @note The expected value of a truncated distribution could be very
 #' different from the expected value of the unrestricted distribution. Be
-#' carefull as the \code{oval} field is not changed and may not represent
-#' anymore the expected value of the distribution.
+#' careful as the \code{oval} field is not changed and may not represent
+#' any more the expected value of the distribution.
 #'
 #' If the distribution is multidimensional, the limits will apply to all dimensions.
-#' @author John Aponte
+#' @author John J. Aponte
 #' @param p_distribution An object of class DISTRIBUTION to truncate
 #' @param p_min A numeric that set the lower limit of the distribution
 #' @param p_max A numeric that set the upper limit of the distribution
@@ -545,13 +548,13 @@ new_TRUNCATED <-
 
 #' Factory for a DIRICHLET distribution object
 #'
-#' Returns an DIRCHLET distribution object that limits the values that are
+#' Returns an \code{DIRICHLET} distribution object that draw random numbers
 #' generated by the function \code{\link[extraDistr]{rdirichlet}}
 #'
 #'A name can be provided for the dimensions. Otherwise \code{rvar1},
 #'\code{rvar2}, ..., \code{rvark} will be assigned
 #'
-#' @author John Aponte
+#' @author John J. Aponte
 #' @param p_alpha k-value vector for concentration parameter. Must be positive
 #' @param p_dimnames A vector of characters for the names of the k-dimensions
 #' @return An object of class \code{DISTRIBUTION},
@@ -590,9 +593,9 @@ new_DIRICHLET <- function(p_alpha, p_dimnames) {
 #' Factory for a LOGNORMAL distribution object
 #'
 #' Returns a LOGNORMAL distribution object that produce random numbers
-#' from a log normal distribution using the \code{\link{rlnorm}} funtion
-#' @author John Aponte
-#' @param p_meanlog mean of the distribution on th elog scale
+#' from a log normal distribution using the \code{\link{rlnorm}} function
+#' @author John J. Aponte
+#' @param p_meanlog mean of the distribution on the log scale
 #' @param p_sdlog A numeric that represents the standard deviation on the log scale
 #' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{\link{DISTRIBUTION}}, \code{LOGNORMAL}
@@ -625,10 +628,10 @@ new_LOGNORMAL <- function(p_meanlog, p_sdlog, p_dimnames = "rvar") {
 #' Factory for a BINOMIAL distribution object
 #'
 #' Returns a BINOMIAL distribution object that produce random numbers
-#' from a binomial distribution using the \code{\link{rbinom}} funtion
-#' @author John Aponte
+#' from a binomial distribution using the \code{\link{rbinom}} function
+#' @author John J. Aponte
 #' @param p_size integer that represent the number of trials
-#' @param p_prob probabilty of success of each trial
+#' @param p_prob probability of success
 #' @param p_dimnames A character that represents the name of the dimension
 #' @return An object of class \code{\link{DISTRIBUTION}}, \code{BINOMIAL}
 #' @importFrom stats rnorm
@@ -664,11 +667,12 @@ new_BINOMIAL <- function(p_size, p_prob, p_dimnames = "rvar") {
 
 #' Multivariate Normal Distribution
 #' 
-#' Return a \code{\link{DISTRIBUTION}} object that obtain random drawns from a 
+#' Return a \code{\link{DISTRIBUTION}} object that draw random numbers from a 
 #' multivariate normal distribution using the \code{\link[MASS]{mvrnorm}} function.
 #' 
+#' @author John J. Aponte
 #' @param p_mu a vector of means
-#' @param p_sigma a positive-definite symmetric matrix specifiying the covariance matrix
+#' @param p_sigma a positive-definite symmetric matrix for the covariance matrix
 #' @param p_dimnames A character that represents the name of the dimension 
 #' @param tol tolerance (relative to largest variance) for numerical lack of positive-definiteness in p_sigma.
 #' @param empirical logical. If true, mu and Sigma specify the empirical not population mean and covariance matrix.

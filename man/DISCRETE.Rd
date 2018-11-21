@@ -31,5 +31,5 @@ myDistr <- new_DISCRETE(p_supp=c(1,2,3,4), p_prob=c(0.40,0.30,0.20,0.10))
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

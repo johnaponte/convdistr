@@ -4,7 +4,7 @@
 
 #' Convolution with combination of dimensions
 #'
-#' In case of different dimnesions of the distribution
+#' In case of different dimensions of the distribution
 #' this function perform the operation on the combination of the distributions
 #' of both distribution.
 #'
@@ -14,6 +14,7 @@
 #'
 #' @note In case of the same dimensions, only the first combination is taken
 #'
+#' @author John J. Aponte
 #' @param dist1 an object of class \code{\link{DISTRIBUTION}}
 #' @param dist2 and object of class \code{\link{DISTRIBUTION}}
 #' @param op one of `+`,`-`,`*`,`/`
@@ -22,6 +23,7 @@
 #'
 #' @return an object of class \code{\link{DISTRIBUTION}}
 #' @export
+
 #' @examples 
 #' x1 <- new_MULTINORMAL(c(0,1), matrix(c(1,0.5,0.5,1),ncol=2), p_dimnames = c("A","B"))
 #' x2 <- new_MULTINORMAL(c(10,1), matrix(c(1,0.4,0.4,1),ncol=2), p_dimnames = c("B","C"))
@@ -85,10 +87,11 @@ new_CONVOLUTION_comb <-
 #' Adds a total dimension
 #' 
 #' This function returns a \code{\link{DISTRIBUTION}} with a new dimension
-#' created by the sum of each row of the drawns of the distribution.
+#' created by row sum of the dimensions of the distribution.
 #' 
 #' Only works with multidimensional distributions.
 #' 
+#' @author John J. Aponte
 #' @param p_distribution an object of class \code{\link{DISTRIBUTION}}
 #' @param p_totalname the name of the new dimension
 #' @return a \code{\link{DISTRIBUTION}}
@@ -131,11 +134,11 @@ new_SUM_comb <- function(dist1,dist2) {
 }
 
 
-#' @describeIn CONVOLUTION_comb Substraction of distributions
+#' @describeIn CONVOLUTION_comb Subtraction of distributions
 #' @export
 #' @examples 
-#' new_SUBSTRACTION_comb(x1,x2)
-new_SUBSTRACTION_comb <- function(dist1,dist2) {
+#' new_SUBTRACTION_comb(x1,x2)
+new_SUBTRACTION_comb <- function(dist1,dist2) {
   new_CONVOLUTION_comb(dist1,dist2, `-`)
 }
 

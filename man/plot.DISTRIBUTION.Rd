@@ -9,13 +9,13 @@
 \arguments{
 \item{x}{an object of class \code{\link{DISTRIBUTION}}}
 
-\item{n}{number of drawns}
+\item{n}{number of observations}
 
 \item{...}{other parameters to the \code{\link{hist}} function}
 }
 \description{
 Plot an histogram of the density of the distribution using random
-drawns from the distribution
+numbers from the distribution
 }
 \examples{
 x <- new_NORMAL(0,1)

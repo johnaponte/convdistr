@@ -29,5 +29,5 @@ myDistr <- new_TRIANGULAR(-1,1,0)
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

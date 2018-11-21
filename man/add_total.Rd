@@ -16,7 +16,7 @@ a \code{\link{DISTRIBUTION}}
 }
 \description{
 This function returns a \code{\link{DISTRIBUTION}} with a new dimension
-created by the sum of each row of the drawns of the distribution.
+created by row sum of the dimensions of the distribution.
 }
 \details{
 Only works with multidimensional distributions.
@@ -24,4 +24,7 @@ Only works with multidimensional distributions.
 \examples{
 d1 <- new_DIRICHLET(c(0.2,0.5,0.3))
 d2 <- add_total(d1)
+}
+\author{
+John J. Aponte
 }

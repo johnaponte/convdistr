@@ -4,7 +4,7 @@
 \alias{DISTRIBUTION}
 \title{DISTRIBUTION class}
 \description{
-DISTRIBUTION is an abstract class (or interphase)
+DISTRIBUTION is a kind of abstract class (or interface)
 that the specific constructors should implement.
 }
 \details{
@@ -13,11 +13,11 @@ It contains 4 fields
  \item{distribution}{A character with the name of the distribution implemented}
  \item{seed}{A numerical that is used for \code{details} to produce
  reproducible details of the distribution}
- \item{oval}{Observerd value. Is the value expected. It is used as a
+ \item{oval}{Observed value. Is the value expected. It is used as a
  number for the mathematical operations of the distributions
  as if they were a simple scalar}
  \item{rfunc}{A function that generate random numbers from the distribution.
- Its only parameter \code{n} is the number of drawns of the distribution.
+ Its only parameter \code{n} is the number of draws of the distribution.
  It returns a matrix with as many rows as n, and as many columns as the
  dimensions of the distributions}
 }
@@ -27,13 +27,14 @@ should coincides with the names of the \code{oval} vector.
 If only one dimension, the default name is \code{rvar}.
 
 It is expected that the \code{rfunc} is included in the creation of new
-distributions by convolution so the enviromnent should be carefully controlled
+distributions by convolution so the environment should be carefully controlled
 to avoid reference leaking that is possible within the R language. For that
 reason, \code{rfunc} should be created within a \code{\link{restrict_environment}}
 function
 
-Once the object is instanciated, the fields are immutable and should not be
-changed.
+Once the object is instanced, the fields are immutable and should not be
+changed. If the seed needs to be modified, a new object can be created using
+the \code{\link{set_seed}} function
 
 Objects are defined for the following distributions
 \itemize{
@@ -49,4 +50,7 @@ Objects are defined for the following distributions
  \item \code{\link{TRUNCATED}}
  \item \code{\link{NA_DISTRIBUTION}}
 }
+}
+\author{
+John J. Aponte
 }

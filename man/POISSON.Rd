@@ -24,5 +24,5 @@ myDistr <- new_POISSON(5)
 myDistr$rfunc(10)
 }
 \author{
-John Aponte
+John J. Aponte
 }

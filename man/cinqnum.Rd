@@ -15,6 +15,9 @@ cinqnum(x, ...)
 Make a list with 5 numbers of the distribution (mean_, sd_, lci_, uci_, median_).
 }
 \details{
-Uses the stored seed to have the same drawns always and produce the same numbers
+Uses the stored seed to have the same sequence always and produce the same numbers
 This is an internal function for the summary function
+}
+\author{
+John J. Aponte
 }

@@ -32,3 +32,6 @@ b <- fitbeta(0.5, 0.4, 0.6)
 \seealso{
 \code{\link[SHELF]{fitDirichlet}}
 }
+\author{
+John J. Aponte
+}

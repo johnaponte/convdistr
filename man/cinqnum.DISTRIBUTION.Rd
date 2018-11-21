@@ -9,13 +9,16 @@
 \arguments{
 \item{x}{an object of  class \code{\link{DISTRIBUTION}}}
 
-\item{n}{number of dranws}
+\item{n}{number of drawns}
 }
 \value{
 a list with the  mean, sd, 95%upper and lower centiles and median
 }
 \description{
-Generantes n random numbers from the distribution, using the seed of the
+Generate n random numbers from the distribution, using the seed of the
 object, so always return the same value. Internal function to be used in the
 summary
+}
+\author{
+John J. Aponte
 }

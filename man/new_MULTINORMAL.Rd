@@ -10,7 +10,7 @@ new_MULTINORMAL(p_mu, p_sigma, p_dimnames, tol = 1e-06,
 \arguments{
 \item{p_mu}{a vector of means}
 
-\item{p_sigma}{a positive-definite symmetric matrix specifiying the covariance matrix}
+\item{p_sigma}{a positive-definite symmetric matrix for the covariance matrix}
 
 \item{p_dimnames}{A character that represents the name of the dimension}
 
@@ -19,7 +19,7 @@ new_MULTINORMAL(p_mu, p_sigma, p_dimnames, tol = 1e-06,
 \item{empirical}{logical. If true, mu and Sigma specify the empirical not population mean and covariance matrix.}
 }
 \description{
-Return a \code{\link{DISTRIBUTION}} object that obtain random drawns from a 
+Return a \code{\link{DISTRIBUTION}} object that draw random numbers from a 
 multivariate normal distribution using the \code{\link[MASS]{mvrnorm}} function.
 }
 \examples{
@@ -29,4 +29,7 @@ rfunc(d1, 10)
 }
 \seealso{
 \code{\link[MASS]{mvrnorm}}
+}
+\author{
+John J. Aponte
 }

@@ -30,6 +30,7 @@
 #' There will be one column \code{distribution} with the name of the distribution
 #' and one column for each dimension with the names from the \code{oval} field.
 #'
+#' @author John J. Aponte
 #' @param x  a \code{\link{DISTRIBUTION}} object
 #' @return A \code{\link{data.frame}} with the metadata of the distributions
 #' @export
@@ -37,7 +38,7 @@ metadata <- function(x) {
   UseMethod("metadata",x)
 }
 
-#' @describeIn metadata Metadata for DISTIBUTION objects
+#' @describeIn metadata Metadata for DISTRIBUTION objects
 #' @importFrom dplyr bind_cols
 #' @export
 metadata.DISTRIBUTION <- function(x) {
@@ -69,8 +70,9 @@ print.DISTRIBUTION <- function(x, ...){
 #'
 #' Make a list with 5 numbers of the distribution (mean_, sd_, lci_, uci_, median_).
 #'
-#' Uses the stored seed to have the same drawns always and produce the same numbers
+#' Uses the stored seed to have the same sequence always and produce the same numbers
 #' This is an internal function for the summary function
+#' @author John J. Aponte
 #' @param x an object of class \code{\link{DISTRIBUTION}}
 #' @param ... further parameters
 cinqnum <- function(x,...){
@@ -79,11 +81,12 @@ cinqnum <- function(x,...){
 
 #' Generic function for a distribution
 #'
-#' Generantes n random numbers from the distribution, using the seed of the
+#' Generate n random numbers from the distribution, using the seed of the
 #' object, so always return the same value. Internal function to be used in the
 #' summary
+#' @author John J. Aponte
 #' @param x an object of  class \code{\link{DISTRIBUTION}}
-#' @param n number of dranws
+#' @param n number of drawns
 #' @return a list with the  mean, sd, 95%upper and lower centiles and median
 #' @import stats
 cinqnum.DISTRIBUTION <- function(x,n) {
@@ -92,16 +95,16 @@ cinqnum.DISTRIBUTION <- function(x,n) {
   else
     oldseed <- NULL
   set.seed(x$seed)
-  drawns <- x$rfunc(n)
+  draws <- x$rfunc(n)
   if (!is.null(oldseed))
     .GlobalEnv$.Random.seed <- oldseed
   else
     rm(".Random.seed", envir = .GlobalEnv)
-  mean_ <- apply(drawns, 2, mean)
-  sd_ <- apply(drawns, 2, sd)
-  lci_ <- apply(drawns, 2, quantile, 0.025, na.rm = TRUE)
-  uci_ <- apply(drawns, 2, quantile, 0.975, na.rm = TRUE)
-  median_ <- apply(drawns, 2, median)
+  mean_ <- apply(draws, 2, mean)
+  sd_ <- apply(draws, 2, sd)
+  lci_ <- apply(draws, 2, quantile, 0.025, na.rm = TRUE)
+  uci_ <- apply(draws, 2, quantile, 0.975, na.rm = TRUE)
+  median_ <- apply(draws, 2, median)
   list(
     mean_ = mean_,
     sd_ = sd_,
@@ -113,8 +116,9 @@ cinqnum.DISTRIBUTION <- function(x,n) {
 
 #' And optimized version for NA distribution
 #'
+#' @author John J. Aponte
 #' @param x an object of  class \code{\link{DISTRIBUTION}}
-#' @param n number of dranws
+#' @param n number of drawns
 #' @return a list of NA
 cinqnum.NA <- function(x,n) {
   list(
@@ -129,8 +133,9 @@ cinqnum.NA <- function(x,n) {
 
 #' And optimized version for DIRAC distributions
 #'
+#' @author John J. Aponte
 #' @param x an object of  class \code{\link{DISTRIBUTION}}
-#' @param n number of dranws
+#' @param n number of drawns
 #' @return a list of NA
 cinqnum.DIRAC <- function(x,n) {
   list(
@@ -145,16 +150,17 @@ cinqnum.DIRAC <- function(x,n) {
 
 #' Summary of Distributions
 #'
+#' @author John J. Aponte
 #' @param object object of class \code{\link{DISTRIBUTION}}
-#' @param n the number of random drawns from the distribution
-#' @param ... other parameteres. Not used
+#' @param n the number of random samples from the distribution
+#' @param ... other parameters. Not used
 #' @return A \code{\link{data.frame}} with as many rows as dimensions had the
 #' distribution and  with the following columns
 #' \itemize{
 #'   \item distribution name
 #'   \item varname name of the dimension
 #'   \item oval value
-#'   \item nsample number of random drawns
+#'   \item nsample number of random samples
 #'   \item mean_ mean value of the sample
 #'   \item sd_ standard deviation of the sample
 #'   \item lci_ lower 95% centile of the sample
@@ -181,10 +187,11 @@ summary.DISTRIBUTION <- function(object, n = 10000, ...) {
 }
 
 
-#' Generate random drawns from a \code{\link{DISTRIBUTION}} object
+#' Generate random numbers from a \code{\link{DISTRIBUTION}} object
 #'
 #' This is a generic method that calls the \code{rfunc} slot of the object
 #'
+#' @author John J. Aponte
 #' @param x an object
 #' @param n the number of random samples
 #' @return a matrix with as many rows as \code{n} and as many columns as
@@ -196,6 +203,7 @@ rfunc <- function(x, n) {
 
 #' Generic function for a \code{\link{DISTRIBUTION}} object
 #'
+#' @author John J. Aponte
 #' @param x an object of class \code{\link{DISTRIBUTION}}
 #' @param n the number of random samples
 #' @export
@@ -205,14 +213,37 @@ rfunc.DISTRIBUTION <- function(x,n) {
 
 
 #' Default function
+#' @author John J. Aponte
 #' @param x an object of class different from \code{\link{DISTRIBUTION}}
 #' @param n the number of random samples
 #' @export
 rfunc.default <- function(x,n) {
-  stop("Don't know how to obtain random drawns from an object of class ", class(x))
+  stop("Don't know how to obtain random numbers from an object of class ", class(x))
 }
 
 #' @export
 dimnames.DISTRIBUTION <- function(x) {
   return(names(x$oval))
+}
+
+
+#' Modify a the seed of a Distribution object
+#' 
+#' This create a new \code{\link{DISTRIBUTION}} object but with the
+#' specified seed
+#' @author John J. Aponte
+#' @param distribution a \code{\link{DISTRIBUTION}} object
+#' @param seed the new seed
+#' @return a code{\link{DISTRIBUTION}} object of the same class
+#' @export
+set_seed <- function(distribution, seed){
+  stopifnot(inherits(distribution,"DISTRIBUTION"))
+  stopifnot(is.numeric(seed))
+  stopifnot(!is.na(seed))
+  stopifnot(length(seed) == 1)
+  prevclass <- class(distribution)
+  xtemp <- unclass(distribution)
+  xtemp$seed <- seed
+  class(xtemp) <- prevclass
+  xtemp
 }
