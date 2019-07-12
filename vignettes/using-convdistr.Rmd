@@ -18,8 +18,6 @@ summary.DISTRIBUTION <- function(object,...) {
   knitr::kable(convdistr:::summary.DISTRIBUTION(object,...), digits = 2)
 }
 ```
-# The convdistr package
-
 The `convdistr` package provide tools to define distribution objects and make 
 mathematical operations with them. It keep track of the results as if they
 where scalar numbers but maintaining the ability to obtain randoms samples of
