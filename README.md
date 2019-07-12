@@ -1,9 +1,14 @@
-The `convdistr` provide tools to define distribution objects and make
+The convdistr package
+=====================
+
+The `convdistr` package provide tools to define distribution objects and make
 mathematical operations with them. It keep track of the results as if
 they where scalar numbers but maintaining the ability to obtain randoms
 samples of the convoluted distributions.
 
-To install this package \`github-
+To install this package from github
+
+`devtools::install_github("johnaponte/convdistr", build_manual = T, build_vignettes = T)`
 
 Practical example
 -----------------
@@ -72,7 +77,7 @@ the distributions are independent between them, i.e. their correlation
 is 0. If not, you need to implement specific distributions to handle the
 correlation, like the MULTIVARIATE object.
 
-The `DISTRIBUTION` object
+Description of the `DISTRIBUTION` object
 -------------------------
 
 The `DISTRIBUTION` is kind of abstract class (or interface) that
@@ -264,13 +269,11 @@ The following are methods for all objects of class `DISTRIBUTION`
 
     plot(myDistr)
 
-![Figure with R
-plot](using-convdistr_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+<img src="https://user-images.githubusercontent.com/3891174/61120096-78336b80-a49c-11e9-861c-196c0a72d3d9.png"></img>
 
     ggDISTRIBUTION(myDistr)
 
-![Figure with
-ggplot2](using-convdistr_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+<img src="https://user-images.githubusercontent.com/3891174/61120178-a3b65600-a49c-11e9-91bc-2cc16ee98d28.png"></img>
 
 Convolution for Distribution with the same dimensions
 -----------------------------------------------------
@@ -332,7 +335,7 @@ but Mathematical operator can also be used.
 
     ggDISTRIBUTION(dsum)
 
-![](using-convdistr_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+<img src="https://user-images.githubusercontent.com/3891174/61120240-c8123280-a49c-11e9-9e13-7354424ae8e0.png"></img>
 
 Mixture
 -------
@@ -380,7 +383,7 @@ probability will be the same for each distribution.
 
     ggDISTRIBUTION(dmix)
 
-![](using-convdistr_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+<img src="https://user-images.githubusercontent.com/3891174/61120284-e37d3d80-a49c-11e9-9451-295bafe325af.png"><img>
 
 Convolution of distributions with different dimensions
 ------------------------------------------------------
