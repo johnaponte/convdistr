@@ -4,7 +4,7 @@ author: "John J. Aponte"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Using the convdistr package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,6 +23,10 @@ The `convdistr` provide tools to define distribution objects and make
 mathematical operations with them. It keep track of the results as if they
 where scalar numbers but maintaining the ability to obtain randoms samples of
 the convoluted distributions.
+
+To install this package from github
+
+`devtools::install_github("johnaponte/convdistr", build_manual = T, build_vignettes = T)`
 
 ## Practical example
 What would be the resulting distribution of 
@@ -60,7 +64,12 @@ and 95% quantiles of `r r_lci`, `r r_uci`
 The following sections describe the DISTRIBUTION object, how to create 
 new DISTRIBUTION objects and how to make operations and mixtures with them.
 
-## The `DISTRIBUTION` object
+Please note that when convoluting distributions, this package assumes the 
+distributions are independent between them, i.e. their correlation is 0. If not,
+you need to implement specific distributions to handle the correlation, like the
+MULTIVARIATE object.
+
+## Description of the  `DISTRIBUTION` object
 
 The `DISTRIBUTION` is kind of abstract class (or interface)
 that specific constructors should implement.

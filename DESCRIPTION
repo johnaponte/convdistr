@@ -1,7 +1,7 @@
 Package: convdistr
 Type: Package
 Title: Convolute probabilistic distributions
-Version: 0.3.0
+Version: 1.0
 Authors@R: person("Aponte", "John", email = "apontej@who.int", role = c("aut","cre"))
 Description: convolute probabilistic distributions using the random generator 
  function of each distribution. A new random number generator function is created that 
@@ -10,10 +10,7 @@ Description: convolute probabilistic distributions using the random generator
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Suggests:
-    spelling, testthat,
-    knitr,
-    rmarkdown
+Suggests: spelling, testthat, knitr, rmarkdown
 Imports: stats, graphics, pryr, extraDistr, dplyr, tidyr, ggplot2, RColorBrewer, SHELF, MASS
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

@@ -78,9 +78,12 @@ fitbeta <- function(point,lci,uci) {
 #' @seealso \code{\link[SHELF]{fitDirichlet}}
 fitdirichlet <- function(..., plotBeta=FALSE, n.fitted="opt") {
   categories <- names(list(...))
+  if (is.null(categories)) {
+    categories <- LETTERS[1:(length(list(...)))]
+  }
   dist <- lapply(list(...),function(x){list(Beta = x)})
-  thearg <- c(dist, list(categories = categories, plotBeta = plotBeta, n.fitted = n.fitted))
-  sink("/dev/null");
+  thearg <- list(dist, categories = categories, plotBeta = plotBeta, n.fitted = n.fitted)
+  sink("/dev/null")
   res <- do.call(fitDirichlet,thearg)
   sink()
   res

@@ -5,7 +5,7 @@
 \alias{new_DISCRETE}
 \title{Factory for a DISCRETE distribution object}
 \usage{
-new_DISCRETE(p_supp, p_prob = NA, p_dimnames = "rvar")
+new_DISCRETE(p_supp, p_prob, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_supp}{A numeric vector of options}

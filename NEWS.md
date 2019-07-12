@@ -23,3 +23,5 @@
 * Check of spelling of documentation
 * Sample size has been extended
 
+# convdistr 1.0
+* Package is ready for distribution

@@ -400,12 +400,11 @@ new_EXPONENTIAL <- function(p_rate, p_dimnames = "rvar") {
 #' myDistr <- new_DISCRETE(p_supp=c(1,2,3,4), p_prob=c(0.40,0.30,0.20,0.10))
 #' myDistr$rfunc(10)
 #' @name DISCRETE
-new_DISCRETE <- function(p_supp, p_prob = NA, p_dimnames = "rvar") {
-  stopifnot(missing(p_prob) ||
-              is.na(p_prob) || length(p_supp) == length(p_prob))
-  if (missing(p_prob) || is.na(p_prob)) {
+new_DISCRETE <- function(p_supp, p_prob, p_dimnames = "rvar") {
+  if (missing(p_prob)) {
     p_prob = rep(1 / length(p_supp), length(p_supp))
   }
+  stopifnot(missing(p_prob)  | length(p_supp) == length(p_prob))
   stopifnot(abs(1 - sum(p_prob)) < 1 ^ 0.4)
   .oval = sum(p_supp * p_prob)
   names(.oval) <- p_dimnames
