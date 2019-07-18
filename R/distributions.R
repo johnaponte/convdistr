@@ -263,9 +263,11 @@ new_BETA_lci <- function(p_mean, p_lci, p_uci, p_dimnames = "rvar") {
   stopifnot(0 <= p_lci & p_lci < 1)
   stopifnot(0 < p_uci & p_uci <= 1)
   varp <- abs(((p_uci - p_lci)) / 4) ^ 2
-  p_shape1 <- p_mean * (p_mean * (1 - p_mean) / varp - 1)
-  p_shape2 <- (1 - p_mean) * (p_mean * (1 - p_mean) / varp - 1)
-  new_BETA(p_shape1,p_shape2, p_dimnames = p_dimnames)
+  #p_shape1 <- p_mean * (p_mean * (1 - p_mean) / varp - 1)
+  #p_shape2 <- (1 - p_mean) * (p_mean * (1 - p_mean) / varp - 1)
+  # Using maximum likelihood fiting from rriskDistributions
+  fitval <- fitbeta(p_mean, p_lci, p_uci)
+  new_BETA(fitval["shape1"],fitval["shape2"], p_dimnames = p_dimnames)
 }
 
 #' Factory for a TRIANGULAR distribution object

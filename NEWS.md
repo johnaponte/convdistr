@@ -25,3 +25,7 @@
 
 # convdistr 1.0
 * Package is ready for distribution
+
+# convdistr 1.1
+* Change for minimun square diff on the cumulative distribution for BETA_LCI
+# avoid sink in fitdirichlet

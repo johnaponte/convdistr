@@ -29,7 +29,7 @@ same_dimensions <- function(listdistr) {
 #'
 #' This is a wrap of the \code{\link[SHELF]{fitdist}} to obtain
 #' the best parameters for a beta distribution based
-#' on quantiles
+#' on quantiles. 
 #'
 #' @author John J. Aponte
 #' @param point Point estimates corresponding to the median
@@ -83,8 +83,8 @@ fitdirichlet <- function(..., plotBeta=FALSE, n.fitted="opt") {
   }
   dist <- lapply(list(...),function(x){list(Beta = x)})
   thearg <- list(dist, categories = categories, plotBeta = plotBeta, n.fitted = n.fitted)
-  sink("/dev/null")
+  capture.output(
   res <- do.call(fitDirichlet,thearg)
-  sink()
+  )
   res
 }
