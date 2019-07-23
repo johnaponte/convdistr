@@ -250,25 +250,38 @@ new_BETA <- function(p_shape1, p_shape2, p_dimnames = "rvar") {
 #' @param p_mean A numeric that represents the expected value of the proportion
 #' @param p_lci A numeric for the lower 95\% confidence interval
 #' @param p_uci A numeric for the upper 95\% confidence interval
-#' @importFrom stats rbeta
 #' @export
 #' @examples
 #' myDistr <- new_BETA_lci(0.30,0.25,0.35)
 #' myDistr$rfunc(10)
-#' @describeIn BETA Constructor based on confidence intervals
+#' @describeIn BETA Constructor based on confidence intervals. Preserve expected value.
 new_BETA_lci <- function(p_mean, p_lci, p_uci, p_dimnames = "rvar") {
   stopifnot(p_lci < p_uci)
   stopifnot(p_lci < p_mean & p_mean < p_uci)
   stopifnot(0 < p_mean & p_mean < 1)
   stopifnot(0 <= p_lci & p_lci < 1)
   stopifnot(0 < p_uci & p_uci <= 1)
-  varp <- abs(((p_uci - p_lci)) / 4) ^ 2
-  #p_shape1 <- p_mean * (p_mean * (1 - p_mean) / varp - 1)
-  #p_shape2 <- (1 - p_mean) * (p_mean * (1 - p_mean) / varp - 1)
-  # Using maximum likelihood fiting from rriskDistributions
   fitval <- fitbeta(p_mean, p_lci, p_uci)
   new_BETA(fitval["shape1"],fitval["shape2"], p_dimnames = p_dimnames)
 }
+
+#' @note
+#' new_BETA_lci2 estimate parameters using maximum likelihood
+#' myDistr <- new_BETA_lci2(0.30,0.25,0.35)
+#' myDistr$rfunc(10)
+#' @export
+#' @describeIn BETA Constructor based on ML confidence intervals
+new_BETA_lci2 <- function(p_mean, p_lci, p_uci, p_dimnames = "rvar") {
+  stopifnot(p_lci < p_uci)
+  stopifnot(p_lci < p_mean & p_mean < p_uci)
+  stopifnot(0 < p_mean & p_mean < 1)
+  stopifnot(0 <= p_lci & p_lci < 1)
+  stopifnot(0 < p_uci & p_uci <= 1)
+  # Using maximum likelihood fiting from rriskDistributions
+  fitval <- fitbeta_ml(p_mean, p_lci, p_uci)
+  new_BETA(fitval["shape1"],fitval["shape2"], p_dimnames = p_dimnames)
+}
+
 
 #' Factory for a TRIANGULAR distribution object
 #'

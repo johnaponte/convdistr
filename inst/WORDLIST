@@ -38,5 +38,6 @@ assoc
 dimmnames
 fitbeta
 fitdiri
-fitdirchlet
+fitdirichlet
+myDistr
 github

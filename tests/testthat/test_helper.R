@@ -28,9 +28,17 @@ test_that("The same_dimensions function works fine", {
 
 test_that("The fitbeta works fine" , {
   fitval <- fitbeta(0.45,0.40,0.50)
-  expect_equivalent(fitval[1] / sum(fitval), 0.45, tolerance = 0.001)
-  expect_equivalent(qbeta(0.025, fitval[1], fitval[2]), 0.40, tolerance = 0.001)
-  expect_equivalent(qbeta(0.975, fitval[1], fitval[2]), 0.50, tolerance = 0.001)
+  expect_equivalent(fitval[1] / sum(fitval), 0.45, tolerance = 0.0001)
+  expect_equivalent(qbeta(0.025, fitval[1], fitval[2]), 0.40, tolerance = 0.002)
+  expect_equivalent(qbeta(0.975, fitval[1], fitval[2]), 0.50, tolerance = 0.002)
+})
+
+
+test_that("The fitbeta_ml works fine" , {
+  fitval <- fitbeta_ml(0.45,0.40,0.50)
+  expect_equivalent(fitval[1] / sum(fitval), 0.45, tolerance = 0.0001)
+  expect_equivalent(qbeta(0.025, fitval[1], fitval[2]), 0.40, tolerance = 0.002)
+  expect_equivalent(qbeta(0.975, fitval[1], fitval[2]), 0.50, tolerance = 0.002)
 })
 
 test_that("The fitdirichlet works fine", {

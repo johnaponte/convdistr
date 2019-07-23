@@ -44,3 +44,12 @@ output:
 
 * Fix example for fitdirichlet
 * Spelling of news
+
+# convdistr 1.3
+
+* new_BETA_lci and new_BETA_lci2 are separated functions. The first keep the
+expected value but could be less accurate on CI, the second could be more 
+accurate on the CI but the expected value may change. The second use a ML 
+function to find the parameters. Equivalent changes has made to fitbeta and
+fitbeta_ml
+

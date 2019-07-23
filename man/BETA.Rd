@@ -4,11 +4,14 @@
 \alias{BETA}
 \alias{new_BETA}
 \alias{new_BETA_lci}
+\alias{new_BETA_lci2}
 \title{Factory for a BETA distribution object}
 \usage{
 new_BETA(p_shape1, p_shape2, p_dimnames = "rvar")
 
 new_BETA_lci(p_mean, p_lci, p_uci, p_dimnames = "rvar")
+
+new_BETA_lci2(p_mean, p_lci, p_uci, p_dimnames = "rvar")
 }
 \arguments{
 \item{p_shape1}{non-negative parameters of the Beta distribution}
@@ -32,7 +35,9 @@ from a  beta distribution using the \code{\link{rbeta}} function
 }
 \section{Functions}{
 \itemize{
-\item \code{new_BETA_lci}: Constructor based on confidence intervals
+\item \code{new_BETA_lci}: Constructor based on confidence intervals. Preserve expected value.
+
+\item \code{new_BETA_lci2}: Constructor based on ML confidence intervals
 }}
 
 \note{
@@ -44,6 +49,10 @@ using the following formula:
 \eqn{shape1 = p_mean * (p_mean * (1 - p_mean) / varp - 1)}
 
 \eqn{shape2 =(1 - p_mean) * (p_mean * (1 - p_mean) / varp - 1) }
+
+new_BETA_lci2 estimate parameters using maximum likelihood
+myDistr <- new_BETA_lci2(0.30,0.25,0.35)
+myDistr$rfunc(10)
 }
 \examples{
 myDistr <- new_BETA(1,1)

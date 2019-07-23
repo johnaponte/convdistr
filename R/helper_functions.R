@@ -27,21 +27,27 @@ same_dimensions <- function(listdistr) {
 
 #' Fits a beta distribution based on quantiles
 #'
-#' This is a wrap of the \code{\link[SHELF]{fitdist}} to obtain
-#' the best parameters for a beta distribution based
-#' on quantiles. 
-#'
 #' @author John J. Aponte
 #' @param point Point estimates corresponding to the median
 #' @param lci Lower limit (quantile 0.025)
 #' @param uci Upper limit (quantile 0.975)
 #' @return parameters shape1 and shape2 of a beta distribution
-#' @importFrom SHELF fitdist
-#' @export
 #' @examples 
+#' fitbeta_ml(0.45,0.40,0.50)
 #' fitbeta(0.45,0.40,0.50)
+#' @name fitbeta
+NULL
+
+#' @note
+#' This is a wrap of the \code{\link[SHELF]{fitdist}} to obtain
+#' the best parameters for a beta distribution based
+#' on quantiles. 
+#'
+#' @importFrom SHELF fitdist
+#' @describeIn fitbeta using ML to estimate parameters
 #' @seealso \code{\link[SHELF]{fitdist}}
-fitbeta <- function(point,lci,uci) {
+#' @export
+fitbeta_ml <- function(point,lci,uci) {
   p1 <- c(0.025,0.50,0.975)
   vals <- c(lci,point,uci)
   #print(vals)
@@ -54,6 +60,33 @@ fitbeta <- function(point,lci,uci) {
   fit <- SHELF::fitdist(vals,p1,lower = 0,upper = 1)
   unlist(fit$Beta)
 }
+
+#' @note
+#' When using confidence intervals (not ML), the shape parameters are obtained
+#' using the following formula:
+#'
+#' \eqn{varp = (p_uci-p_lci)/4^2}
+#'
+#' \eqn{shape1 = p_mean * (p_mean * (1 - p_mean) / varp - 1)}
+#'
+#' \eqn{shape2 =(1 - p_mean) * (p_mean * (1 - p_mean) / varp - 1) }
+#' @describeIn fitbeta preserve the expected value
+#' @export
+fitbeta <- function(point, lci, uci) {
+  vals <- c(lci,point,uci)
+  #print(vals)
+  if (all(vals == 1)) {
+    return(c(shape1 = 1, shape2 = 0))
+  }
+  if (all(vals == 0)) {
+    return(c(shape1 = 0, shape2 = 1))
+  }
+  varp <- abs(((uci - lci)) / 4) ^ 2
+  p_shape1 <- point * (point * (1 - point) / varp - 1)
+  p_shape2 <- (1 - point) * (point * (1 - point) / varp - 1)
+  return(c(shape1 = p_shape1, shape2 = p_shape2))
+}
+
 
 #' Fits a Dirichlet distribution, 
 #' 
