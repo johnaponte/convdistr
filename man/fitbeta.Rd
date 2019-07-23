@@ -19,7 +19,7 @@ parameters shape1 and shape2 of a beta distribution
 \description{
 This is a wrap of the \code{\link[SHELF]{fitdist}} to obtain
 the best parameters for a beta distribution based
-on quantiles
+on quantiles.
 }
 \examples{
 fitbeta(0.45,0.40,0.50)

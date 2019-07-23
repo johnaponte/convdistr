@@ -51,7 +51,7 @@ fitbeta <- function(point,lci,uci) {
   if (all(vals == 0)) {
     return(c(shape1 = 0, shape2 = 1))
   }
-  fit <- fitdist(vals,p1,lower = 0,upper = 1)
+  fit <- SHELF::fitdist(vals,p1,lower = 0,upper = 1)
   unlist(fit$Beta)
 }
 
@@ -69,11 +69,12 @@ fitbeta <- function(point,lci,uci) {
 #' @param n.fitted Method to fit the values
 #' @return a vector with the parameters for a Dirichlet distribution
 #' @importFrom SHELF fitDirichlet
+#' @importFrom utils capture.output
 #' @examples
 #' a <- fitbeta(0.3, 0.2, 0.4)
 #' c <- fitbeta(0.2, 0.1, 0.3)
 #' b <- fitbeta(0.5, 0.4, 0.6)
-#  fitdiri(cat1=a,cat2=b,cat3=c)
+#' fitdirichlet(cat1=a,cat2=b,cat3=c)
 #' @export
 #' @seealso \code{\link[SHELF]{fitDirichlet}}
 fitdirichlet <- function(..., plotBeta=FALSE, n.fitted="opt") {
@@ -84,7 +85,7 @@ fitdirichlet <- function(..., plotBeta=FALSE, n.fitted="opt") {
   dist <- lapply(list(...),function(x){list(Beta = x)})
   thearg <- list(dist, categories = categories, plotBeta = plotBeta, n.fitted = n.fitted)
   capture.output(
-  res <- do.call(fitDirichlet,thearg)
+  res <- do.call(SHELF::fitDirichlet,thearg)
   )
   res
 }

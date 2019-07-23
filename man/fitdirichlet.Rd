@@ -28,6 +28,7 @@ This is a wrap of \code{\link[SHELF]{fitDirichlet}}
 a <- fitbeta(0.3, 0.2, 0.4)
 c <- fitbeta(0.2, 0.1, 0.3)
 b <- fitbeta(0.5, 0.4, 0.6)
+fitdirichlet(cat1=a,cat2=b,cat3=c)
 }
 \seealso{
 \code{\link[SHELF]{fitDirichlet}}
