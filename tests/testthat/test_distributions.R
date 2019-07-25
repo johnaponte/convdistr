@@ -139,7 +139,7 @@ test_that("new_DIRCHLET works with ceros", {
   expect_s3_class(myDistr, "DISTRIBUTION")
   expect_equivalent(myDistr$oval, c(0.5, 0.0, 0.5))
   expect_silent(myDistr$rfunc(1))
-  expect_equivalent(myDistr$rfunc(1)[1,2],0)
+  expect_equivalent(myDistr$rfunc(2)[,2],c(0,0))
 })
 
 test_that("new_BINOMIAL works fine",{
