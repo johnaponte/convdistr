@@ -53,3 +53,6 @@ accurate on the CI but the expected value may change. The second use a ML
 function to find the parameters. Equivalent changes has made to fitbeta and
 fitbeta_ml
 
+# convdistr 1.4
+* new_DIRICHLET now accept to have a columm with zero probability. If only
+one column have probability, returns 1 in that colum and zero elsewhere

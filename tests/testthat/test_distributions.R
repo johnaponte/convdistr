@@ -133,6 +133,15 @@ test_that("new_DIRCHLET works fine", {
   expect_equal(myDistr$oval, c(A = 0.2, B = 0.3, C = 0.5))
 })
 
+test_that("new_DIRCHLET works with ceros", {
+  myDistr <- new_DIRICHLET(c(0.5, 0, 0.5))
+  expect_s3_class(myDistr, "DIRICHLET")
+  expect_s3_class(myDistr, "DISTRIBUTION")
+  expect_equivalent(myDistr$oval, c(0.5, 0.0, 0.5))
+  expect_silent(myDistr$rfunc(1))
+  expect_equivalent(myDistr$rfunc(1)[1,2],0)
+})
+
 test_that("new_BINOMIAL works fine",{
   myDistr <- new_BINOMIAL(1000, 0.3)
   expect_s3_class(myDistr, "BINOMIAL")

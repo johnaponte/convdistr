@@ -592,9 +592,26 @@ new_DIRICHLET <- function(p_alpha, p_dimnames) {
       seed = sample(1:2 ^ 15, 1),
       oval = .oval,
       rfunc = restrict_environment(function(n) {
-        res <- rdirichlet(n, p_alpha)
-        colnames(res) <- p_dimnames
-        res
+        with0 <- which(p_alpha == 0)
+        if (length(with0) == 0) {
+          res <- rdirichlet(n, p_alpha)
+          colnames(res) <- p_dimnames
+          res
+        } 
+        else {
+          new_alpha = p_alpha[-with0]
+          new_colname = p_dimnames[-with0]
+          cero_colname = p_dimnames[with0]
+          if ( length(new_alpha) == 1) {
+            resmat <- matrix(rep(1,n), ncol = 1)
+          } else {
+            resmat <- rdirichlet(n, new_alpha)
+          }
+          zeromat <- matrix(rep(0,n*length(cero_colname)), ncol = length(cero_colname))
+          res <- cbind(resmat, zeromat)
+          colnames(res) <- c(new_colname, cero_colname)
+          res[,p_dimnames]
+        }
       },
       p_alpha = p_alpha,
       p_dimnames = p_dimnames)
