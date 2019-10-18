@@ -479,7 +479,8 @@ new_NA <- function(p_dimnames = "rvar") {
 
 #' Factory for a DIRAC distribution object
 #'
-#' Returns an DIRAC distribution object that always return the same number.
+#' Returns an DIRAC distribution object that always return the same number, or
+#' the same matrix of numbers in case multiple dimensions are setup
 #'
 #' @author John J. Aponte
 #' @param p_scalar A numeric that set the value for the distribution
@@ -491,7 +492,7 @@ new_NA <- function(p_dimnames = "rvar") {
 #' myDistr$rfunc(10)
 #' @name DIRAC
 new_DIRAC <- function(p_scalar, p_dimnames = "rvar") {
-  stopifnot(length(p_scalar) == 1)
+  stopifnot(length(p_scalar) == length(p_dimnames))
   .oval = p_scalar
   names(.oval) <- p_dimnames
   structure(
@@ -501,14 +502,13 @@ new_DIRAC <- function(p_scalar, p_dimnames = "rvar") {
       oval = .oval,
       rfunc = restrict_environment(function(n) {
         matrix(rep(p_scalar, n),
-               ncol = 1,
+               ncol = length(p_scalar),
                dimnames = list(1:n, p_dimnames))
       },
       p_scalar = p_scalar, p_dimnames = p_dimnames)
     ),
     class =  c("DIRAC", "DISTRIBUTION")
-  )
-}
+  )}
 
 
 #' Factory for a TRUNCATED distribution object

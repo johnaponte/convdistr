@@ -56,3 +56,7 @@ fitbeta_ml
 # convdistr 1.4
 * new_DIRICHLET now accept to have a column with zero probability. If only
 one column have probability, returns 1 in that column and zero elsewhere
+
+# convdistr 1.5
+* new_DIRAC distribution allows now multiple dimensions
+

@@ -16,7 +16,8 @@ new_DIRAC(p_scalar, p_dimnames = "rvar")
 An object of class \code{DISTRIBUTION}, \code{DIRAC}
 }
 \description{
-Returns an DIRAC distribution object that always return the same number.
+Returns an DIRAC distribution object that always return the same number, or
+the same matrix of numbers in case multiple dimensions are setup
 }
 \examples{
 myDistr <- new_DIRAC(1)

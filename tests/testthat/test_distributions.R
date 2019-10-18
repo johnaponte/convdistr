@@ -158,3 +158,13 @@ test_that("new_MULTINORMAL works fine", {
   dif <- abs(Sigma - mycov)
   expect_true(all(dif < 0.05))
 })
+
+
+test_that("new_DIRAC multidiimensions",{
+  myDistr <- new_DIRAC(c(1,2,3), c("dim1","dim2","dim3"))
+  expect_s3_class(myDistr, "DIRAC")
+  expect_s3_class(myDistr, "DISTRIBUTION")
+  expect_equivalent(myDistr$oval, c(1,2,3))
+  expect_equivalent(myDistr$rfunc(1), c(1,2,3))
+})
+
