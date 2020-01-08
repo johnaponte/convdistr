@@ -4,7 +4,7 @@
 \alias{cinqnum.NA}
 \title{And optimized version for NA distribution}
 \usage{
-\method{cinqnum}{NA}(x, n)
+\method{cinqnum}{`NA`}(x, n)
 }
 \arguments{
 \item{x}{an object of  class \code{\link{DISTRIBUTION}}}

@@ -3,7 +3,6 @@
 \docType{package}
 \name{convdistr}
 \alias{convdistr}
-\alias{convdistr-package}
 \title{convdistr: A package useful for convolution of distributions.}
 \description{
 The convdistr package provides tools to define \code{\link{DISTRIBUTION}} objects and make 

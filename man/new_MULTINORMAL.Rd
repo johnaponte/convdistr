@@ -4,8 +4,7 @@
 \alias{new_MULTINORMAL}
 \title{Multivariate Normal Distribution}
 \usage{
-new_MULTINORMAL(p_mu, p_sigma, p_dimnames, tol = 1e-06,
-  empirical = FALSE)
+new_MULTINORMAL(p_mu, p_sigma, p_dimnames, tol = 1e-06, empirical = FALSE)
 }
 \arguments{
 \item{p_mu}{a vector of means}
