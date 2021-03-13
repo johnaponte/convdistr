@@ -1,9 +1,9 @@
 Package: convdistr
 Type: Package
-Title: Convolute probabilistic distributions
+Title: Convolute Probabilistic Distributions
 Version: 1.5.0
 Authors@R: person("Aponte", "John", email = "john.j.aponte@gmail.com", role = c("aut","cre"))
-Description: convolute probabilistic distributions using the random generator 
+Description: Convolute probabilistic distributions using the random generator 
  function of each distribution. A new random number generator function is created that 
  perform the mathematical operation on the individual random samples from the 
  random generator function of each distribution. See the documentation for examples.
