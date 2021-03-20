@@ -60,3 +60,7 @@ one column have probability, returns 1 in that column and zero elsewhere
 # convdistr 1.5
 * new_DIRAC distribution allows now multiple dimensions
 
+# convdistr 1.5.1
+* Fix documentation and the return value for all objects is complete
+* Change the approach to make cinqnum.DISTRIBUTION reproducible
+
