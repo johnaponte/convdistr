@@ -3,6 +3,9 @@
 \name{DISTRIBUTION}
 \alias{DISTRIBUTION}
 \title{DISTRIBUTION class}
+\value{
+a DISTRIBUTION object
+}
 \description{
 DISTRIBUTION is a kind of abstract class (or interface)
 that the specific constructors should implement.

@@ -11,6 +11,9 @@ cinqnum(x, ...)
 
 \item{...}{further parameters}
 }
+\value{
+a vector with the mean, sd, lci, uci and median values
+}
 \description{
 Make a list with 5 numbers of the distribution (mean_, sd_, lci_, uci_, median_).
 }

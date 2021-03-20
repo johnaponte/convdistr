@@ -11,6 +11,9 @@
 
 \item{n}{the number of random samples}
 }
+\value{
+No return value. Raise an error message.
+}
 \description{
 Default function
 }

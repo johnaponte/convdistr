@@ -17,6 +17,9 @@ new_MULTINORMAL(p_mu, p_sigma, p_dimnames, tol = 1e-06, empirical = FALSE)
 
 \item{empirical}{logical. If true, mu and Sigma specify the empirical not population mean and covariance matrix.}
 }
+\value{
+An object of class \code{\link{DISTRIBUTION}}, \code{MULTINORMAL}
+}
 \description{
 Return a \code{\link{DISTRIBUTION}} object that draw random numbers from a 
 multivariate normal distribution using the \code{\link[MASS]{mvrnorm}} function.

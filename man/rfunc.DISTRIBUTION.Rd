@@ -11,6 +11,9 @@
 
 \item{n}{the number of random samples}
 }
+\value{
+a matrix with as many rows as \code{n} and as many columns as
+}
 \description{
 Generic function for a \code{\link{DISTRIBUTION}} object
 }

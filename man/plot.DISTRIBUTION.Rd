@@ -13,6 +13,9 @@
 
 \item{...}{other parameters to the \code{\link{hist}} function}
 }
+\value{
+No return value. Side effect plot the histogram.
+}
 \description{
 Plot an histogram of the density of the distribution using random
 numbers from the distribution
