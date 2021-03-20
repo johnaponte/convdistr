@@ -48,6 +48,7 @@ ggDISTRIBUTION <- function(x, n = 10000) {
 #' @param ... other parameters to the \code{\link{hist}} function
 #' @importFrom RColorBrewer brewer.pal
 #' @import graphics 
+#' @return No return value. Side effect plot the histogram.
 #' @export
 #' @examples
 #' x <- new_NORMAL(0,1)

@@ -54,6 +54,7 @@
 #' }
 #' 
 #' @author John J. Aponte
+#' @return a DISTRIBUTION object
 #' @name DISTRIBUTION
 NULL
 
@@ -707,6 +708,7 @@ new_BINOMIAL <- function(p_size, p_prob, p_dimnames = "rvar") {
 #' @param p_dimnames A character that represents the name of the dimension 
 #' @param tol tolerance (relative to largest variance) for numerical lack of positive-definiteness in p_sigma.
 #' @param empirical logical. If true, mu and Sigma specify the empirical not population mean and covariance matrix.
+#' @return  An object of class \code{\link{DISTRIBUTION}}, \code{MULTINORMAL}
 #' @importFrom MASS mvrnorm
 #' @export
 #' @seealso \code{\link[MASS]{mvrnorm}}

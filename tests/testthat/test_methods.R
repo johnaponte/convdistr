@@ -69,11 +69,7 @@ test_that("The dimnames works well" , {
 
 test_that("The Summary does not change the system seed", {
   d1 <- new_NORMAL(0,1)
-  # Setup the fixture
-  if (exists(".Random.seed", .GlobalEnv))
-    oldseed <- .GlobalEnv$.Random.seed
-  else
-    oldseed <- NULL
+
   #test start
   set.seed(123456789)
   v1 <- runif(1000)
@@ -91,11 +87,6 @@ test_that("The Summary does not change the system seed", {
   expect_equal(v2,v4)
   expect_true(all(v2 == v4))
   expect_false(all(v2 == v6))
-  # Return back the fixture
-  if (!is.null(oldseed))
-    .GlobalEnv$.Random.seed <- oldseed
-  else
-    rm(".Random.seed", envir = .GlobalEnv)
 })
 
 

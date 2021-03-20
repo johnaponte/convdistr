@@ -75,6 +75,7 @@ print.DISTRIBUTION <- function(x, ...){
 #' @author John J. Aponte
 #' @param x an object of class \code{\link{DISTRIBUTION}}
 #' @param ... further parameters
+#' @return a vector with the mean, sd, lci, uci and median values
 cinqnum <- function(x,...){
   UseMethod("cinqnum",x)
 }
@@ -90,16 +91,15 @@ cinqnum <- function(x,...){
 #' @return a list with the  mean, sd, 95%upper and lower centiles and median
 #' @import stats
 cinqnum.DISTRIBUTION <- function(x,n) {
-  if (exists(".Random.seed", .GlobalEnv))
-    oldseed <- .GlobalEnv$.Random.seed
-  else
-    oldseed <- NULL
+  if (exists(".Random.seed", .GlobalEnv)) {
+    oldSeed <- get(".Random.seed", pos = globalenv())
+    on.exit(assign(".Random.seed", oldSeed, pos = globalenv()))
+  }
+  else{
+    on.exit(rm(".Random.seed", pos = globalenv()))
+  }
   set.seed(x$seed)
   draws <- x$rfunc(n)
-  if (!is.null(oldseed))
-    .GlobalEnv$.Random.seed <- oldseed
-  else
-    rm(".Random.seed", envir = .GlobalEnv)
   mean_ <- apply(draws, 2, mean)
   sd_ <- apply(draws, 2, sd)
   lci_ <- apply(draws, 2, quantile, 0.025, na.rm = TRUE)
@@ -206,6 +206,8 @@ rfunc <- function(x, n) {
 #' @author John J. Aponte
 #' @param x an object of class \code{\link{DISTRIBUTION}}
 #' @param n the number of random samples
+#' @return a matrix with as many rows as \code{n} and as many columns as
+#' 
 #' @export
 rfunc.DISTRIBUTION <- function(x,n) {
   x$rfunc(n)
@@ -216,6 +218,7 @@ rfunc.DISTRIBUTION <- function(x,n) {
 #' @author John J. Aponte
 #' @param x an object of class different from \code{\link{DISTRIBUTION}}
 #' @param n the number of random samples
+#' @return No return value. Raise an error message.
 #' @export
 rfunc.default <- function(x,n) {
   stop("Don't know how to obtain random numbers from an object of class ", class(x))
