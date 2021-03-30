@@ -1,52 +1,37 @@
----------------------------------------------------
--- 0 Errors, 0 Warning , 1 Note for new submission
----------------------------------------------------
-Maintainer: ‘Aponte John <john.j.aponte@gmail.com>’
+Thanks for the comments. All issues has been addressed
 
-New submission
+#### Comments
+If there are references describing the methods in your package, please add these in the description field of your DESCRIPTION file in the form
+authors (year) <doi:...>
+authors (year) <arXiv:...>
+authors (year, ISBN:...)
+or if those are not available: <https:...>
+with no space after 'doi:', 'arXiv:', 'https:' and angle brackets for auto-linking.
+(If you want to add a title as well please put it in quotes: "Title")
+ >> DESCRIPTION FILE HAS BEEN MODIFIED
+ 
+Please add \value to .Rd files regarding exported methods and explain the functions results in the documentation. Please write about the structure of the output (class) and also what the output means. (If a function does not return a value, please document that too, e.g. \value{No return value, called for side effects} or similar)
+Missing Rd-tags:
+    cinqnum.Rd: \value
+    DISTRIBUTION.Rd:  \value
+    new_MULTINORMAL.Rd: \value
+    plot.DISTRIBUTION.Rd: \value
+    rfunc.default.Rd: \value
+    rfunc.DISTRIBUTION.Rd: \value
+>> Return value has been included in the documentation
 
-0 errors ✓ | 0 warnings ✓ | 1 note x
+Please do not modify the .GlobalEnv. This is not allowed by the CRAN policies. e.g.: .Random.seed
+>> The approach to make the function reproductible has been changed.
 
-── convdistr 1.5.0: NOTE
+### END of comments
 
-Build ID:   convdistr_1.5.0.tar.gz-ae4b78d37d0947f39fa0c32c57db23a3
-Platform:   Ubuntu Linux 20.04.1 LTS, R-release, GCC
-Submitted:  11h 36m 0.3s ago
-Build time: 1h 43m 31.6s
-
-> checking CRAN incoming feasibility ... NOTE
-Maintainer: ‘Aponte John <john.j.aponte@gmail.com>’
-
-New submission
-
-0 errors ✓ | 0 warnings ✓ | 1 note x
-> group_check$cran_summary()
-For a CRAN submission we recommend that you fix all NOTEs, WARNINGs and ERRORs.
 ## Test environments
-- R-hub windows-x86_64-devel (r-devel)
-- R-hub fedora-clang-devel (r-devel)
-- R-hub ubuntu-gcc-release (r-release)
+* local R installation, R 4.0.4
+* ubuntu 16.04 (on travis-ci), R 4.0.4
+* win-builder (devel)
 
 ## R CMD check results
-> On windows-x86_64-devel (r-devel), fedora-clang-devel (r-devel), ubuntu-gcc-release (r-release)
-checking CRAN incoming feasibility ... NOTE
 
-Maintainer: 'Aponte John <john.j.aponte@gmail.com>'
-New submission
+0 errors | 0 warnings | 1 note
 
-0 errors ✓ | 0 warnings ✓ | 1 note x
-> group_check$cran_summary()
-For a CRAN submission we recommend that you fix all NOTEs, WARNINGs and ERRORs.
-## Test environments
-- R-hub windows-x86_64-devel (r-devel)
-- R-hub fedora-clang-devel (r-devel)
-- R-hub ubuntu-gcc-release (r-release)
-
-## R CMD check results
-> On windows-x86_64-devel (r-devel), fedora-clang-devel (r-devel), ubuntu-gcc-release (r-release)
-checking CRAN incoming feasibility ... NOTE
-
-Maintainer: 'Aponte John <john.j.aponte@gmail.com>'
-New submission
-
-0 errors ✓ | 0 warnings ✓ | 1 note x
+* This is a new release.
