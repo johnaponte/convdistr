@@ -16,7 +16,6 @@ Description: Convolute probabilistic distributions using the random generator
  random generator function of each distribution. See the documentation for examples.
 License: GPL (>= 3)
 Encoding: UTF-8
-LazyData: true
 Suggests: spelling, testthat, knitr, rmarkdown
 Imports: stats, graphics, pryr, extraDistr, dplyr, tidyr, ggplot2, RColorBrewer, SHELF, MASS
 RoxygenNote: 7.1.1
