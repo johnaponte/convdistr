@@ -90,28 +90,28 @@ cinqnum <- function(x,...){
 #' @param n number of drawns
 #' @return a list with the  mean, sd, 95%upper and lower centiles and median
 #' @import stats
+#' @importFrom shiny repeatable
 cinqnum.DISTRIBUTION <- function(x,n) {
-  if (exists(".Random.seed", .GlobalEnv)) {
-    oldSeed <- get(".Random.seed", pos = globalenv())
-    on.exit(assign(".Random.seed", oldSeed, pos = globalenv()))
+  
+  cinqnum_base <- function(x,n){
+    draws <- x$rfunc(n)
+    mean_ <- apply(draws, 2, mean)
+    sd_ <- apply(draws, 2, sd)
+    lci_ <- apply(draws, 2, quantile, 0.025, na.rm = TRUE)
+    uci_ <- apply(draws, 2, quantile, 0.975, na.rm = TRUE)
+    median_ <- apply(draws, 2, median)
+    list(
+      mean_ = mean_,
+      sd_ = sd_,
+      lci_ = lci_,
+      uci_ = uci_,
+      median_ = median_
+    )
   }
-  else{
-    on.exit(rm(".Random.seed", pos = globalenv()))
-  }
-  set.seed(x$seed)
-  draws <- x$rfunc(n)
-  mean_ <- apply(draws, 2, mean)
-  sd_ <- apply(draws, 2, sd)
-  lci_ <- apply(draws, 2, quantile, 0.025, na.rm = TRUE)
-  uci_ <- apply(draws, 2, quantile, 0.975, na.rm = TRUE)
-  median_ <- apply(draws, 2, median)
-  list(
-    mean_ = mean_,
-    sd_ = sd_,
-    lci_ = lci_,
-    uci_ = uci_,
-    median_ = median_
-  )
+  
+  cinqnum_repeteable <- shiny::repeatable(cinqnum_base, seed = x$seed)
+  
+  cinqnum_repeteable(x,n)
 }
 
 #' And optimized version for NA distribution

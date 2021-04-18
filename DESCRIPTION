@@ -1,7 +1,7 @@
 Package: convdistr
 Type: Package
 Title: Convolute Probabilistic Distributions
-Version: 1.5.1
+Version: 1.5.2
 Authors@R: person(
     "Aponte", 
     "John", 

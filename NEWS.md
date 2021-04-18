@@ -64,3 +64,9 @@ one column have probability, returns 1 in that column and zero elsewhere
 * Fix documentation and the return value for all objects is complete
 * Change the approach to make cinqnum.DISTRIBUTION reproducible
 
+# convdistr 1.5.2
+* cinqnum.DISTRIBUTION function now use repeatable from shiny in order to 
+ensure the seed from the distribution is used and the same cinqnum results are
+obtained. CRAN does not allow to change 
+the environment, necessary to ensure the seed from the system is not affected by
+the function cinqnum, but the already approved shiny function do it for us.

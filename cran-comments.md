@@ -1,3 +1,12 @@
+### Comments to version 1.5.1
+Thanks for the comments,
+Please do not modify the .GlobalEnv. This is not allowed by the CRAN policies. e.g.: rm(".Random.seed", envir = .GlobalEnv)
+
+>> The function cinqnum.DISTRIBUTION now uses repeatable function from shiny which has been already approve by CRAN.
+Now the set.seed and .GlobalEnv functions are only used on the Test functions which are fundamental to test the desired behaviour of the functions.
+
+### END of comments
+
 Thanks for the comments. All issues has been addressed
 
 #### Comments
