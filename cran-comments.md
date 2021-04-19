@@ -1,3 +1,9 @@
+### Comments to verseion 1.5.3
+Date has been updated
+
+### Comments to version 1.5.2
+Description updated to the new dependence on shiny
+
 ### Comments to version 1.5.1
 Thanks for the comments,
 Please do not modify the .GlobalEnv. This is not allowed by the CRAN policies. e.g.: rm(".Random.seed", envir = .GlobalEnv)

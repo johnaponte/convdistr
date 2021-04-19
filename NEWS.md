@@ -70,3 +70,6 @@ ensure the seed from the distribution is used and the same cinqnum results are
 obtained. CRAN does not allow to change 
 the environment, necessary to ensure the seed from the system is not affected by
 the function cinqnum, but the already approved shiny function do it for us.
+
+# convdistr 1.5.3
+Change date of submission for a current date
