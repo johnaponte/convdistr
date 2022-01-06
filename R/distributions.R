@@ -751,3 +751,91 @@ new_MULTINORMAL <-
       class = c("MULTINORMAL", "DISTRIBUTION")
     )
   }
+
+
+#' Factory for a BETABINOMIAL distribution object
+#'
+#' Returns an BETABINOMIAL distribution object that produce random numbers
+#' from a  betabinomial distribution using the \code{\link[extraDistr]{rbbinom}} function
+#' @author John J. Aponte
+#' @param p_size a non-negative parameter for the number of trials
+#' @param p_shape1 non-negative parameters of the Betabinomial distribution
+#' @param p_shape2 non-negative parameters of the Betabinomial distribution
+#' @param p_dimnames A character that represents the name of the dimension
+#' @return An object of class \code{DISTRIBUTION}, \code{BETADISTRIBUION}
+#' @importFrom extraDistr rbbinom
+#' @export
+#' @examples
+#' myDistr <- new_BETABINOMIAL(10,1,1)
+#' myDistr$rfunc(10)
+#' @name BETABINOMIAL
+new_BETABINOMIAL <- function(p_size, p_shape1, p_shape2, p_dimnames = "rvar") {
+  stopifnot("p_size should be greater than 0" = p_size > 0)
+  stopifnot("p_shape1 should be greater than 0" = p_shape1 > 0)
+  stopifnot("p_shape2 should be greater than 0" = p_shape2 > 0)
+  stopifnot("p_size should be integer" = abs(trunc(p_size) - p_size) < 1e-16)
+  .oval = p_shape1 / (p_shape1 + p_shape2)* p_size
+  names(.oval) <- p_dimnames
+  structure(
+    list(
+      distribution = "BETABINOMIAL",
+      seed = sample(1:2 ^ 15, 1),
+      oval = .oval,
+      rfunc = restrict_environment(function(n) {
+        matrix(rbbinom(n, p_size, p_shape1, p_shape2),
+               ncol = 1,
+               dimnames = list(1:n,p_dimnames))
+      },
+      p_size = p_size, p_shape1 = p_shape1, p_shape2 = p_shape2, p_dimnames = p_dimnames)
+    ),
+    class = c("BETABINOMIAL", "DISTRIBUTION", "list")
+  )
+}
+
+#' @note There are several parametrization for the betabinomial distribution.
+#' The one based on shape1 and shape2 are parameters alpha and beta of the beta
+#' part of the distribution, but it can be parametrized as mu, and od where mu is the 
+#' expected mean proportion and od is a measure of the overdispersion. 
+#' 
+#' \eqn{p_mu = p_shape1/(p_shape1 + p_shape2)}
+#' 
+#' \eqn{p_od = p_shape1 + p_shape2}
+#' 
+#' \eqn{p_shape1 = p_mu*p_od}
+#' 
+#' \eqn{p_shape2 <- (1-p_mu)*p_od}
+#' 
+#' @param p_mu mean proportion for the binomial part of the distribution
+#' @param p_od over dispersion parameter
+#' @export
+#' @describeIn BETABINOMIAL parametrization based on dispersion
+new_BETABINOMIAL_od <- function(p_size, p_mu, p_od, p_dimnames = "rvar") {
+  stopifnot("p_size should be greater than 0" = p_size > 0)
+  stopifnot("p_mu should be greater than 0" = p_mu > 0)
+  stopifnot("p_od should be greater than 0" = p_od > 0)
+  stopifnot("p_size should be integer" = abs(trunc(p_size) - p_size) < 1e-16)
+  new_BETABINOMIAL(p_size, p_mu*p_od, p_od*(1-p_mu), p_dimnames)
+}
+
+
+#' @note Another parametrization is based on mu and the icc where mu is the mean
+#' proportion and icc is the intra-class correlation.
+#' 
+#' \eqn{p_mu = p_shape1/(p_shape1 + p_shape2)}
+#' 
+#' \eqn{p_icc = 1/(p_shape1 + p_shape2 + 1)}
+#' 
+#' \eqn{p_shape1 = p_mu*(1-p_icc)/p_icc}
+#' 
+#' \eqn{p_shape2 = (1-p_mu)*(1-p_icc)/p_icc}
+#' 
+#' @param p_icc intra-class correlation parameter
+#' @export
+#' @describeIn BETABINOMIAL parametrization based on intra-class correlation
+new_BETABINOMIAL_icc <- function(p_size, p_mu, p_icc, p_dimnames = "rvar") {
+  stopifnot("p_size should be greater than 0" = p_size > 0)
+  stopifnot("p_mu should be greater than 0" = p_mu > 0)
+  stopifnot("p_icc should be greater than 0" = p_icc > 0)
+  stopifnot("p_size should be integer" = abs(trunc(p_size) - p_size) < 1e-16)
+  new_BETABINOMIAL(p_size, p_mu*(1-p_icc)/p_icc, (1-p_mu)*(1-p_icc)/p_icc, p_dimnames)
+}

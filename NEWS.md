@@ -73,3 +73,6 @@ the function cinqnum, but the already approved shiny function do it for us.
 
 # convdistr 1.5.3
 Change date of submission for a current date
+
+# convdistr 1.6.0
+Add a betabinomial distribution

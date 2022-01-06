@@ -168,3 +168,11 @@ test_that("new_DIRAC multidiimensions",{
   expect_equivalent(myDistr$rfunc(1), c(1,2,3))
 })
 
+test_that("BETABINOMIAL distributions", {
+  d1 <- new_BETABINOMIAL(10,5.6,1.4)
+  d2 <- new_BETABINOMIAL_od(10,0.8,7)
+  d3 <- new_BETABINOMIAL_icc(10,0.8,0.125)
+  expect_equivalent(d1$oval, d2$oval)
+  expect_equivalent(d1$oval, d3$oval)
+  expect_true(rfunc(d1,1) >= 0 & rfunc(d1,1) <= 10)
+})
