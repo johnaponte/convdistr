@@ -59,15 +59,15 @@ the result will be a new distribution of class \code{NA} unless the
 }
 \section{Functions}{
 \itemize{
-\item \code{new_SUM}: Sum of distributions
+\item \code{new_SUM()}: Sum of distributions
 
-\item \code{new_SUBTRACTION}: Subtraction for distributions
+\item \code{new_SUBTRACTION()}: Subtraction for distributions
 
-\item \code{new_MULTIPLICATION}: Multiplication for distributions
+\item \code{new_MULTIPLICATION()}: Multiplication for distributions
 
-\item \code{new_DIVISION}: DIVISION for distributions
+\item \code{new_DIVISION()}: DIVISION for distributions
+
 }}
-
 \examples{
 x1 <- new_NORMAL(0,1)
 x2 <- new_UNIFORM(1,2)

@@ -41,15 +41,15 @@ a, c,  b+b,
 }
 \section{Functions}{
 \itemize{
-\item \code{new_SUM_assoc}: Sum of distributions
+\item \code{new_SUM_assoc()}: Sum of distributions
 
-\item \code{new_SUBTRACTION_assoc}: Subtraction of distributions
+\item \code{new_SUBTRACTION_assoc()}: Subtraction of distributions
 
-\item \code{new_MULTIPLICATION_assoc}: Multiplication of distributions
+\item \code{new_MULTIPLICATION_assoc()}: Multiplication of distributions
 
-\item \code{new_DIVISION_assoc}: Division of distributions
+\item \code{new_DIVISION_assoc()}: Division of distributions
+
 }}
-
 \examples{
 x1 <- new_MULTINORMAL(c(0,1), matrix(c(1,0.5,0.5,1),ncol=2), p_dimnames = c("A","B"))
 x2 <- new_MULTINORMAL(c(10,1), matrix(c(1,0.4,0.4,1),ncol=2), p_dimnames = c("B","C"))

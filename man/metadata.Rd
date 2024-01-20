@@ -24,11 +24,11 @@ object
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{DISTRIBUTION}: Metadata for DISTRIBUTION objects
+\item \code{metadata(DISTRIBUTION)}: Metadata for DISTRIBUTION objects
 
-\item \code{default}: Metadata for other objects
+\item \code{metadata(default)}: Metadata for other objects
+
 }}
-
 \note{
 The number of columns depends on the dimensions of the distribution.
 There will be one column \code{distribution} with the name of the distribution

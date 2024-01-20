@@ -37,11 +37,11 @@ from a  betabinomial distribution using the \code{\link[extraDistr]{rbbinom}} fu
 }
 \section{Functions}{
 \itemize{
-\item \code{new_BETABINOMIAL_od}: parametrization based on dispersion
+\item \code{new_BETABINOMIAL_od()}: parametrization based on dispersion
 
-\item \code{new_BETABINOMIAL_icc}: parametrization based on intra-class correlation
+\item \code{new_BETABINOMIAL_icc()}: parametrization based on intra-class correlation
+
 }}
-
 \note{
 There are several parametrization for the betabinomial distribution.
 The one based on shape1 and shape2 are parameters alpha and beta of the beta

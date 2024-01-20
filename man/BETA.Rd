@@ -35,11 +35,11 @@ from a  beta distribution using the \code{\link{rbeta}} function
 }
 \section{Functions}{
 \itemize{
-\item \code{new_BETA_lci}: Constructor based on confidence intervals. Preserve expected value.
+\item \code{new_BETA_lci()}: Constructor based on confidence intervals. Preserve expected value.
 
-\item \code{new_BETA_lci2}: Constructor based on ML confidence intervals
+\item \code{new_BETA_lci2()}: Constructor based on ML confidence intervals
+
 }}
-
 \note{
 When using confidence intervals, the shape parameters are obtained
 using the following formula:

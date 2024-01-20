@@ -44,15 +44,15 @@ a_b,a_c,b_b, b_c
 }
 \section{Functions}{
 \itemize{
-\item \code{new_SUM_comb}: Sum of distributions
+\item \code{new_SUM_comb()}: Sum of distributions
 
-\item \code{new_SUBTRACTION_comb}: Subtraction of distributions
+\item \code{new_SUBTRACTION_comb()}: Subtraction of distributions
 
-\item \code{new_MULTIPLICATION_comb}: Multiplication of distributions
+\item \code{new_MULTIPLICATION_comb()}: Multiplication of distributions
 
-\item \code{new_DIVISION_comb}: Division of distributions
+\item \code{new_DIVISION_comb()}: Division of distributions
+
 }}
-
 \note{
 In case of the same dimensions, only the first combination is taken
 }

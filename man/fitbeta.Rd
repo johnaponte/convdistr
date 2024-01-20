@@ -24,11 +24,11 @@ Fits a beta distribution based on quantiles
 }
 \section{Functions}{
 \itemize{
-\item \code{fitbeta_ml}: using ML to estimate parameters
+\item \code{fitbeta_ml()}: using ML to estimate parameters
 
-\item \code{fitbeta}: preserve the expected value
+\item \code{fitbeta()}: preserve the expected value
+
 }}
-
 \note{
 This is a wrap of the \code{\link[SHELF]{fitdist}} to obtain
 the best parameters for a beta distribution based
