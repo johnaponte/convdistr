@@ -1,10 +1,26 @@
-### Comments to verseion 1.5.3
+# Comments to version 1.6.1
+Update documentation including package level documentation
+Add pkdown
+
+## R CMD check results
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+## revdepcheck results
+
+We checked 0 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
+
+
+# Comments to version 1.5.3
 Date has been updated
 
-### Comments to version 1.5.2
+# Comments to version 1.5.2
 Description updated to the new dependence on shiny
 
-### Comments to version 1.5.1
+# Comments to version 1.5.1
 Thanks for the comments,
 Please do not modify the .GlobalEnv. This is not allowed by the CRAN policies. e.g.: rm(".Random.seed", envir = .GlobalEnv)
 

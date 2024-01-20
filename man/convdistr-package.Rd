@@ -12,6 +12,7 @@ Convolute probabilistic distributions using the random generator function of eac
 Useful links:
 \itemize{
   \item \url{https://github.com/johnaponte/convdistr}
+  \item \url{https://johnaponte.github.io/convdistr/}
 }
 
 }
