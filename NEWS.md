@@ -2,6 +2,7 @@
 
 ## convdistr 1.6.1
   * Update documentation of the package
+  * Add pkgdown
 
 ## convdistr 1.6.0
   * Add a betabinomial distribution
