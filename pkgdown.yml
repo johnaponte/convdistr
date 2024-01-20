@@ -1,0 +1,11 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  sample_size: sample_size.html
+  using-convdistr: using-convdistr.html
+last_built: 2024-01-20T09:55Z
+urls:
+  reference: htinstatps://johnaponte.github.io/convdistr/reference
+  article: htinstatps://johnaponte.github.io/convdistr/articles
+
