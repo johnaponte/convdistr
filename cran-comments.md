@@ -1,6 +1,7 @@
 # Comments to version 1.6.1
 Update documentation including package level documentation
-Add pkdown
+Add pkgdown
+Export cinqnum functions
 
 ## R CMD check results
 

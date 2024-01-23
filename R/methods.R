@@ -68,7 +68,7 @@ print.DISTRIBUTION <- function(x, ...){
 
 #' cinqnum
 #'
-#' Make a list with 5 numbers of the distribution (mean_, sd_, lci_, uci_, median_).
+#' Produce 5 numbers of the distribution (mean_, sd_, lci_, uci_, median_).
 #'
 #' Uses the stored seed to have the same sequence always and produce the same numbers
 #' This is an internal function for the summary function
@@ -80,18 +80,12 @@ cinqnum <- function(x,...){
   UseMethod("cinqnum",x)
 }
 
-#' Generic function for a distribution
-#'
-#' Generate n random numbers from the distribution, using the seed of the
-#' object, so always return the same value. Internal function to be used in the
-#' summary
-#' @author John J. Aponte
-#' @param x an object of  class \code{\link{DISTRIBUTION}}
 #' @param n number of drawns
-#' @return a list with the  mean, sd, 95%upper and lower centiles and median
 #' @import stats
 #' @importFrom shiny repeatable
-cinqnum.DISTRIBUTION <- function(x,n) {
+#' @export
+#' @describeIn cinqnum  Generic method for a DISTRIBUTION
+cinqnum.DISTRIBUTION <- function(x,n, ...) {
   
   cinqnum_base <- function(x,n){
     draws <- x$rfunc(n)
@@ -114,13 +108,9 @@ cinqnum.DISTRIBUTION <- function(x,n) {
   cinqnum_repeteable(x,n)
 }
 
-#' And optimized version for NA distribution
-#'
-#' @author John J. Aponte
-#' @param x an object of  class \code{\link{DISTRIBUTION}}
-#' @param n number of drawns
-#' @return a list of NA
-cinqnum.NA <- function(x,n) {
+#' @export
+#' @describeIn cinqnum Generic method for optimized for a NA distribution
+cinqnum.NA <- function(x,n, ...) {
   list(
     mean_ = x$oval,
     sd_ = x$oval,
@@ -131,13 +121,9 @@ cinqnum.NA <- function(x,n) {
   )
 }
 
-#' And optimized version for DIRAC distributions
-#'
-#' @author John J. Aponte
-#' @param x an object of  class \code{\link{DISTRIBUTION}}
-#' @param n number of drawns
-#' @return a list of NA
-cinqnum.DIRAC <- function(x,n) {
+#' @export
+#' @describeIn cinqnum Generic method optimized for a DIRAC distribution
+cinqnum.DIRAC <- function(x,n, ...) {
   list(
     mean_ = x$oval,
     sd_ = 0,

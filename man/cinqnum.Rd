@@ -2,25 +2,45 @@
 % Please edit documentation in R/methods.R
 \name{cinqnum}
 \alias{cinqnum}
+\alias{cinqnum.DISTRIBUTION}
+\alias{cinqnum.NA}
+\alias{cinqnum.DIRAC}
 \title{cinqnum}
 \usage{
 cinqnum(x, ...)
+
+\method{cinqnum}{DISTRIBUTION}(x, n, ...)
+
+\method{cinqnum}{`NA`}(x, n, ...)
+
+\method{cinqnum}{DIRAC}(x, n, ...)
 }
 \arguments{
 \item{x}{an object of class \code{\link{DISTRIBUTION}}}
 
 \item{...}{further parameters}
+
+\item{n}{number of drawns}
 }
 \value{
 a vector with the mean, sd, lci, uci and median values
 }
 \description{
-Make a list with 5 numbers of the distribution (mean_, sd_, lci_, uci_, median_).
+Produce 5 numbers of the distribution (mean_, sd_, lci_, uci_, median_).
 }
 \details{
 Uses the stored seed to have the same sequence always and produce the same numbers
 This is an internal function for the summary function
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{cinqnum(DISTRIBUTION)}: Generic method for a DISTRIBUTION
+
+\item \code{cinqnum(`NA`)}: Generic method for optimized for a NA distribution
+
+\item \code{cinqnum(DIRAC)}: Generic method optimized for a DIRAC distribution
+
+}}
 \author{
 John J. Aponte
 }
