@@ -223,7 +223,7 @@ dimnames.DISTRIBUTION <- function(x) {
 #' @author John J. Aponte
 #' @param distribution a \code{\link{DISTRIBUTION}} object
 #' @param seed the new seed
-#' @return a code{\link{DISTRIBUTION}} object of the same class
+#' @return a \code{\link{DISTRIBUTION}} object of the same class
 #' @export
 set_seed <- function(distribution, seed){
   stopifnot(inherits(distribution,"DISTRIBUTION"))
