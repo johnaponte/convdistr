@@ -76,7 +76,7 @@
                         <h4 data-toc-skip class="author">John
 Aponte</h4>
             
-            <h4 data-toc-skip class="date">2024-01-23</h4>
+            <h4 data-toc-skip class="date">2024-01-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/johnaponte/convdistr/blob/HEAD/vignettes/sample_size.Rmd" class="external-link"><code>vignettes/sample_size.Rmd</code></a></small>
       <div class="d-none name"><code>sample_size.Rmd</code></div>
@@ -146,7 +146,7 @@ how is a factory of <code>DISTRIBUTION</code> objects:</p>
 <span><span class="co">#&gt;     }, p_min = p_min, p_max = p_max, p_dimnames = p_dimnames)), </span></span>
 <span><span class="co">#&gt;         class = c("UNIFORM", "DISTRIBUTION"))</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55be59110a48&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x55eed44c30b0&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:convdistr&gt;</span></span></code></pre></div>
 <p>The function should return an structure which consist of a list of
 four named vector and a class attribute that should include
@@ -244,15 +244,15 @@ as</p>
 <span><span class="va">sd</span> <span class="op">=</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">8</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">73</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fl">4</span></span>
 <span><span class="va">d_logrr</span> <span class="op">=</span> <span class="fu"><a href="../reference/NORMAL.html">new_NORMAL</a></span><span class="op">(</span><span class="va">rr</span>,<span class="va">sd</span><span class="op">)</span></span></code></pre></div>
 <p>So the input distributions are</p>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="20%">
+<col width="19%">
 <col width="12%">
 <col width="9%">
 <col width="12%">
 <col width="9%">
 <col width="7%">
-<col width="7%">
+<col width="9%">
 <col width="12%">
 <col width="7%">
 </colgroup>
@@ -275,7 +275,7 @@ as</p>
 <td align="right">10000</td>
 <td align="right">0.35</td>
 <td align="right">0.02</td>
-<td align="right">0.3</td>
+<td align="right">0.30</td>
 <td align="right">0.35</td>
 <td align="right">0.4</td>
 </tr>
@@ -284,9 +284,9 @@ as</p>
 <td align="left">rvar</td>
 <td align="right">-0.69</td>
 <td align="right">10000</td>
-<td align="right">-0.70</td>
-<td align="right">0.31</td>
-<td align="right">-1.3</td>
+<td align="right">-0.69</td>
+<td align="right">0.30</td>
+<td align="right">-1.28</td>
 <td align="right">-0.70</td>
 <td align="right">-0.1</td>
 </tr>
@@ -324,11 +324,11 @@ those conditions</p>
 <td align="left">rvar</td>
 <td align="right">95</td>
 <td align="right">10000</td>
-<td align="right">25347</td>
-<td align="right">1189403</td>
+<td align="right">95874</td>
+<td align="right">9481958</td>
 <td align="right">38</td>
 <td align="right">96</td>
-<td align="right">2350</td>
+<td align="right">2061</td>
 </tr></tbody>
 </table>
 <p><img src="sample_size_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
@@ -346,7 +346,7 @@ simulations.</p>
 <span><span class="va">f_ecdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ecdf.html" class="external-link">ecdf</a></span><span class="op">(</span><span class="va">rdrawn</span><span class="op">)</span></span>
 <span><span class="va">n_80</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">trunc</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html" class="external-link">uniroot</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="fu">f_ecdf</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fl">0.8</span><span class="op">}</span>, interval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">10000</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">root</span><span class="op">)</span></span></code></pre></div>
 <p>The empirical cumulative distribution values of a random sample of
-the distribution show us that with <code>209</code> subjects per arm,
+the distribution show us that with <code>213</code> subjects per arm,
 80% of the possible scenarios are covered</p>
 <p><img src="sample_size_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
@@ -420,17 +420,17 @@ sample size so we can make a graph with the three values.</p>
 <span><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d_sample2</span> <span class="op">&lt;-</span> <span class="fu">new_SAMPLE_SIZE2</span><span class="op">(</span><span class="va">d_p0</span>, <span class="va">d_logrr</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="16%">
-<col width="15%">
+<col width="14%">
 <col width="7%">
-<col width="10%">
-<col width="10%">
-<col width="12%">
+<col width="9%">
+<col width="11%">
+<col width="13%">
 <col width="7%">
-<col width="10%">
-<col width="10%">
+<col width="9%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">distribution</th>
@@ -450,7 +450,7 @@ sample size so we can make a graph with the three values.</p>
 <td align="right">0.35</td>
 <td align="right">10000</td>
 <td align="right">0.35</td>
-<td align="right">0.02</td>
+<td align="right">0.03</td>
 <td align="right">0.30</td>
 <td align="right">0.35</td>
 <td align="right">0.40</td>
@@ -461,21 +461,21 @@ sample size so we can make a graph with the three values.</p>
 <td align="right">0.50</td>
 <td align="right">10000</td>
 <td align="right">0.53</td>
-<td align="right">0.17</td>
+<td align="right">0.16</td>
 <td align="right">0.28</td>
 <td align="right">0.50</td>
-<td align="right">0.92</td>
+<td align="right">0.90</td>
 </tr>
 <tr class="odd">
 <td align="left">SAMPLE_SIZE2</td>
 <td align="left">sample_size</td>
 <td align="right">95.31</td>
 <td align="right">10000</td>
-<td align="right">6908.79</td>
-<td align="right">221869.02</td>
-<td align="right">38.32</td>
-<td align="right">95.89</td>
-<td align="right">2605.02</td>
+<td align="right">18542.32</td>
+<td align="right">1042680.99</td>
+<td align="right">38.02</td>
+<td align="right">97.05</td>
+<td align="right">1989.25</td>
 </tr>
 </tbody>
 </table>
@@ -485,12 +485,12 @@ sample size so we can make a graph with the three values.</p>
 <span><span class="va">df</span><span class="op">$</span><span class="va">category</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">sample_size</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">150</span>,<span class="cn">Inf</span><span class="op">)</span>,include.lowest <span class="op">=</span> <span class="cn">T</span>, ordered_result <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   prevalence        rr sample_size  category</span></span>
-<span><span class="co">#&gt; 1  0.3459163 0.5151837   104.01165   [0,150]</span></span>
-<span><span class="co">#&gt; 2  0.3290356 0.6687854   259.31858 (150,Inf]</span></span>
-<span><span class="co">#&gt; 3  0.3074351 0.6707793   288.55029 (150,Inf]</span></span>
-<span><span class="co">#&gt; 4  0.3563093 0.4462713    73.20836   [0,150]</span></span>
-<span><span class="co">#&gt; 5  0.3382727 0.2707446    39.60154   [0,150]</span></span>
-<span><span class="co">#&gt; 6  0.3602419 0.4146032    63.09802   [0,150]</span></span></code></pre></div>
+<span><span class="co">#&gt; 1  0.3633191 0.2806919    37.10804   [0,150]</span></span>
+<span><span class="co">#&gt; 2  0.3308561 0.5707372   145.75037   [0,150]</span></span>
+<span><span class="co">#&gt; 3  0.3409341 0.5838907   149.80950   [0,150]</span></span>
+<span><span class="co">#&gt; 4  0.3393501 0.8603046  1504.97281 (150,Inf]</span></span>
+<span><span class="co">#&gt; 5  0.3481267 0.5052772    98.40755   [0,150]</span></span>
+<span><span class="co">#&gt; 6  0.3540090 0.3390843    47.93408   [0,150]</span></span></code></pre></div>
 <p>The following graph shows the combination of options that would lead
 to a sample size lower than 150 subjects</p>
 <p><img src="sample_size_files/figure-html/unnamed-chunk-15-1.png" width="672"></p>
