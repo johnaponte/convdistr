@@ -12,7 +12,7 @@ set_seed(distribution, seed)
 \item{seed}{the new seed}
 }
 \value{
-a code{\link{DISTRIBUTION}} object of the same class
+a \code{\link{DISTRIBUTION}} object of the same class
 }
 \description{
 This create a new \code{\link{DISTRIBUTION}} object but with the
