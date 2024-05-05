@@ -1,3 +1,5 @@
+# convdistr (development version)
+
 # News for the package convdistr
 
 ## convdistr 1.6.2
