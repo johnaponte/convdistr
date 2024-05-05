@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   sample_size: sample_size.html
   using-convdistr: using-convdistr.html
-last_built: 2024-05-05T16:53Z
+last_built: 2024-05-05T16:56Z
 urls:
   reference: htinstatps://johnaponte.github.io/convdistr/reference
   article: htinstatps://johnaponte.github.io/convdistr/articles
