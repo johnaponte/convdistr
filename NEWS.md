@@ -1,5 +1,9 @@
 # News for the package convdistr
 
+## convdistr 1.6.2
+  * Update the use of a depecrated function from ggplot2
+  * Add aLogo
+
 ## convdistr 1.6.1
   * Update documentation of the package
   * Add pkgdown
