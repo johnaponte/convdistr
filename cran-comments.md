@@ -1,3 +1,7 @@
+# Comments to version 1.6.2
+Update the use of a deprecated function from ggplot2
+Add a logo
+
 # Comments to version 1.6.1
 Update documentation including package level documentation
 Add pkgdown

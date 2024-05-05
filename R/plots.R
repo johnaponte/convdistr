@@ -22,7 +22,7 @@ ggDISTRIBUTION <- function(x, n = 10000) {
   xxdf <- tidyr::gather(data.frame(xx), dimension, value)
   if (ncol(xx) > 1) {
     g <-
-      ggplot(xxdf, aes(x = value, stat(density), color = dimension)) +
+      ggplot(xxdf, aes(x = value, y=after_stat(density), color = dimension)) +
       geom_histogram(aes(fill = dimension),
                      alpha = 0.4,
                      bins = log10(n) * 7 * ncol(xx),
@@ -32,7 +32,7 @@ ggDISTRIBUTION <- function(x, n = 10000) {
   else {
     g <-
       ggplot(xxdf,
-             aes(x = value, stat(density))) +
+             aes(x = value, y = after_stat(density))) +
       geom_histogram(alpha = 0.4, bins = log10(n) * 7, color = "white") 
       #geom_freqpoly(bins = log10(n) * 7)
   }

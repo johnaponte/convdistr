@@ -1,5 +1,6 @@
-The convdistr package
-=====================
+# The convdistr package
+
+John J. Aponte
 
 The `convdistr` package provide tools to define distribution objects and make
 mathematical operations with them. It keep track of the results as if
@@ -10,8 +11,7 @@ To install this package from github
 
 `devtools::install_github("johnaponte/convdistr", build_manual = T, build_vignettes = T)`
 
-Practical example
------------------
+## Practical example
 
 What would be the resulting distribution of *a* + *b* \* *c* if *a* is a
 **normal** distribution with mean 1 and standard deviation 0.5, *b* is a
@@ -77,8 +77,7 @@ the distributions are independent between them, i.e. their correlation
 is 0. If not, you need to implement specific distributions to handle the
 correlation, like the MULTIVARIATE object.
 
-Description of the `DISTRIBUTION` object
--------------------------
+## Description of the `DISTRIBUTION` object
 
 The `DISTRIBUTION` is kind of abstract class (or interface) that
 specific constructors should implement.
@@ -116,8 +115,7 @@ the function.
 Once the new objects are instanced, the fields are immutable and should
 not be changed.
 
-Factory of `DISTRIBUTION` objects
----------------------------------
+## Factory of `DISTRIBUTION` objects
 
 The following functions create new objects of class `DISTRIBUTION`
 
@@ -206,8 +204,7 @@ The following functions create new objects of class `DISTRIBUTION`
 </tbody>
 </table>
 
-Methods
--------
+## Methods
 
 The following are methods for all objects of class `DISTRIBUTION`
 
@@ -275,8 +272,7 @@ The following are methods for all objects of class `DISTRIBUTION`
 
 <img src="https://user-images.githubusercontent.com/3891174/61120178-a3b65600-a49c-11e9-91bc-2cc16ee98d28.png"></img>
 
-Convolution for Distribution with the same dimensions
------------------------------------------------------
+## Convolution for Distribution with the same dimensions
 
 Mathematical operations like `+`, `-`, `*`, `/` between `DISTRIBUTION`
 with the same dimensions can be perform with the
@@ -337,8 +333,7 @@ but Mathematical operator can also be used.
 
 <img src="https://user-images.githubusercontent.com/3891174/61120240-c8123280-a49c-11e9-9e13-7354424ae8e0.png"></img>
 
-Mixture
--------
+## Mixture
 
 A `DISTRIBUTION`, consisting on the mixture of several distribution can
 be obtained with the `new_MIXTURE(listdistr, mixture)` function where
@@ -385,8 +380,7 @@ probability will be the same for each distribution.
 
 <img src="https://user-images.githubusercontent.com/3891174/61120284-e37d3d80-a49c-11e9-9451-295bafe325af.png"><img>
 
-Convolution of distributions with different dimensions
-------------------------------------------------------
+## Convolution of distributions with different dimensions
 
 When convoluting distribution with different dimensions, there are two
 possibilities. The `new_CONVOLUTION_assoc` family of functions perform
@@ -597,3 +591,6 @@ dimensions.
 </tr>
 </tbody>
 </table>
+
+
+<img src="man/figures/logo.png" align="right" height="139" alt="convdistr website" />

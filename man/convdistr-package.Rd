@@ -6,6 +6,8 @@
 \alias{convdistr-package}
 \title{convdistr: Convolute Probabilistic Distributions}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Convolute probabilistic distributions using the random generator function of each distribution. A new random number generator function is created that perform the mathematical operation on the individual random samples from the random generator function of each distribution. See the documentation for examples.
 }
 \seealso{
