@@ -1,141 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/404.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/articles/sample_size.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/articles/using-convdistr.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/authors.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/index.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/news/index.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/BETA.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/BETABINOMIAL.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/BINOMIAL.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/CONVOLUTION.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/CONVOLUTION_assoc.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/CONVOLUTION_comb.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/DIRAC.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/DIRICHLET.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/DISCRETE.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/DISTRIBUTION.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/DISTRIBUTION_factory.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/EXPONENTIAL.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/LOGNORMAL.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/NA_DISTRIBUTION.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/NORMAL.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/POISSON.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/TRIANGULAR.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/TRUNCATED.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/UNIFORM.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/add_total.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/cinqnum.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/convdistr-package.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/fitbeta.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/fitdirichlet.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/ggDISTRIBUTION.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/metadata.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/new_MIXTURE.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/new_MULTINORMAL.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/omit_NA.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/plot.DISTRIBUTION.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/restrict_environment.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/rfunc.DISTRIBUTION.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/rfunc.default.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/rfunc.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/same_dimensions.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/set_seed.html</loc>
-  </url>
-  <url>
-    <loc>htinstatps://johnaponte.github.io/convdistr/reference/summary.DISTRIBUTION.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/404.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/LICENSE.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/articles/index.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/articles/sample_size.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/articles/using-convdistr.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/authors.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/index.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/news/index.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/BETA.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/BETABINOMIAL.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/BINOMIAL.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/CONVOLUTION.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/CONVOLUTION_assoc.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/CONVOLUTION_comb.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/DIRAC.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/DIRICHLET.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/DISCRETE.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/DISTRIBUTION.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/DISTRIBUTION_factory.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/EXPONENTIAL.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/LOGNORMAL.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/NA_DISTRIBUTION.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/NORMAL.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/POISSON.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/TRIANGULAR.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/TRUNCATED.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/UNIFORM.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/add_total.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/cinqnum.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/convdistr-package.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/fitbeta.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/fitdirichlet.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/ggDISTRIBUTION.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/index.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/metadata.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/new_MIXTURE.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/new_MULTINORMAL.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/omit_NA.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/plot.DISTRIBUTION.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/restrict_environment.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/rfunc.DISTRIBUTION.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/rfunc.default.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/rfunc.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/same_dimensions.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/set_seed.html</loc></url>
+<url><loc>htinstatps://johnaponte.github.io/convdistr/reference/summary.DISTRIBUTION.html</loc></url>
 </urlset>
+
