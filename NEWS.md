@@ -2,9 +2,12 @@
 
 # News for the package convdistr
 
+## convdistr 1.6.3
+  * Remove dependence on pryr packages as it will be removed
+
 ## convdistr 1.6.2
-  * Update the use of a depecrated function from ggplot2
-  * Add aLogo
+  * Update the use of a deprecated function from ggplot2
+  * Add a Logo
 
 ## convdistr 1.6.1
   * Update documentation of the package

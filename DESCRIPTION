@@ -16,7 +16,7 @@ Description: Convolute probabilistic distributions using the random generator
 License: GPL (>= 3)
 Encoding: UTF-8
 Suggests: spelling, testthat, knitr, rmarkdown
-Imports: stats, graphics, pryr, extraDistr, dplyr, tidyr, ggplot2, RColorBrewer, SHELF, MASS, shiny
-RoxygenNote: 7.3.1
+Imports: stats, graphics, extraDistr, dplyr, tidyr, ggplot2, RColorBrewer, SHELF, MASS, shiny
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Language: en-US

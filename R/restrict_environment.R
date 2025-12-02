@@ -14,7 +14,6 @@
 #' @param f input function
 #' @param ... define the set of  variables to be included as variable = value.
 #' @return new function with a restricted environment
-#' @importFrom pryr named_dots
 #' @export
 #' @examples
 #' a = 0
@@ -29,15 +28,35 @@
 #' ls(envir=environment(myfunc))
 #'
 restrict_environment <- function(f, ...) {
-  dots <- named_dots(...)
+  ## capture unevaluated ... as a list
+  mc   <- match.call(expand.dots = FALSE)
+  dots <- mc[["..."]]
+  if (is.null(dots)) dots <- list()
+  dots <- as.list(dots)
+  
+  ## auto-name unnamed arguments with their expressions
+  nms <- names(dots)
+  if (is.null(nms)) nms <- rep("", length(dots))
+  missing <- nms == "" | is.na(nms)
+  
+  if (any(missing)) {
+    nms[missing] <- vapply(
+      dots[missing],
+      function(x) paste(deparse(x, 500L), collapse = ""),
+      character(1L)
+    )
+  }
+  names(dots) <- nms
+  
+  ## build restricted environment
   oldEnv <- environment(f)
   newEnv <- new.env(parent = parent.env(oldEnv))
-  values <- lapply(dots,function(x){eval(x, envir = oldEnv)})
-  if (length(values) > 0) {
-    for (i in 1:length(values)) {
-      assign(names(values)[i], values[[i]], envir = newEnv)
-    }
+  
+  values <- lapply(dots, eval, envir = oldEnv)
+  for (nm in names(values)) {
+    assign(nm, values[[nm]], envir = newEnv)
   }
+  
   environment(f) <- newEnv
   f
 }
