@@ -15,6 +15,7 @@ Useful links:
 \itemize{
   \item \url{https://github.com/johnaponte/convdistr}
   \item \url{https://johnaponte.github.io/convdistr/}
+  \item Report bugs at \url{https://github.com/johnaponte/convdistr/issues}
 }
 
 }
