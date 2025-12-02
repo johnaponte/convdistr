@@ -1,5 +1,5 @@
 # Comments to version 1.6.3
-Remove dependency on pryr package
+Remove the dependency on the pryr package
 
 # Comments to version 1.6.2
 Update the use of a deprecated function from ggplot2
