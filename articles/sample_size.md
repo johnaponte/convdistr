@@ -65,7 +65,7 @@ new_UNIFORM
 #>     }, p_min = p_min, p_max = p_max, p_dimnames = p_dimnames)), 
 #>         class = c("UNIFORM", "DISTRIBUTION"))
 #> }
-#> <bytecode: 0x557867d20690>
+#> <bytecode: 0x5579efb0cf48>
 #> <environment: namespace:convdistr>
 ```
 

@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/johnaponte/convdistr/blob/master/DESCRIPTION)
 
 John A (2025). *convdistr: Convolute Probabilistic Distributions*. R
-package version 1.6.2.9000, <https://github.com/johnaponte/convdistr>.
+package version 1.6.3, <https://github.com/johnaponte/convdistr>.
 
     @Manual{,
       title = {convdistr: Convolute Probabilistic Distributions},
       author = {Aponte John},
       year = {2025},
-      note = {R package version 1.6.2.9000},
+      note = {R package version 1.6.3},
       url = {https://github.com/johnaponte/convdistr},
     }
