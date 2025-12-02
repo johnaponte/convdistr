@@ -14,6 +14,8 @@ Useful links:
 
 - <https://johnaponte.github.io/convdistr/>
 
+- Report bugs at <https://github.com/johnaponte/convdistr/issues>
+
 ## Author
 
 **Maintainer**: Aponte John <john.j.aponte@gmail.com>
