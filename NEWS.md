@@ -3,7 +3,7 @@
 # News for the package convdistr
 
 ## convdistr 1.6.3
-  * Remove dependence on pryr packages as it will be removed
+  * Remove the dependency on the pryr package
 
 ## convdistr 1.6.2
   * Update the use of a deprecated function from ggplot2

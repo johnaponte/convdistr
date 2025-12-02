@@ -1,3 +1,6 @@
+# Comments to version 1.6.3
+Remove dependency on pryr package
+
 # Comments to version 1.6.2
 Update the use of a deprecated function from ggplot2
 Add a logo
