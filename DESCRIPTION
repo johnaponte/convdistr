@@ -20,3 +20,4 @@ Imports: stats, graphics, extraDistr, dplyr, tidyr, ggplot2, RColorBrewer, SHELF
 RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Language: en-US
+BugReports: https://github.com/johnaponte/convdistr/issues
